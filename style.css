@@ -1,0 +1,491 @@
+/* ==========================================================================
+   Modern CSS Reset & Theme Variables (identical, with CSS accent colour)
+   ========================================================================== */
+:root {
+    /* Color Palette */
+    --bg-main: #f8fafc;
+    --bg-card: #ffffff;
+    --border-color: #e2e8f0;
+    --border-hover: #2563eb;
+
+    --spa-container-max-width: 1350px;
+    
+    /* CSS brand colour – used as accent for icons and badges */
+    --css-color: #1572B6;
+    --css-glow: rgba(21, 114, 182, 0.12);
+
+    --text-primary: #0f172a;
+    --text-secondary: #475569;
+    --text-muted: #64748b;
+    
+    --accent-blue: #2563eb;
+    --accent-blue-bg: #eff6ff;
+    --accent-blue-glow: rgba(37, 99, 235, 0.12);
+
+    /* Shadow Elevation Levels */
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.05), 0 1px 2px rgba(0, 0, 0, 0.03);
+    --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+    --shadow-hover: 0 16px 24px -6px rgba(37, 99, 235, 0.12), 0 6px 12px -4px rgba(0, 0, 0, 0.04);
+
+    /* Transitions */
+    --transition-standard: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    min-height: 100dvh;
+    padding: 100px 24px 48px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    -webkit-font-smoothing: antialiased;
+}
+body::-webkit-scrollbar {
+    display: none;
+}
+
+/* ==========================================================================
+   Modern Glassmorphism Navbar (responsive)
+   ========================================================================== */
+.navbar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    background: rgba(15, 23, 42, 0.88);
+    -webkit-backdrop-filter: blur(12px);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.navbar-container {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 14px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+}
+
+.navbar-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    cursor: pointer;
+    flex-shrink: 0;
+}
+
+.brand-badge {
+    background-color: var(--css-color);
+    color: #ffffff;
+    font-size: 0.95rem;
+    font-weight: 700;
+    padding: 3px 5px;
+    border-radius: 4px;
+    letter-spacing: 0.5px;
+}
+
+.brand-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #ffffff;
+    letter-spacing: -0.02em;
+}
+
+.navbar-links {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    list-style: none;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+}
+
+.nav-link {
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    padding: 6px 14px;
+    border-radius: 8px;
+    transition: var(--transition-standard);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+}
+
+.nav-link i {
+    font-size: 1rem;
+}
+
+.nav-link:hover {
+    color: #ffffff;
+    background-color: rgba(255, 255, 255, 0.08);
+}
+
+.nav-link.nav-btn {
+    background-color: var(--css-color);
+    color: #ffffff;
+    font-weight: 600;
+}
+
+.nav-link.nav-btn:hover {
+    background-color: #0f5a91;
+}
+
+/* ==========================================================================
+   Hero Header Section
+   ========================================================================== */
+.hero-header {
+    text-align: center;
+    margin-bottom: 36px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.hero-header h1 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    letter-spacing: -0.03em;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.hero-header h1 i {
+    color: var(--css-color);
+    font-size: 2.2rem;
+}
+
+.hero-header .subtitle {
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--text-secondary);
+}
+
+.hero-header .url-tag {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    background-color: #e2e8f0;
+    padding: 4px 12px;
+    border-radius: 999px;
+    margin-top: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.hero-header .url-tag i {
+    color: var(--css-color);
+}
+
+/* ==========================================================================
+   SPA Layout & Seamless Iframe Styles
+   ========================================================================== */
+.spa-container {
+    width: 100%;
+    max-width: var(--spa-container-max-width);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.back-btn {
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    background-color: var(--css-color);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.9rem;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition-standard);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.back-btn:hover {
+    background-color: #0f5a91;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.back-btn i {
+    font-size: 1rem;
+}
+
+.project-iframe {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 12px;
+    background-color: #f3f3f3;
+    box-shadow: var(--shadow-md);
+    overflow-x: scroll;
+    transition: height 0.2s ease;
+}
+
+
+/* ==========================================================================
+   Responsive Cards Grid
+   ========================================================================== */
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 28px;
+    width: 100%;
+    max-width: 1080px;
+}
+
+/* ==========================================================================
+   Project Card Link Styling
+   ========================================================================== */
+.project-card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 28px;
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    position: relative;
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-standard);
+}
+
+/* card header area with number + icon */
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.card-number {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--css-color);
+    background-color: var(--css-glow);
+    padding: 4px 12px;
+    border-radius: 999px;
+    letter-spacing: 0.5px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.card-icon {
+    font-size: 1.8rem;
+    color: var(--css-color);
+    opacity: 0.85;
+    transition: transform 0.2s ease;
+}
+
+.project-card h2 {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: -0.01em;
+    transition: color 0.2s ease;
+}
+
+.project-card p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    line-height: 1.6;
+}
+
+.project-card p i {
+    color: var(--css-color);
+    font-style: normal;
+    font-weight: 500;
+}
+
+/* ==========================================================================
+   Interactivity & Animations
+   ========================================================================== */
+.project-card:hover {
+    transform: translateY(-6px);
+    border-color: var(--css-color);
+    box-shadow: 0 16px 24px -6px rgba(21, 114, 182, 0.12), 0 6px 12px -4px rgba(0, 0, 0, 0.04);
+}
+
+.project-card:hover h2 {
+    color: var(--css-color);
+}
+
+.project-card:hover .card-icon {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+.project-card:active {
+    transform: translateY(-2px);
+}
+
+/* Accessible Keyboard Focus Ring */
+.project-card:focus-visible {
+    outline: 2px solid var(--css-color);
+    outline-offset: 4px;
+}
+
+/* ==========================================================================
+   Site Footer
+   ========================================================================== */
+.site-footer {
+    width: 100%;
+    max-width: 1080px;
+    margin-top: 56px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+}
+
+.footer-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+    padding-bottom: 8px;
+}
+
+.footer-text {
+    font-size: 0.88rem;
+    color: var(--text-secondary);
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-text i {
+    color: var(--css-color);
+    font-size: 0.95rem;
+}
+
+.footer-heart {
+    color: var(--css-color) !important;
+    animation: heartbeat 1.6s ease-in-out infinite;
+}
+
+@keyframes heartbeat {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.15); }
+}
+
+.footer-meta {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.footer-meta a {
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: var(--transition-standard);
+}
+
+.footer-meta a:hover {
+    color: var(--css-color);
+    text-decoration: underline;
+}
+
+.footer-dot {
+    opacity: 0.5;
+}
+
+/* ==========================================================================
+   Mobile Optimization
+   ========================================================================== */
+@media (max-width: 768px) {
+    body {
+        padding: 90px 16px 32px 16px;
+    }
+
+    .hero-header h1 {
+        font-size: 2rem;
+    }
+
+    .hero-header h1 i {
+        font-size: 1.8rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* Navbar: small screens */
+    .navbar-container {
+        padding: 10px 12px;
+        gap: 6px;
+    }
+
+    .brand-title {
+        font-size: 1rem;
+    }
+
+    .brand-badge {
+        font-size: 0.8rem;
+        padding: 2px 5px;
+    }
+
+    .navbar-links {
+        gap: 4px;
+    }
+
+    .nav-link .nav-text {
+        display: none;
+    }
+
+    .nav-link i {
+        font-size: 0.95rem;
+    }
+
+    /* Footer: tighter on mobile */
+    .site-footer {
+        margin-top: 40px;
+        padding-top: 20px;
+    }
+}
+
+/* Very narrow phones — hide nav text, icons only */
+@media (max-width: 400px) {
+    .nav-link .nav-text {
+        display: none;
+    }
+
+    .nav-link {
+        padding: 7px 9px;
+    }
+
+    .nav-link i {
+        font-size: 1.05rem;
+    }
+}
