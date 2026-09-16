@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- OPTECH Favicon -->
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Normal Box</title>
+    <style>
+        html,body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin-bottom: 12px; }
+
+        .box {
+            width: 250px;
+            height: 120px;
+            padding: 20px;
+            border: 4px solid #3b82f6;
+            margin: 20px;
+            background-color: #dbeafe;
+            color: #0f172a;
+            font-weight: 600;
+        }
+
+        .box-labeled {
+            position: relative;
+            background-color: #fef9c3;
+            border: 4px dashed #f59e0b;
+            padding: 20px;
+            width: 220px;
+            margin: 40px auto;
+            text-align: center;
+            font-weight: 700;
+            color: #92400e;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">BOX MODEL [ NORMAL ]</h1>
+
+    <h2>Simple Box (width + height + padding + border + margin)</h2>
+
+    <div class="box">
+        BOX-1: I am a box.<br>
+        width: 250px<br>
+        height: 120px<br>
+        padding: 20px<br>
+        border: 4px solid blue<br>
+        margin: 20px
+    </div>
+
+    <hr>
+
+    <h2>Box Model Visual (dashed = border)</h2>
+
+    <div class="box-labeled">
+        BOX-2: Content Area<br>
+        <small>(padding + border around me)</small>
+    </div>
+
+    <script>
+        console.group("📦 Basic Box Model — CSS Used For Each Box");
+
+        console.group("🔵 [Normal] BOX-1 → .box");
+        console.log(`
+.box {
+    width: 250px;
+    height: 120px;
+    padding: 20px;
+    border: 4px solid #3b82f6;
+    margin: 20px;
+    background-color: #dbeafe;
+    color: #0f172a;
+    font-weight: 600;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🟡 [Normal] BOX-2 → .box-labeled");
+        console.log(`
+.box-labeled {
+    position: relative;
+    background-color: #fef9c3;
+    border: 4px dashed #f59e0b;
+    padding: 20px;
+    width: 220px;
+    margin: 40px auto;
+    text-align: center;
+    font-weight: 700;
+    color: #92400e;
+}
+        `);
+        console.groupEnd();
+
+        console.groupEnd();
+    </script>
+
+</body>
+</html>

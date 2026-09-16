@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Nested Box</title>
+    <style>
+        html, body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin-bottom: 12px; }
+        h3 { color: #475569; margin: 16px 0 8px; font-size: 1rem; }
+
+        .compare-wrap { display: flex; gap: 24px; flex-wrap: wrap; }
+
+        .content-box {
+            box-sizing: content-box;
+            width: 200px;
+            padding: 20px;
+            border: 5px solid #ef4444;
+            background-color: #fee2e2;
+        }
+
+        .border-box {
+            box-sizing: border-box;
+            width: 200px;
+            padding: 20px;
+            border: 5px solid #10b981;
+            background-color: #dcfce7;
+        }
+
+        .outer {
+            padding: 24px;
+            border: 4px solid #8b5cf6;
+            background-color: #ede9fe;
+            width: 320px;
+            margin-top: 16px;
+        }
+
+        .middle {
+            padding: 18px;
+            border: 4px solid #3b82f6;
+            background-color: #dbeafe;
+        }
+
+        .inner {
+            padding: 12px;
+            border: 4px solid #f59e0b;
+            background-color: #fef3c7;
+            text-align: center;
+            font-weight: 700;
+            color: #92400e;
+        }
+
+        .card {
+            width: 260px;
+            padding: 20px;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            margin-top: 16px;
+        }
+        .card h4 { color: #0f172a; margin-bottom: 8px; }
+        .card p  { color: #475569; font-size: 0.9rem; line-height: 1.5; }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">BOX MODEL [ NESTED ]</h1>
+    <h2>box-sizing: content-box vs border-box</h2>
+
+    <div class="compare-wrap">
+        <div class="content-box">
+            <strong>BOX-1: content-box</strong><br>
+            width: 200px<br>
+            + padding: 20px<br>
+            + border: 5px<br>
+            = <strong>250px total</strong>
+        </div>
+
+        <div class="border-box">
+            <strong>BOX-2: border-box</strong><br>
+            width: 200px<br>
+            (padding &amp; border <em>included</em>)<br>
+            = <strong>200px total</strong>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2>Nested Boxes</h2>
+    <div class="outer">
+        BOX-3: Outer box (padding 24px, purple border)
+        <div class="middle">
+            BOX-4: Middle box (padding 18px, blue border)
+            <div class="inner">
+                BOX-5: Inner box (padding 12px, amber border)
+            </div>
+        </div>
+    </div>
+
+    <hr>
+
+    <h2>Real-world Card Example</h2>
+    <div class="card">
+        <h4>[Nested] BOX-6: Card Title</h4>
+        <p>A card is just a box with padding, a border, and a shadow — a practical use of the box model.</p>
+    </div>
+
+    <script>
+        console.group("🧩 Nested Boxes & box-sizing — CSS Used For Each Box");
+
+        console.group("🔴 [Nested] BOX-1 → .content-box");
+        console.log(`
+.content-box {
+    box-sizing: content-box;
+    width: 200px;
+    padding: 20px;
+    border: 5px solid #ef4444;
+    background-color: #fee2e2;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🟢 [Nested] BOX-2 → .border-box");
+        console.log(`
+.border-box {
+    box-sizing: border-box;
+    width: 200px;
+    padding: 20px;
+    border: 5px solid #10b981;
+    background-color: #dcfce7;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🟣 [Nested] BOX-3 → .outer");
+        console.log(`
+.outer {
+    padding: 24px;
+    border: 4px solid #8b5cf6;
+    background-color: #ede9fe;
+    width: 320px;
+    margin-top: 16px;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🔵 [Nested] BOX-4 → .middle");
+        console.log(`
+.middle {
+    padding: 18px;
+    border: 4px solid #3b82f6;
+    background-color: #dbeafe;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🟡 [Nested] BOX-5 → .inner");
+        console.log(`
+.inner {
+    padding: 12px;
+    border: 4px solid #f59e0b;
+    background-color: #fef3c7;
+    text-align: center;
+    font-weight: 700;
+    color: #92400e;
+}
+        `);
+        console.groupEnd();
+
+        console.group("⚪ [Nested] BOX-6 → .card");
+        console.log(`
+.card {
+    width: 260px;
+    padding: 20px;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    margin-top: 16px;
+}
+.card h4 { color: #0f172a; margin-bottom: 8px; }
+.card p  { color: #475569; font-size: 0.9rem; line-height: 1.5; }
+        `);
+        console.groupEnd();
+
+        console.groupEnd();
+    </script>
+</body>
+</html>

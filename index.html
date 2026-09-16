@@ -56,7 +56,7 @@
 
         <section class="projects-grid">
             <!-- Project 1 = [ PORTFOLIO ] -->
-            <a href="./PORTFOLIO/portfolio.html" class="project-card">
+            <!-- <a href="./PORTFOLIO/portfolio.html" class="project-card">
                 <div class="card-header">
                     <span class="card-number"><i class="bi bi-hash"></i> 01</span>
                     <i class="bi bi-person-badge card-icon"></i>
@@ -67,21 +67,21 @@
                     <br>
                     Tag used: <i>[ Table, List, Form, iframe,..etc ]</i>
                 </p>
-            </a>
+            </a> -->
 
-            <!-- Project 2 = [ HTML_TEXT ] -->
-            <!-- <a href="./HTML_TEXT/text.html" class="project-card">
+            <!-- Project 2 = [ BOX MODEL ] -->
+            <a href="./BOX_MODEL/box_model.html" class="project-card">
                 <div class="card-header">
                     <span class="card-number"><i class="bi bi-hash"></i> 02</span>
-                    <i class="bi bi-fonts card-icon"></i>
+                    <i class="bi bi-bounding-box card-icon"></i>
                 </div>
-                <h2>HTML Text</h2>
+                <h2>CSS Box Model</h2>
                 <p>
-                    Typography &amp; text formatting practice.
+                    Padding, margin, border &amp; box-sizing practice.
                     <br>
-                    tags: <i>[ h1–h6, p, b, i, u, s, sub, sup, mark, code, ... ]</i>
+                    topics: <i>[ width, height, padding, margin, border, box-sizing ]</i>
                 </p>
-            </a> -->
+            </a>
 
             <!-- Project 3 = [ HTML_LIST ] -->
             <!-- <a href="./HTML_LIST/list.html" class="project-card">
@@ -156,6 +156,7 @@
         let iframeEntryUrl = null;
         let heightObserver = null;     // MutationObserver instance
         let heightInterval = null;     // Fallback poller
+        let lastKnownHeight = 0;       // ⬅️ tracks last applied height
 
         function attachCardListeners() {
             const cards = mainContainer.querySelectorAll('.project-card');
@@ -171,6 +172,7 @@
             console.clear();   // show only the new page's logs
 
             iframeEntryUrl = url;
+            lastKnownHeight = 0;   // ⬅️ reset for new content
             stopHeightTracking();
 
             mainContainer.className = "spa-container";
@@ -191,18 +193,17 @@
         }
 
         /**
-         * Continuously keep the iframe height matched to its inner document.
-         * Uses MutationObserver (instant) + setInterval (safety net every 500ms).
-         */
+        * Keep the iframe height matched to its inner document.
+        * Only resizes when the inner height actually changes —
+        * this prevents the iframe from creeping up on every poll.
+        */
         function startHeightTracking(iframe) {
             stopHeightTracking();
 
             try {
                 const innerDoc = iframe.contentWindow.document;
 
-                // Observe only structural changes (childList/subtree).
-                // NOT attributes — style mutations caused by the parent's own
-                // resize would otherwise trigger an infinite feedback loop.
+                // Observe structural changes only (no attributes → no feedback loop)
                 heightObserver = new MutationObserver(() => {
                     autoResizeIframe(iframe);
                 });
@@ -211,8 +212,9 @@
                     subtree: true
                 });
 
-                // Fallback poll — some navigations replace the whole document,
-                // which breaks the observer. The interval reattaches it automatically.
+                // Safety-net poll: reattach observer if the document is replaced.
+                // Also calls autoResize — but autoResize itself is guarded, so it
+                // only applies a new height when the content height truly changed.
                 heightInterval = setInterval(() => {
                     try {
                         const currentDoc = iframe.contentWindow.document;
@@ -281,6 +283,12 @@
             }
         }
 
+        /**
+        * Measure the inner document and apply its height to the iframe.
+        * KEY FIX: we compare against `lastKnownHeight` and only write to the
+        * DOM when the measured height has actually changed by more than 2px.
+        * This stops the iframe from growing by a fixed buffer every poll.
+        */
         function autoResizeIframe(iframe) {
             try {
                 const doc = iframe.contentWindow.document;
@@ -289,14 +297,12 @@
                     doc.documentElement ? doc.documentElement.scrollHeight : 0
                 );
 
-                // Small fixed buffer prevents bottom-border / focus-ring /
-                // rounding clipping without causing a feedback loop.
-                // The >2px guard blocks oscillation.
-                const target = h > 0 ? h + 15 : 0;
+                if (h <= 0) return;   // nothing measured yet
 
-                const current = parseFloat(iframe.style.height) || 0;
-                if (target > 0 && Math.abs(target - current) > 2) {
-                    iframe.style.height = target + 'px';
+                // Only update if the real content height changed
+                if (Math.abs(h - lastKnownHeight) > 2) {
+                    lastKnownHeight = h;
+                    iframe.style.height = h + 'px';
                 }
             } catch {
                 iframe.style.height = '100dvh';
@@ -308,6 +314,7 @@
 
             stopHeightTracking();
             iframeEntryUrl = null;
+            lastKnownHeight = 0;   // ⬅️ reset
             mainContainer.className = "";
             mainContainer.innerHTML = initialGridHTML;
             attachCardListeners();
