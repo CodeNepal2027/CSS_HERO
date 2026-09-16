@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Margin &amp; Padding</title>
+    <style>
+        html, body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin-bottom: 12px; }
+        h3 { color: #475569; margin: 16px 0 8px; font-size: 1rem; }
+
+        .pad-uniform {
+            padding: 30px;
+            background-color: #dcfce7;
+            border: 2px solid #10b981;
+            width: 260px;
+        }
+
+        .pad-sides {
+            padding-top: 10px;
+            padding-right: 30px;
+            padding-bottom: 40px;
+            padding-left: 20px;
+            background-color: #dcfce7;
+            border: 2px solid #10b981;
+            width: 260px;
+        }
+
+        .pad-shorthand {
+            padding: 10px 30px 40px 20px;
+            background-color: #dcfce7;
+            border: 2px solid #10b981;
+            width: 260px;
+        }
+
+        .mar-uniform {
+            margin: 30px;
+            background-color: #fef3c7;
+            border: 2px solid #f59e0b;
+            width: 200px;
+            padding: 10px;
+        }
+
+        .mar-auto {
+            margin: 20px auto;
+            width: 200px;
+            padding: 10px;
+            background-color: #fef3c7;
+            border: 2px solid #f59e0b;
+            text-align: center;
+        }
+
+        .mar-shorthand {
+            margin: 10px 30px 40px 20px;
+            background-color: #fef3c7;
+            border: 2px solid #f59e0b;
+            padding: 10px;
+            width: 200px;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">BOX MODEL [ Margin & Padding ]</h1>
+    <h2>Padding Practice</h2>
+    <h3>Uniform padding (padding: 30px)</h3>
+    <div class="pad-uniform"> BOX-1: Uniform padding on all sides</div>
+
+    <h3>Individual side padding</h3>
+    <div class="pad-sides"> BOX-2: Top 10 / Right 30 / Bottom 40 / Left 20</div>
+
+    <h3>Shorthand padding (10px 30px 40px 20px)</h3>
+    <div class="pad-shorthand"> BOX-3: Top / Right / Bottom / Left</div>
+
+    <hr>
+
+    <h2>Margin Practice</h2>
+    <h3>Uniform margin (margin: 30px)</h3>
+    <div class="mar-uniform"> BOX-4: Uniform margin on all sides</div>
+
+    <h3>Auto margin (horizontal centering)</h3>
+    <div class="mar-auto"> BOX-5: margin: 20px auto</div>
+
+    <h3>Shorthand margin (10px 30px 40px 20px)</h3>
+    <div class="mar-shorthand"> BOX-6: Top / Right / Bottom / Left</div>
+
+    <scrip>
+        console.group("📐 Margin & Padding — CSS Used For Each Box");
+
+        console.group("🟩 [Margin or Padding] BOX-1 → .pad-uniform");
+        console.log(`
+.pad-uniform {
+    padding: 30px;
+    background-color: #dcfce7;
+    border: 2px solid #10b981;
+    width: 260px;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🟩 [Margin or Padding] BOX-2 → .pad-sides");
+        console.log(`
+.pad-sides {
+    padding-top: 10px;
+    padding-right: 30px;
+    padding-bottom: 40px;
+    padding-left: 20px;
+    background-color: #dcfce7;
+    border: 2px solid #10b981;
+    width: 260px;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🟩 [Margin or Padding] BOX-3 → .pad-shorthand");
+        console.log(`
+.pad-shorthand {
+    padding: 10px 30px 40px 20px;
+    background-color: #dcfce7;
+    border: 2px solid #10b981;
+    width: 260px;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🟨 [Margin or Padding] BOX-4 → .mar-uniform");
+        console.log(`
+.mar-uniform {
+    margin: 30px;
+    background-color: #fef3c7;
+    border: 2px solid #f59e0b;
+    width: 200px;
+    padding: 10px;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🟨 [Margin or Padding] BOX-5 → .mar-auto");
+        console.log(`
+.mar-auto {
+    margin: 20px auto;
+    width: 200px;
+    padding: 10px;
+    background-color: #fef3c7;
+    border: 2px solid #f59e0b;
+    text-align: center;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🟨 [Margin or Padding] BOX-6 → .mar-shorthand");
+        console.log(`
+.mar-shorthand {
+    margin: 10px 30px 40px 20px;
+    background-color: #fef3c7;
+    border: 2px solid #f59e0b;
+    padding: 10px;
+    width: 200px;
+}
+        `);
+        console.groupEnd();
+
+        console.groupEnd();
+    </scrip>
+
+</body>
+</html>

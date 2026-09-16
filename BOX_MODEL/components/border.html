@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Border</title>
+    <style>
+        html,body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin-bottom: 12px; }
+        h3 { color: #475569; margin: 16px 0 8px; font-size: 1rem; }
+
+        .demo {
+            width: 240px;
+            padding: 16px;
+            margin: 10px 0;
+            background-color: #fef3c7;
+        }
+
+        .b-solid    { border: 3px solid #f59e0b; }
+        .b-dashed   { border: 3px dashed #f59e0b; }
+        .b-dotted   { border: 3px dotted #f59e0b; }
+        .b-double   { border: 4px double #f59e0b; }
+        .b-groove   { border: 6px groove #f59e0b; }
+        .b-ridge    { border: 6px ridge #f59e0b; }
+        .b-inset    { border: 6px inset #f59e0b; }
+        .b-outset   { border: 6px outset #f59e0b; }
+        .b-none     { border: none; background-color: #fef3c7; }
+
+        .b-sides {
+            border-top: 3px solid #ef4444;
+            border-right: 3px solid #10b981;
+            border-bottom: 3px solid #3b82f6;
+            border-left: 3px solid #8b5cf6;
+            background-color: #f9fafb;
+            padding: 16px;
+            width: 240px;
+        }
+
+        .b-rounded {
+            border: 3px solid #3b82f6;
+            border-radius: 16px;
+            background-color: #dbeafe;
+            padding: 16px;
+            width: 240px;
+        }
+
+        .b-pill {
+            border: 3px solid #10b981;
+            border-radius: 999px;
+            background-color: #dcfce7;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+
+        .shape-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 24px;
+            align-items: center;
+            margin: 12px 0 20px;
+        }
+
+        .shape-label {
+            font-size: 0.8rem;
+            color: #475569;
+            text-align: center;
+            margin-top: 6px;
+        }
+
+        .shape-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .b-circle {
+            width: 100px;
+            height: 100px;
+            border: 4px solid #3b82f6;
+            border-radius: 50%;
+            background-color: #dbeafe;
+        }
+
+        .b-ellipse {
+            width: 160px;
+            height: 100px;
+            border: 4px solid #10b981;
+            border-radius: 50%;
+            background-color: #dcfce7;
+        }
+
+        .b-oval {
+            width: 160px;
+            height: 100px;
+            border: 4px solid #f59e0b;
+            border-radius: 100px / 50px;
+            background-color: #fef3c7;
+        }
+
+        .b-squircle {
+            width: 100px;
+            height: 100px;
+            border: 4px solid #8b5cf6;
+            border-radius: 30px;
+            background-color: #ede9fe;
+        }
+
+        .b-leaf {
+            width: 100px;
+            height: 100px;
+            border: 4px solid #ef4444;
+            border-radius: 0 50% 0 50%;
+            background-color: #fee2e2;
+        }
+
+        .b-blob {
+            width: 110px;
+            height: 110px;
+            border: 4px solid #06b6d4;
+            border-radius: 60% 40% 55% 45% / 55% 45% 60% 40%;
+            background-color: #cffafe;
+        }
+
+        .b-diamond {
+            width: 80px;
+            height: 80px;
+            border: 4px solid #ec4899;
+            background-color: #fce7f3;
+            transform: rotate(45deg);
+        }
+
+        .b-triangle {
+            width: 0;
+            height: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+            border-bottom: 90px solid #f59e0b;
+        }
+
+        .b-corners {
+            width: 140px;
+            height: 80px;
+            border: 3px solid #3b82f6;
+            background-color: #dbeafe;
+            border-radius: 20px 0 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1 style="text-align: center;">BOX MODEL [ BORDER ]</h1>
+    <h2>Border Styles</h2>
+    <h3>Solid / Dashed / Dotted / Double</h3>
+    <div class="demo b-solid"> BOX-1: solid</div>
+    <div class="demo b-dashed"> BOX-2: dashed</div>
+    <div class="demo b-dotted"> BOX-3: dotted</div>
+    <div class="demo b-double"> BOX-4: double</div>
+
+    <h3>3D styles: groove / ridge / inset / outset</h3>
+    <div class="demo b-groove"> BOX-5: groove</div>
+    <div class="demo b-ridge"> BOX-6: ridge</div>
+    <div class="demo b-inset"> BOX-7: inset</div>
+    <div class="demo b-outset"> BOX-8: outset</div>
+
+    <h3>No border</h3>
+    <div class="demo b-none"> BOX-9: border: none</div>
+
+    <hr>
+
+    <h2>Individual Side Borders</h2>
+    <div class="b-sides"> BOX-10: Each side has a different colour</div>
+
+    <hr>
+
+    <h2>Border Radius</h2>
+    <h3>Rounded corners</h3>
+    <div class="b-rounded"> BOX-11: border-radius: 16px</div>
+
+    <h3>Pill shape</h3>
+    <div class="b-pill"> BOX-12: border-radius: 999px</div>
+
+    <h3>Individual corner radius (20px 0 20px 0)</h3>
+    <p> BOX-13:</p>
+    <div class="b-corners"></div>
+
+    <hr>
+
+    <h2>Shapes (border-radius tricks)</h2>
+
+    <h3>Circle — equal width &amp; height + border-radius: 50%</h3>
+    <div class="shape-row">
+        <div class="shape-item">
+            <div class="b-circle"></div>
+            <span class="shape-label"> BOX-14: circle</span>
+        </div>
+    </div>
+
+    <h3>Ellipse — different width &amp; height + border-radius: 50%</h3>
+    <div class="shape-row">
+        <div class="shape-item">
+            <div class="b-ellipse"></div>
+            <span class="shape-label"> BOX-15: ellipse</span>
+        </div>
+        <div class="shape-item">
+            <div class="b-oval"></div>
+            <span class="shape-label"> BOX-16: oval (100px / 50px)</span>
+        </div>
+    </div>
+
+    <h3>Squircle / Leaf / Blob</h3>
+    <div class="shape-row">
+        <div class="shape-item">
+            <div class="b-squircle"></div>
+            <span class="shape-label"> BOX-17: squircle</span>
+        </div>
+        <div class="shape-item">
+            <div class="b-leaf"></div>
+            <span class="shape-label"> BOX-18: leaf</span>
+        </div>
+        <div class="shape-item">
+            <div class="b-blob"></div>
+            <span class="shape-label"> BOX-19: blob</span>
+        </div>
+        <div class="shape-item">
+            <div class="b-diamond"></div>
+            <span class="shape-label"> BOX-20: diamond</span>
+        </div>
+    </div>
+
+    <h3>Triangle — border trick (no border-radius needed)</h3>
+    <div class="shape-row">
+        <div class="shape-item">
+            <div class="b-triangle"></div>
+            <span class="shape-label"> BOX-21: triangle</span>
+        </div>
+    </div>
+
+    <script>
+        console.group("🖼️ Border Practice — CSS Used For Each Box");
+
+        console.group("🟡 [Border] BOX-1 → .b-solid");
+        console.log(`
+.b-solid { border: 3px solid #f59e0b; }
+        `);
+        console.groupEnd();
+
+        console.group("🟡 [Border] BOX-2 → .b-dashed");
+        console.log(`
+.b-dashed { border: 3px dashed #f59e0b; }
+        `);
+        console.groupEnd();
+
+        console.group("🟡 [Border] BOX-3 → .b-dotted");
+        console.log(`
+.b-dotted { border: 3px dotted #f59e0b; }
+        `);
+        console.groupEnd();
+
+        console.group("🟡 [Border] BOX-4 → .b-double");
+        console.log(`
+.b-double { border: 4px double #f59e0b; }
+        `);
+        console.groupEnd();
+
+        console.group("🟡 [Border] BOX-5 → .b-groove");
+        console.log(`
+.b-groove { border: 6px groove #f59e0b; }
+        `);
+        console.groupEnd();
+
+        console.group("🟡 [Border] BOX-6 → .b-ridge");
+        console.log(`
+.b-ridge { border: 6px ridge #f59e0b; }
+        `);
+        console.groupEnd();
+
+        console.group("🟡 [Border] BOX-7 → .b-inset");
+        console.log(`
+.b-inset { border: 6px inset #f59e0b; }
+        `);
+        console.groupEnd();
+
+        console.group("🟡 [Border] BOX-8 → .b-outset");
+        console.log(`
+.b-outset { border: 6px outset #f59e0b; }
+        `);
+        console.groupEnd();
+
+        console.group("🟡 [Border] BOX-9 → .b-none");
+        console.log(`
+.b-none { border: none; background-color: #fef3c7; }
+        `);
+        console.groupEnd();
+
+        console.group("🌈 [Border] BOX-10 → .b-sides");
+        console.log(`
+.b-sides {
+    border-top: 3px solid #ef4444;
+    border-right: 3px solid #10b981;
+    border-bottom: 3px solid #3b82f6;
+    border-left: 3px solid #8b5cf6;
+    background-color: #f9fafb;
+    padding: 16px;
+    width: 240px;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🔵 [Border] BOX-11 → .b-rounded");
+        console.log(`
+.b-rounded {
+    border: 3px solid #3b82f6;
+    border-radius: 16px;
+    background-color: #dbeafe;
+    padding: 16px;
+    width: 240px;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🟢 [Border] BOX-12 → .b-pill");
+        console.log(`
+.b-pill {
+    border: 3px solid #10b981;
+    border-radius: 999px;
+    background-color: #dcfce7;
+    padding: 10px 20px;
+    display: inline-block;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🔵 [Border] BOX-13 → .b-corners");
+        console.log(`
+.b-corners {
+    width: 140px;
+    height: 80px;
+    border: 3px solid #3b82f6;
+    background-color: #dbeafe;
+    border-radius: 20px 0 20px 0;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🔵 [Border] BOX-14 → .b-circle");
+        console.log(`
+.b-circle {
+    width: 100px;
+    height: 100px;
+    border: 4px solid #3b82f6;
+    border-radius: 50%;
+    background-color: #dbeafe;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🟢 [Border] BOX-15 → .b-ellipse");
+        console.log(`
+.b-ellipse {
+    width: 160px;
+    height: 100px;
+    border: 4px solid #10b981;
+    border-radius: 50%;
+    background-color: #dcfce7;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🟡 [Border] BOX-16 → .b-oval");
+        console.log(`
+.b-oval {
+    width: 160px;
+    height: 100px;
+    border: 4px solid #f59e0b;
+    border-radius: 100px / 50px;
+    background-color: #fef3c7;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🟣 [Border] BOX-17 → .b-squircle");
+        console.log(`
+.b-squircle {
+    width: 100px;
+    height: 100px;
+    border: 4px solid #8b5cf6;
+    border-radius: 30px;
+    background-color: #ede9fe;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🔴 [Border] BOX-18 → .b-leaf");
+        console.log(`
+.b-leaf {
+    width: 100px;
+    height: 100px;
+    border: 4px solid #ef4444;
+    border-radius: 0 50% 0 50%;
+    background-color: #fee2e2;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🔷 [Border] BOX-19 → .b-blob");
+        console.log(`
+.b-blob {
+    width: 110px;
+    height: 110px;
+    border: 4px solid #06b6d4;
+    border-radius: 60% 40% 55% 45% / 55% 45% 60% 40%;
+    background-color: #cffafe;
+}
+        `);
+        console.groupEnd();
+
+        console.group("🩷 [Border] BOX-20 → .b-diamond");
+        console.log(`
+.b-diamond {
+    width: 80px;
+    height: 80px;
+    border: 4px solid #ec4899;
+    background-color: #fce7f3;
+    transform: rotate(45deg);
+}
+        `);
+        console.groupEnd();
+
+        console.group("🟡 [Border] BOX-21 → .b-triangle");
+        console.log(`
+.b-triangle {
+    width: 0;
+    height: 0;
+    border-left: 50px solid transparent;
+    border-right: 50px solid transparent;
+    border-bottom: 90px solid #f59e0b;
+}
+        `);
+        console.groupEnd();
+
+        console.groupEnd();
+    </script>
+
+</body>
+</html>
