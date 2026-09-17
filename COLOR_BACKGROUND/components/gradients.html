@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Gradients</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin-bottom: 12px; }
+        h3 { color: #475569; margin: 16px 0 8px; font-size: 1rem; }
+
+        .demo {
+            padding: 40px 24px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #ffffff;
+            text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        /* ==========================================================
+           BACKGROUND GRADIENTS
+           ========================================================== */
+
+        /* ---------- Linear ---------- */
+        .lg-to-right    { background: linear-gradient(to right, #3b82f6, #8b5cf6); }
+        .lg-to-bottom   { background: linear-gradient(to bottom, #10b981, #06b6d4); }
+        .lg-45deg       { background: linear-gradient(45deg, #ef4444, #f59e0b); }
+        .lg-3-color     { background: linear-gradient(to right, red, yellow, green); }
+        .lg-hard-stop   { background: linear-gradient(to right, #3b82f6 50%, #ef4444 50%); }
+        .lg-transparent { background: linear-gradient(to right, rgba(0,0,0,0.8), transparent); }
+
+        /* ---------- Radial ---------- */
+        .rg-circle      { background: radial-gradient(circle, #f59e0b, #ef4444); }
+        .rg-ellipse     { background: radial-gradient(ellipse, #8b5cf6, #1e293b); }
+
+        /* ---------- Conic ---------- */
+        .cg-pie         { background: conic-gradient(#3b82f6, #10b981, #f59e0b, #ef4444, #3b82f6); }
+        .cg-hard        { background: conic-gradient(
+                            #3b82f6 0deg 90deg,
+                            #10b981 90deg 180deg,
+                            #f59e0b 180deg 270deg,
+                            #ef4444 270deg 360deg); }
+
+        /* ---------- Repeating ---------- */
+        .rlg-stripes    { background: repeating-linear-gradient(
+                            45deg, #3b82f6 0px, #3b82f6 20px,
+                            #1e293b 20px, #1e293b 40px); }
+        .rcg-rainbow    { background: conic-gradient(from 0deg,
+                            red, orange, yellow, green, cyan, blue, violet, red); }
+
+        /* ==========================================================
+           TEXT GRADIENTS (background-clip: text)
+           ========================================================== */
+        .tg-linear {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            padding: 16px;
+            font-size: 2rem;
+            font-weight: 800;
+            text-shadow: none;
+        }
+
+        .tg-radial {
+            background: radial-gradient(circle, #f59e0b, #ef4444);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            padding: 16px;
+            font-size: 2rem;
+            font-weight: 800;
+            text-shadow: none;
+        }
+
+        .tg-rainbow {
+            background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            padding: 16px;
+            font-size: 2rem;
+            font-weight: 800;
+            text-shadow: none;
+        }
+
+        .tg-animated {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            padding: 16px;
+            font-size: 2rem;
+            font-weight: 800;
+            text-shadow: none;
+            animation: tg-slide 3s linear infinite;
+        }
+        @keyframes tg-slide {
+            0%   { background-position:   0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+
+        /* ==========================================================
+           BORDER GRADIENTS
+           ========================================================== */
+
+        /* --- Technique 1: border-image --- */
+        .bg-border-image {
+            border: 4px solid;
+            border-image: linear-gradient(90deg, #3b82f6, #ec4899) 1;
+            background: #f8fafc;
+            color: #0f172a;
+            padding: 24px;
+            text-shadow: none;
+            border-radius: 0;   /* border-image ignores radius */
+            font-weight: 700;
+        }
+
+        /* --- Technique 2: background-clip: padding-box + border-box --- */
+        .bg-border-clip {
+            border: 4px solid transparent;
+            background:
+                linear-gradient(#ffffff, #ffffff) padding-box,
+                linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899) border-box;
+            color: #0f172a;
+            padding: 24px;
+            text-shadow: none;
+            border-radius: 16px;
+            font-weight: 700;
+        }
+
+        /* --- Technique 3: mask (modern, works with radius) --- */
+        .bg-border-mask {
+            position: relative;
+            background: #ffffff;
+            color: #0f172a;
+            padding: 24px;
+            text-shadow: none;
+            border-radius: 16px;
+            font-weight: 700;
+        }
+        .bg-border-mask::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            padding: 4px;
+            border-radius: inherit;
+            background: linear-gradient(135deg, #10b981, #06b6d4);
+            -webkit-mask:
+                linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+            mask:
+                linear-gradient(#000 0 0) content-box,
+                linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+        }
+
+        /* --- Technique 4: pseudo-element border (double layer) --- */
+        .bg-border-pseudo {
+            position: relative;
+            background: #ffffff;
+            color: #0f172a;
+            padding: 24px;
+            text-shadow: none;
+            border-radius: 16px;
+            font-weight: 700;
+            border: 4px solid transparent;
+            background-clip: padding-box;
+        }
+        .bg-border-pseudo::after {
+            content: "";
+            position: absolute;
+            inset: -4px;
+            z-index: -1;
+            border-radius: 20px;
+            background: linear-gradient(90deg, #ef4444, #f59e0b);
+        }
+
+        /* --- Extra: gradient border with dashed look (border-image-repeat) --- */
+        .bg-border-dashed {
+            border: 6px solid;
+            border-image: repeating-linear-gradient(
+                45deg, #3b82f6 0, #3b82f6 10px,
+                #8b5cf6 10px, #8b5cf6 20px) 1;
+            background: #f8fafc;
+            color: #0f172a;
+            padding: 24px;
+            text-shadow: none;
+            font-weight: 700;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Linear Gradients (Background)</h2>
+    <div class="demo lg-to-right">    BOX-1: linear-gradient(to right, blue, purple)</div>
+    <div class="demo lg-to-bottom">   BOX-2: linear-gradient(to bottom, green, cyan)</div>
+    <div class="demo lg-45deg">       BOX-3: linear-gradient(45deg, red, amber)</div>
+    <div class="demo lg-3-color">     BOX-4: linear-gradient(to right, red, yellow, green)</div>
+    <div class="demo lg-hard-stop">   BOX-5: linear-gradient(to right, blue 50%, red 50%)</div>
+    <div class="demo lg-transparent"> BOX-6: linear-gradient(to right, rgba(0,0,0,0.8), transparent)</div>
+
+    <hr>
+
+    <h2>Radial Gradients (Background)</h2>
+    <div class="demo rg-circle">  BOX-7: radial-gradient(circle, amber, red)</div>
+    <div class="demo rg-ellipse"> BOX-8: radial-gradient(ellipse, purple, dark)</div>
+
+    <hr>
+
+    <h2>Conic Gradients (Background)</h2>
+    <div class="demo cg-pie">  BOX-9:  conic-gradient(blue, green, amber, red, blue)</div>
+    <div class="demo cg-hard"> BOX-10: conic-gradient(hard stops — pie chart)</div>
+
+    <hr>
+
+    <h2>Repeating Gradients (Background)</h2>
+    <div class="demo rlg-stripes"> BOX-11: repeating-linear-gradient (stripes)</div>
+    <div class="demo rcg-rainbow"> BOX-12: conic-gradient rainbow wheel</div>
+
+    <hr>
+
+    <h2>Text Gradients (background-clip: text)</h2>
+    <div class="demo tg-linear">    BOX-13: GRADIENT TEXT</div>
+    <div class="demo tg-radial">    BOX-14: RADIAL TEXT</div>
+    <div class="demo tg-rainbow">   BOX-15: RAINBOW TEXT</div>
+    <div class="demo tg-animated">  BOX-16: ANIMATED TEXT</div>
+
+    <hr>
+
+    <h2>Border Gradients</h2>
+
+    <h3>Technique 1 — border-image</h3>
+    <div class="demo bg-border-image"> BOX-17: border-image: linear-gradient(90deg, blue, pink) 1</div>
+
+    <h3>Technique 2 — background-clip: padding-box + border-box</h3>
+    <div class="demo bg-border-clip"> BOX-18: padding-box + border-box (rounded corners work)</div>
+
+    <h3>Technique 3 — mask (modern, works with radius)</h3>
+    <div class="demo bg-border-mask"> BOX-19: mask-composite: exclude</div>
+
+    <h3>Technique 4 — pseudo-element border</h3>
+    <div class="demo bg-border-pseudo"> BOX-20: ::after border layer</div>
+
+    <h3>Extra — repeating border-image (dashed gradient)</h3>
+    <div class="demo bg-border-dashed"> BOX-21: repeating-linear-gradient border</div>
+
+    <script>
+        console.group("🌈 Gradients — CSS Used For Each Box");
+
+        /* ---------- Background: Linear ---------- */
+        console.group("🔵 BOX-1 → .lg-to-right");
+        console.log(`.lg-to-right { background: linear-gradient(to right, #3b82f6, #8b5cf6); }`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-2 → .lg-to-bottom");
+        console.log(`.lg-to-bottom { background: linear-gradient(to bottom, #10b981, #06b6d4); }`);
+        console.groupEnd();
+
+        console.group("🟠 BOX-3 → .lg-45deg");
+        console.log(`.lg-45deg { background: linear-gradient(45deg, #ef4444, #f59e0b); }`);
+        console.groupEnd();
+
+        console.group("🌈 BOX-4 → .lg-3-color");
+        console.log(`.lg-3-color { background: linear-gradient(to right, red, yellow, green); }`);
+        console.groupEnd();
+
+        console.group("✂️ BOX-5 → .lg-hard-stop");
+        console.log(`.lg-hard-stop { background: linear-gradient(to right, #3b82f6 50%, #ef4444 50%); }`);
+        console.groupEnd();
+
+        console.group("🌫️ BOX-6 → .lg-transparent");
+        console.log(`.lg-transparent { background: linear-gradient(to right, rgba(0,0,0,0.8), transparent); }`);
+        console.groupEnd();
+
+        /* ---------- Background: Radial ---------- */
+        console.group("⭕ BOX-7 → .rg-circle");
+        console.log(`.rg-circle { background: radial-gradient(circle, #f59e0b, #ef4444); }`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-8 → .rg-ellipse");
+        console.log(`.rg-ellipse { background: radial-gradient(ellipse, #8b5cf6, #1e293b); }`);
+        console.groupEnd();
+
+        /* ---------- Background: Conic ---------- */
+        console.group("🥧 BOX-9 → .cg-pie");
+        console.log(`.cg-pie { background: conic-gradient(#3b82f6, #10b981, #f59e0b, #ef4444, #3b82f6); }`);
+        console.groupEnd();
+
+        console.group("🥧 BOX-10 → .cg-hard");
+        console.log(`.cg-hard {
+    background: conic-gradient(
+        #3b82f6 0deg 90deg,
+        #10b981 90deg 180deg,
+        #f59e0b 180deg 270deg,
+        #ef4444 270deg 360deg);
+}`);
+        console.groupEnd();
+
+        /* ---------- Background: Repeating ---------- */
+        console.group("🦓 BOX-11 → .rlg-stripes");
+        console.log(`.rlg-stripes {
+    background: repeating-linear-gradient(
+        45deg, #3b82f6 0px, #3b82f6 20px,
+        #1e293b 20px, #1e293b 40px);
+}`);
+        console.groupEnd();
+
+        console.group("🌈 BOX-12 → .rcg-rainbow");
+        console.log(`.rcg-rainbow {
+    background: conic-gradient(from 0deg,
+        red, orange, yellow, green, cyan, blue, violet, red);
+}`);
+        console.groupEnd();
+
+        /* ---------- Text Gradients ---------- */
+        console.group("🌈 BOX-13 → .tg-linear");
+        console.log(`.tg-linear {
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}`);
+        console.groupEnd();
+
+        console.group("⭕ BOX-14 → .tg-radial");
+        console.log(`.tg-radial {
+    background: radial-gradient(circle, #f59e0b, #ef4444);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}`);
+        console.groupEnd();
+
+        console.group("🌈 BOX-15 → .tg-rainbow");
+        console.log(`.tg-rainbow {
+    background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}`);
+        console.groupEnd();
+
+        console.group("✨ BOX-16 → .tg-animated");
+        console.log(`.tg-animated {
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: tg-slide 3s linear infinite;
+}
+@keyframes tg-slide {
+    0%   { background-position:   0% 50%; }
+    100% { background-position: 300% 50%; }
+}`);
+        console.groupEnd();
+
+        /* ---------- Border Gradients ---------- */
+        console.group("🔷 BOX-17 → .bg-border-image");
+        console.log(`.bg-border-image {
+    border: 4px solid;
+    border-image: linear-gradient(90deg, #3b82f6, #ec4899) 1;
+    background: #f8fafc;
+    /* NOTE: border-image ignores border-radius */
+}`);
+        console.groupEnd();
+
+        console.group("🔷 BOX-18 → .bg-border-clip");
+        console.log(`.bg-border-clip {
+    border: 4px solid transparent;
+    background:
+        linear-gradient(#ffffff, #ffffff) padding-box,
+        linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899) border-box;
+    border-radius: 16px;   /* radius works! */
+}`);
+        console.groupEnd();
+
+        console.group("🔷 BOX-19 → .bg-border-mask");
+        console.log(`.bg-border-mask { position: relative; border-radius: 16px; }
+
+.bg-border-mask::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 4px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, #10b981, #06b6d4);
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+}`);
+        console.groupEnd();
+
+        console.group("🔷 BOX-20 → .bg-border-pseudo");
+        console.log(`.bg-border-pseudo {
+    position: relative;
+    border: 4px solid transparent;
+    background: #ffffff;
+    background-clip: padding-box;
+    border-radius: 16px;
+}
+.bg-border-pseudo::after {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    z-index: -1;
+    border-radius: 20px;
+    background: linear-gradient(90deg, #ef4444, #f59e0b);
+}`);
+        console.groupEnd();
+
+        console.group("🔷 BOX-21 → .bg-border-dashed");
+        console.log(`.bg-border-dashed {
+    border: 6px solid;
+    border-image: repeating-linear-gradient(
+        45deg, #3b82f6 0, #3b82f6 10px,
+        #8b5cf6 10px, #8b5cf6 20px) 1;
+    background: #f8fafc;
+}`);
+        console.groupEnd();
+
+        console.groupEnd();
+    </script>
+
+</body>
+</html>
