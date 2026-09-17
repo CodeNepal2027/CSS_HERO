@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Weight / Style / Decoration</title>
+    <style>
+        html, body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin-bottom: 12px; }
+        h3 { color: #475569; margin: 16px 0 8px; font-size: 1rem; }
+
+        .demo {
+            padding: 16px;
+            margin: 10px 0;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 18px;
+        }
+
+        .fw-light    { font-weight: 300; }
+        .fw-normal   { font-weight: 400; }
+        .fw-medium   { font-weight: 500; }
+        .fw-semibold { font-weight: 600; }
+        .fw-bold     { font-weight: 700; }
+        .fw-black    { font-weight: 900; }
+
+        .fs-italic   { font-style: italic; }
+        .fs-oblique  { font-style: oblique; }
+
+        .td-underline    { text-decoration: underline; }
+        .td-line-through { text-decoration: line-through; }
+        .td-overline     { text-decoration: overline; }
+        .td-none         { text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <h2>Font Weight</h2>
+    <div class="demo fw-light">    BOX-1: font-weight: 300 (light)</div>
+    <div class="demo fw-normal">   BOX-2: font-weight: 400 (normal)</div>
+    <div class="demo fw-medium">   BOX-3: font-weight: 500 (medium)</div>
+    <div class="demo fw-semibold"> BOX-4: font-weight: 600 (semibold)</div>
+    <div class="demo fw-bold">     BOX-5: font-weight: 700 (bold)</div>
+    <div class="demo fw-black">    BOX-6: font-weight: 900 (black)</div>
+
+    <hr>
+
+    <h2>Font Style</h2>
+    <div class="demo fs-italic">  BOX-7: font-style: italic</div>
+    <div class="demo fs-oblique"> BOX-8: font-style: oblique</div>
+
+    <hr>
+
+    <h2>Text Decoration</h2>
+    <div class="demo td-underline">    BOX-9: text-decoration: underline</div>
+    <div class="demo td-line-through"> BOX-10: text-decoration: line-through</div>
+    <div class="demo td-overline">     BOX-11: text-decoration: overline</div>
+    <div class="demo td-none">         BOX-12: text-decoration: none</div>
+
+    <script>
+        console.group("✍️ Weight / Style / Decoration — CSS Used For Each Box");
+
+        console.group("🟢 BOX-1 → .fw-light");
+        console.log(`.fw-light { font-weight: 300; }`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-2 → .fw-normal");
+        console.log(`.fw-normal { font-weight: 400; }`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-3 → .fw-medium");
+        console.log(`.fw-medium { font-weight: 500; }`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-4 → .fw-semibold");
+        console.log(`.fw-semibold { font-weight: 600; }`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-5 → .fw-bold");
+        console.log(`.fw-bold { font-weight: 700; }`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-6 → .fw-black");
+        console.log(`.fw-black { font-weight: 900; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-7 → .fs-italic");
+        console.log(`.fs-italic { font-style: italic; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-8 → .fs-oblique");
+        console.log(`.fs-oblique { font-style: oblique; }`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-9 → .td-underline");
+        console.log(`.td-underline { text-decoration: underline; }`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-10 → .td-line-through");
+        console.log(`.td-line-through { text-decoration: line-through; }`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-11 → .td-overline");
+        console.log(`.td-overline { text-decoration: overline; }`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-12 → .td-none");
+        console.log(`.td-none { text-decoration: none; }`);
+        console.groupEnd();
+
+        console.groupEnd();
+    </script>
+
+</body>
+</html>

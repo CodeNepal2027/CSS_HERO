@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Text Align &amp; Transform</title>
+    <style>
+        html, body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin-bottom: 12px; }
+        h3 { color: #475569; margin: 16px 0 8px; font-size: 1rem; }
+
+        .demo {
+            padding: 16px;
+            margin: 10px 0;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            width: 100%;
+            max-width: 480px;
+        }
+
+        .ta-left    { text-align: left; }
+        .ta-center  { text-align: center; }
+        .ta-right   { text-align: right; }
+        .ta-justify { text-align: justify; }
+
+        .tt-upper    { text-transform: uppercase; }
+        .tt-lower    { text-transform: lowercase; }
+        .tt-capital  { text-transform: capitalize; }
+        .tt-none     { text-transform: none; }
+    </style>
+</head>
+<body>
+
+    <h2>Text Align</h2>
+    <div class="demo ta-left">    BOX-1: text-align: left — Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+    <div class="demo ta-center">  BOX-2: text-align: center — Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+    <div class="demo ta-right">   BOX-3: text-align: right — Lorem ipsum dolor sit amet, consectetur adipiscing elit.</div>
+    <div class="demo ta-justify"> BOX-4: text-align: justify — Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</div>
+
+    <hr>
+
+    <h2>Text Transform</h2>
+    <div class="demo tt-upper">   BOX-5: text-transform: uppercase — hello world</div>
+    <div class="demo tt-lower">   BOX-6: text-transform: lowercase — HELLO WORLD</div>
+    <div class="demo tt-capital"> BOX-7: text-transform: capitalize — hello world</div>
+    <div class="demo tt-none">    BOX-8: text-transform: none — Hello World</div>
+
+    <script>
+        console.group("📐 Text Align & Transform — CSS Used For Each Box");
+
+        console.group("🟡 BOX-1 → .ta-left");
+        console.log(`.ta-left { text-align: left; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-2 → .ta-center");
+        console.log(`.ta-center { text-align: center; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-3 → .ta-right");
+        console.log(`.ta-right { text-align: right; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-4 → .ta-justify");
+        console.log(`.ta-justify { text-align: justify; }`);
+        console.groupEnd();
+
+        console.group("🟠 BOX-5 → .tt-upper");
+        console.log(`.tt-upper { text-transform: uppercase; }`);
+        console.groupEnd();
+
+        console.group("🟠 BOX-6 → .tt-lower");
+        console.log(`.tt-lower { text-transform: lowercase; }`);
+        console.groupEnd();
+
+        console.group("🟠 BOX-7 → .tt-capital");
+        console.log(`.tt-capital { text-transform: capitalize; }`);
+        console.groupEnd();
+
+        console.group("🟠 BOX-8 → .tt-none");
+        console.log(`.tt-none { text-transform: none; }`);
+        console.groupEnd();
+
+        console.groupEnd();
+    </script>
+
+</body>
+</html>
