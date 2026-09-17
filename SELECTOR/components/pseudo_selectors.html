@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Pseudo Selectors</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin: 24px 0 12px; }
+
+        .demo-wrap { position: relative; width: min(600px, 100%); }
+        .demo-wrap::after {
+            content: "container: 600px (100% on mobile)";
+            display: block; margin-top: 6px;
+            font-size: 0.72rem; color: #64748b;
+            font-weight: 600; font-style: italic;
+        }
+
+        .demo {
+            width: 100%;
+            padding: 14px;
+            margin-top: 32px;
+            background-color: #0f172a;
+            border: 2px dashed rgba(255,255,255,0.25);
+            border-radius: 12px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .demo::before {
+            content: attr(data-box);
+            position: absolute;
+            top: -26px; left: 0;
+            font-size: 0.85rem; font-weight: 800;
+            color: #0f172a; background-color: #fbbf24;
+            padding: 3px 12px; border-radius: 6px;
+        }
+        .demo::after {
+            content: attr(data-prop);
+            position: absolute;
+            top: -26px; right: 0;
+            font-size: 0.78rem; font-weight: 700;
+            color: #475569; max-width: 60%; text-align: right;
+        }
+
+        /* ==========================================================
+           ITEM — flex row: role badge | text | action badge
+           ========================================================== */
+        .item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            background-color: #475569;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.85rem;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+
+        /* Role badge — left */
+        .item .role {
+            flex-shrink: 0;
+            font-size: 0.62rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            min-width: 68px;
+            text-align: center;
+        }
+
+        /* Description — middle */
+        .item .desc {
+            flex: 1;
+            line-height: 1.35;
+        }
+
+        /* Action / match badge — right */
+        .item .action {
+            flex-shrink: 0;
+            font-size: 0.68rem;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 999px;
+            background-color: rgba(255,255,255,0.15);
+            white-space: nowrap;
+        }
+
+        /* Role colour palette */
+        .role-item   { background-color: #0ea5e9; color: #fff; }
+        .role-target { background-color: #22c55e; color: #fff; }
+        .role-excluded { background-color: #64748b; color: #fff; }
+        .role-input  { background-color: #a855f7; color: #fff; }
+
+        /* ==========================================================
+           1. :hover
+           ========================================================== */
+        .s-hover .item {
+            cursor: pointer;
+        }
+        .s-hover .item:hover {
+            background-color: #ef4444;
+            transform: translateX(6px);
+        }
+
+        /* ==========================================================
+           2. :focus
+           ========================================================== */
+        .s-focus .focus-row {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 8px;
+            border: 2px solid #475569;
+            background-color: #334155;
+            color: #fff;
+            font-weight: 700;
+            font-size: 0.85rem;
+            width: 100%;
+            transition: all 0.2s ease;
+        }
+        .s-focus .focus-row .role {
+            flex-shrink: 0;
+            font-size: 0.62rem;
+            font-weight: 800;
+            padding: 3px 8px;
+            border-radius: 4px;
+            background-color: #a855f7;
+            color: #fff;
+            min-width: 68px;
+            text-align: center;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+        .s-focus .focus-row input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            color: #ffffff;
+            font: inherit;
+            outline: none;
+            padding: 4px 0;
+        }
+        .s-focus .focus-row input::placeholder { color: #94a3b8; }
+        .s-focus .focus-row:focus-within {
+            border-color: #10b981;
+            background-color: #064e3b;
+            box-shadow: 0 0 0 3px rgba(16,185,129,0.25);
+        }
+        .s-focus .focus-row .action {
+            flex-shrink: 0;
+            font-size: 0.68rem;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 999px;
+            background-color: rgba(255,255,255,0.15);
+            white-space: nowrap;
+        }
+        .s-focus .focus-row:focus-within .action {
+            content: "focused!";
+        }
+
+        /* ==========================================================
+           3. :nth-child
+           ========================================================== */
+        .s-nth .item:nth-child(odd) {
+            background-color: #f59e0b;
+        }
+        .s-nth .item:nth-child(even) {
+            background-color: #8b5cf6;
+        }
+
+        /* ==========================================================
+           4. :first-child / :last-child
+           ========================================================== */
+        .s-first-last .item:first-child {
+            background-color: #06b6d4;
+        }
+        .s-first-last .item:last-child {
+            background-color: #ec4899;
+        }
+
+        /* ==========================================================
+           5. ::before / ::after
+           ========================================================== */
+        .s-before-after .item::before {
+            content: "★";
+            color: #fbbf24;
+            font-size: 1.1rem;
+            margin-right: 2px;
+        }
+        .s-before-after .item::after {
+            content: "✓";
+            color: #10b981;
+            font-size: 1.1rem;
+            margin-left: auto;
+        }
+
+        /* ==========================================================
+           6. :not()
+           ========================================================== */
+        .s-not .item:not(.skip) {
+            background-color: #22c55e;
+        }
+        .s-not .item.skip {
+            background-color: #6b7280;
+        }
+
+        /* ==========================================================
+           CONSOLE-STYLE CODE BLOCK
+           ========================================================== */
+        .console-code {
+            width: min(600px, 100%);
+            margin: 12px 0 0;
+            padding: 12px 16px;
+            background-color: #1e1e1e; color: #d4d4d4;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem; line-height: 1.55;
+            border-radius: 8px;
+            border-left: 4px solid #fbbf24;
+            white-space: pre-wrap; word-break: break-word;
+        }
+        .console-code .header { color: #fbbf24; font-weight: 700; display: block; margin-bottom: 4px; }
+        .console-code .sel  { color: #f472b6; }
+        .console-code .prop { color: #7dd3fc; }
+        .console-code .val  { color: #fbbf24; }
+        .console-code .cmt  { color: #6b7280; font-style: italic; }
+        .console-code .match { color: #4ade80; }
+        .console-code .nomatch { color: #f87171; }
+
+        hr.divider {
+            border: none; border-top: 2px dashed #cbd5e1;
+            margin: 50px 0 24px; width: min(600px, 100%);
+        }
+
+        @media (max-width: 560px) {
+            .demo { padding: 10px; }
+            .item, .s-focus .focus-row { font-size: 0.72rem; padding: 8px 10px; gap: 6px; }
+            .item .role, .s-focus .focus-row .role { font-size: 0.55rem; padding: 2px 6px; min-width: 58px; }
+            .item .action, .s-focus .focus-row .action { font-size: 0.6rem; padding: 2px 6px; }
+            .demo::before, .demo::after { font-size: 0.7rem; padding: 2px 8px; top: -22px; }
+            .console-code { font-size: 0.72rem; padding: 10px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>:hover · :focus · :nth-child · :first/:last · ::before/::after · :not()</h2>
+
+    <!-- ═════════ BOX-1 — :hover ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-hover" data-box="BOX-1" data-prop=":hover — hover over me">
+            <div class="item">
+                <span class="role role-item">item</span>
+                <span class="desc">Item 1 — hover over me</span>
+                <span class="action">🖱 hover</span>
+            </div>
+            <div class="item">
+                <span class="role role-item">item</span>
+                <span class="desc">Item 2 — hover over me</span>
+                <span class="action">🖱 hover</span>
+            </div>
+            <div class="item">
+                <span class="role role-item">item</span>
+                <span class="desc">Item 3 — hover over me</span>
+                <span class="action">🖱 hover</span>
+            </div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟠 BOX-1 → :hover</span><span class="sel">.item:hover</span> {
+    <span class="prop">background</span>: <span class="val">#ef4444</span>;
+    <span class="prop">transform</span>: <span class="val">translateX(6px)</span>;
+}<span class="cmt">
+/* fires when the mouse is OVER the element
+   try: hover over any item → it slides right and turns red */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-2 — :focus ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-focus" data-box="BOX-2" data-prop=":focus — click the input">
+            <div class="focus-row">
+                <span class="role">input</span>
+                <input type="text" placeholder="Click me to focus → green border">
+                <span class="action">🖱 click</span>
+            </div>
+            <div class="focus-row">
+                <span class="role">input</span>
+                <input type="text" placeholder="Or click me">
+                <span class="action">🖱 click</span>
+            </div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟠 BOX-2 → :focus</span><span class="sel">.focus-row:focus-within</span> {
+    <span class="prop">border-color</span>: <span class="val">#10b981</span>;
+    <span class="prop">background</span>: <span class="val">#064e3b</span>;
+    <span class="prop">box-shadow</span>: <span class="val">0 0 0 3px rgba(16,185,129,0.25)</span>;
+}<span class="cmt">
+/* fires when the element (or its child input) receives focus
+   try: click inside any input → the whole row lights up green */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-3 — :nth-child ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-nth" data-box="BOX-3" data-prop=":nth-child(odd / even)">
+            <div class="item">
+                <span class="role role-target">odd</span>
+                <span class="desc">Item 1 — odd → amber</span>
+            </div>
+            <div class="item">
+                <span class="role role-target">even</span>
+                <span class="desc">Item 2 — even → purple</span>
+            </div>
+            <div class="item">
+                <span class="role role-target">odd</span>
+                <span class="desc">Item 3 — odd → amber</span>
+            </div>
+            <div class="item">
+                <span class="role role-target">even</span>
+                <span class="desc">Item 4 — even → purple</span>
+            </div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟠 BOX-3 → :nth-child</span><span class="sel">.item:nth-child(odd)</span>  { <span class="prop">background</span>: <span class="val">#f59e0b</span>; }
+<span class="sel">.item:nth-child(even)</span> { <span class="prop">background</span>: <span class="val">#8b5cf6</span>; }<span class="cmt">
+/* also accepts numbers: nth-child(3)
+   and formulas: 2n+1, 3n, -n+3 */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-4 — :first-child / :last-child ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-first-last" data-box="BOX-4" data-prop=":first-child · :last-child">
+            <div class="item">
+                <span class="role role-target">first</span>
+                <span class="desc">first-child → cyan</span>
+            </div>
+            <div class="item">
+                <span class="role role-item">middle</span>
+                <span class="desc">middle child — no change</span>
+            </div>
+            <div class="item">
+                <span class="role role-target">last</span>
+                <span class="desc">last-child → pink</span>
+            </div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟠 BOX-4 → :first-child / :last-child</span><span class="sel">.item:first-child</span> { <span class="prop">background</span>: <span class="val">#06b6d4</span>; }
+<span class="sel">.item:last-child</span>  { <span class="prop">background</span>: <span class="val">#ec4899</span>; }<span class="cmt">
+/* :first-child → the FIRST child of its parent
+   :last-child  → the LAST child of its parent
+   middle children are NOT affected */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-5 — ::before / ::after ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-before-after" data-box="BOX-5" data-prop="::before · ::after">
+            <div class="item">
+                <span class="role role-item">item</span>
+                <span class="desc">This element has decorations</span>
+            </div>
+            <div class="item">
+                <span class="role role-item">item</span>
+                <span class="desc">So does this one</span>
+            </div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟠 BOX-5 → ::before / ::after</span><span class="sel">.item::before</span> { <span class="prop">content</span>: <span class="val">"★"</span>; <span class="prop">color</span>: <span class="val">#fbbf24</span>; }
+<span class="sel">.item::after</span>  { <span class="prop">content</span>: <span class="val">"✓"</span>; <span class="prop">color</span>: <span class="val">#10b981</span>; }<span class="cmt">
+/* inserts decorative content — NO extra HTML needed
+   ::before → inserts BEFORE the element's content (★)
+   ::after  → inserts AFTER  the element's content (✓) */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-6 — :not() ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-not" data-box="BOX-6" data-prop=":not(.skip)">
+            <div class="item">
+                <span class="role role-target">matched</span>
+                <span class="desc">Normal item → green</span>
+                <span class="action">✓ styled</span>
+            </div>
+            <div class="item skip">
+                <span class="role role-excluded">excluded</span>
+                <span class="desc">.skip → grey (excluded)</span>
+                <span class="action">✗ skipped</span>
+            </div>
+            <div class="item">
+                <span class="role role-target">matched</span>
+                <span class="desc">Normal item → green</span>
+                <span class="action">✓ styled</span>
+            </div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟠 BOX-6 → :not()</span><span class="sel">.item:not(.skip)</span> {
+    <span class="prop">background</span>: <span class="val">#22c55e</span>;
+}
+<span class="sel">.item.skip</span> { <span class="prop">background</span>: <span class="val">#6b7280</span>; }<span class="cmt">
+/* ✓ matches every .item that is <span class="match">NOT .skip</span>
+   ✗ .skip is excluded from the green rule */</span></div>
+
+    <script>
+        console.group("📐 Pseudo Selectors — CSS Used For Each Box");
+
+        console.group("🟠 BOX-1 → :hover");
+        console.log(`.item:hover {
+    background: #ef4444;
+    transform: translateX(6px);
+}
+/* fires when the mouse is OVER the element */`);
+        console.groupEnd();
+
+        console.group("🟠 BOX-2 → :focus");
+        console.log(`.focus-row:focus-within {
+    border-color: #10b981;
+    background: #064e3b;
+    box-shadow: 0 0 0 3px rgba(16,185,129,0.25);
+}
+/* fires when the element (or its child input) receives focus */`);
+        console.groupEnd();
+
+        console.group("🟠 BOX-3 → :nth-child");
+        console.log(`.item:nth-child(odd)  { background: #f59e0b; }
+.item:nth-child(even) { background: #8b5cf6; }
+/* also accepts numbers and formulas: 2n+1, 3n, -n+3 */`);
+        console.groupEnd();
+
+        console.group("🟠 BOX-4 → :first-child / :last-child");
+        console.log(`.item:first-child { background: #06b6d4; }
+.item:last-child  { background: #ec4899; }
+/* only the FIRST and LAST children of their parent */`);
+        console.groupEnd();
+
+        console.group("🟠 BOX-5 → ::before / ::after");
+        console.log(`.item::before { content: "★"; color: #fbbf24; }
+.item::after  { content: "✓"; color: #10b981; }
+/* inserts decorative content — no extra HTML needed */`);
+        console.groupEnd();
+
+        console.group("🟠 BOX-6 → :not(.skip)");
+        console.log(`.item:not(.skip) { background: #22c55e; }
+.item.skip       { background: #6b7280; }
+/* ✓ every .item that is NOT .skip · ✗ .skip excluded */`);
+        console.groupEnd();
+
+        console.groupEnd();
+    </script>
+
+</body>
+</html>

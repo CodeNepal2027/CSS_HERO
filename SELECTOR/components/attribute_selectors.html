@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Attribute Selectors</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin: 24px 0 12px; }
+
+        .demo-wrap { position: relative; width: min(600px, 100%); }
+        .demo-wrap::after {
+            content: "container: 600px (100% on mobile)";
+            display: block; margin-top: 6px;
+            font-size: 0.72rem; color: #64748b;
+            font-weight: 600; font-style: italic;
+        }
+
+        .demo {
+            width: 100%;
+            padding: 14px;
+            margin-top: 32px;
+            background-color: #0f172a;
+            border: 2px dashed rgba(255,255,255,0.25);
+            border-radius: 12px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .demo::before {
+            content: attr(data-box);
+            position: absolute;
+            top: -26px; left: 0;
+            font-size: 0.85rem; font-weight: 800;
+            color: #0f172a; background-color: #fbbf24;
+            padding: 3px 12px; border-radius: 6px;
+        }
+        .demo::after {
+            content: attr(data-prop);
+            position: absolute;
+            top: -26px; right: 0;
+            font-size: 0.78rem; font-weight: 700;
+            color: #475569; max-width: 60%; text-align: right;
+        }
+
+        /* ==========================================================
+           DEMO ELEMENT — flex row: text | match badge
+           ========================================================== */
+        .demo a,
+        .demo input {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 10px 14px;
+            border-radius: 6px;
+            background-color: #475569;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.85rem;
+            text-decoration: none;
+            border: 2px solid transparent;
+            font-family: inherit;
+            width: 100%;
+        }
+
+        .demo a .text,
+        .demo input::placeholder { color: #ffffff; opacity: 0.95; }
+
+        /* Match badge inside each element */
+        .demo a::after,
+        .demo input::after {
+            content: attr(data-match);
+            flex-shrink: 0;
+            font-size: 0.68rem;
+            font-weight: 800;
+            padding: 3px 10px;
+            border-radius: 999px;
+            background-color: rgba(255,255,255,0.15);
+            white-space: nowrap;
+            text-decoration: none;
+            color: #ffffff;
+        }
+
+        /* ==========================================================
+           1. PRESENCE — [href]
+           ========================================================== */
+        .s-present [href] {
+            background-color: #ef4444;
+        }
+        .s-present [href]::after { background-color: rgba(255,255,255,0.3); }
+
+        /* ==========================================================
+           2. EXACT — [type="email"]
+           ========================================================== */
+        .s-exact [type="email"] {
+            background-color: #10b981;
+        }
+        .s-exact [type="email"]::after { background-color: rgba(255,255,255,0.3); }
+
+        /* ==========================================================
+           3. WHOLE WORD — [class~="active"]
+           ========================================================== */
+        .s-word [class~="active"] {
+            background-color: #f59e0b;
+        }
+        .s-word [class~="active"]::after { background-color: rgba(255,255,255,0.3); }
+
+        /* ==========================================================
+           4. STARTS WITH — [href^="https"]
+           ========================================================== */
+        .s-start [href^="https"] {
+            background-color: #8b5cf6;
+        }
+        .s-start [href^="https"]::after { background-color: rgba(255,255,255,0.3); }
+
+        /* ==========================================================
+           5. ENDS WITH — [href$=".pdf"]
+           ========================================================== */
+        .s-end [href$=".pdf"] {
+            background-color: #06b6d4;
+        }
+        .s-end [href$=".pdf"]::after { background-color: rgba(255,255,255,0.3); }
+
+        /* ==========================================================
+           6. CONTAINS — [href*="docs"]
+           ========================================================== */
+        .s-contains [href*="docs"] {
+            background-color: #ec4899;
+        }
+        .s-contains [href*="docs"]::after { background-color: rgba(255,255,255,0.3); }
+
+        /* ==========================================================
+           CONSOLE-STYLE CODE BLOCK
+           ========================================================== */
+        .console-code {
+            width: min(600px, 100%);
+            margin: 12px 0 0;
+            padding: 12px 16px;
+            background-color: #1e1e1e; color: #d4d4d4;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem; line-height: 1.55;
+            border-radius: 8px;
+            border-left: 4px solid #fbbf24;
+            white-space: pre-wrap; word-break: break-word;
+        }
+        .console-code .header { color: #fbbf24; font-weight: 700; display: block; margin-bottom: 4px; }
+        .console-code .sel  { color: #f472b6; }
+        .console-code .prop { color: #7dd3fc; }
+        .console-code .val  { color: #fbbf24; }
+        .console-code .cmt  { color: #6b7280; font-style: italic; }
+        .console-code .match { color: #4ade80; }
+        .console-code .nomatch { color: #f87171; }
+
+        hr.divider {
+            border: none; border-top: 2px dashed #cbd5e1;
+            margin: 50px 0 24px; width: min(600px, 100%);
+        }
+
+        @media (max-width: 560px) {
+            .demo { padding: 10px; }
+            .demo a, .demo input { font-size: 0.75rem; padding: 8px 10px; gap: 6px; }
+            .demo a::after, .demo input::after { font-size: 0.6rem; padding: 2px 6px; }
+            .demo::before, .demo::after { font-size: 0.7rem; padding: 2px 8px; top: -22px; }
+            .console-code { font-size: 0.72rem; padding: 10px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>[attr] · [attr="value"] · [attr^=] · [attr$=] · [attr*=]</h2>
+
+    <!-- ═════════ BOX-1 — PRESENCE ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-present" data-box="BOX-1" data-prop="[href] — presence">
+            <a href="https://example.com" data-match="✓ matched">
+                <span class="text">href="https://example.com"</span>
+            </a>
+            <a data-match="✗ not matched">
+                <span class="text">(no href attribute)</span>
+            </a>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟣 BOX-1 → presence  [ attr ]</span><span class="sel">[href]</span> {
+    <span class="prop">background</span>: <span class="val">#ef4444</span>;
+}<span class="cmt">
+/* ✓ matches <span class="match">any element that HAS the href attribute</span>
+   ✗ does NOT match elements without href */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-2 — EXACT MATCH ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-exact" data-box="BOX-2" data-prop='[type="email"] — exact match'>
+            <input type="email" placeholder='type="email"' data-match="✓ matched">
+            <input type="text"  placeholder='type="text"'  data-match="✗ not matched">
+            <input type="password" placeholder='type="password"' data-match="✗ not matched">
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟣 BOX-2 → exact match  [ attr="value" ]</span><span class="sel">[type="email"]</span> {
+    <span class="prop">background</span>: <span class="val">#10b981</span>;
+}<span class="cmt">
+/* ✓ matches <span class="match">type="email" EXACTLY</span>
+   ✗ does NOT match type="text" or type="password" */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-3 — WHOLE WORD ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-word" data-box="BOX-3" data-prop='[class~="active"] — whole word'>
+            <a class="btn active" data-match="✓ matched">
+                <span class="text">class="btn active"</span>
+            </a>
+            <a class="btn inactive" data-match="✗ not matched">
+                <span class="text">class="btn inactive"</span>
+            </a>
+            <a class="active" data-match="✓ matched">
+                <span class="text">class="active"</span>
+            </a>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟣 BOX-3 → whole-word match  [ attr~="value" ]</span><span class="sel">[class~="active"]</span> {
+    <span class="prop">background</span>: <span class="val">#f59e0b</span>;
+}<span class="cmt">
+/* ✓ matches when <span class="match">"active" is a WHOLE WORD</span> in a space-separated list
+   ✓ class="btn active" · ✓ class="active"
+   ✗ class="btn inactive" (inactive ≠ active) */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-4 — STARTS WITH ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-start" data-box="BOX-4" data-prop='[href^="https"] — starts with'>
+            <a href="https://secure.example.com" data-match="✓ matched">
+                <span class="text">href="https://secure.example.com"</span>
+            </a>
+            <a href="http://insecure.example.com" data-match="✗ not matched">
+                <span class="text">href="http://insecure.example.com"</span>
+            </a>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟣 BOX-4 → starts-with  [ attr^="value" ]</span><span class="sel">[href^="https"]</span> {
+    <span class="prop">background</span>: <span class="val">#8b5cf6</span>;
+}<span class="cmt">
+/* ✓ matches href that <span class="match">STARTS with "https"</span>
+   ✗ does NOT match "http://..." */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-5 — ENDS WITH ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-end" data-box="BOX-5" data-prop='[href$=".pdf"] — ends with'>
+            <a href="/files/report.pdf" data-match="✓ matched">
+                <span class="text">href="/files/report.pdf"</span>
+            </a>
+            <a href="/files/report.docx" data-match="✗ not matched">
+                <span class="text">href="/files/report.docx"</span>
+            </a>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟣 BOX-5 → ends-with  [ attr$="value" ]</span><span class="sel">[href$=".pdf"]</span> {
+    <span class="prop">background</span>: <span class="val">#06b6d4</span>;
+}<span class="cmt">
+/* ✓ matches href that <span class="match">ENDS with ".pdf"</span>
+   ✗ does NOT match ".docx" — great for file-type icons */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-6 — CONTAINS ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-contains" data-box="BOX-6" data-prop='[href*="docs"] — contains'>
+            <a href="/docs/intro.html" data-match="✓ matched">
+                <span class="text">href="/docs/intro.html"</span>
+            </a>
+            <a href="/blog/post.html" data-match="✗ not matched">
+                <span class="text">href="/blog/post.html"</span>
+            </a>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟣 BOX-6 → contains  [ attr*="value" ]</span><span class="sel">[href*="docs"]</span> {
+    <span class="prop">background</span>: <span class="val">#ec4899</span>;
+}<span class="cmt">
+/* ✓ matches href that <span class="match">CONTAINS "docs" ANYWHERE</span>
+   ✗ does NOT match "/blog/..." */</span></div>
+
+    <script>
+        console.group('📐 Attribute Selectors — CSS Used For Each Box');
+
+        console.group('🟣 BOX-1 → presence  [ href ]');
+        console.log(`[href] {
+    background: #ef4444;
+}
+/* ✓ any element that HAS the href attribute
+   ✗ elements without href */`);
+        console.groupEnd();
+
+        console.group('🟣 BOX-2 → exact match  [ type="email" ]');
+        console.log(`[type="email"] {
+    background: #10b981;
+}
+/* ✓ type="email" EXACTLY
+   ✗ type="text", type="password" */`);
+        console.groupEnd();
+
+        console.group('🟣 BOX-3 → whole word  [ class~="active" ]');
+        console.log(`[class~="active"] {
+    background: #f59e0b;
+}
+/* ✓ "active" as a WHOLE WORD in a space-separated list
+   ✓ class="btn active" · ✓ class="active"
+   ✗ class="btn inactive" */`);
+        console.groupEnd();
+
+        console.group('🟣 BOX-4 → starts-with  [ href^="https" ]');
+        console.log(`[href^="https"] {
+    background: #8b5cf6;
+}
+/* ✓ href STARTS with "https"
+   ✗ "http://..." */`);
+        console.groupEnd();
+
+        console.group('🟣 BOX-5 → ends-with  [ href$=".pdf" ]');
+        console.log(`[href$=".pdf"] {
+    background: #06b6d4;
+}
+/* ✓ href ENDS with ".pdf"
+   ✗ ".docx" */`);
+        console.groupEnd();
+
+        console.group('🟣 BOX-6 → contains  [ href*="docs" ]');
+        console.log(`[href*="docs"] {
+    background: #ec4899;
+}
+/* ✓ href CONTAINS "docs" anywhere
+   ✗ "/blog/..." */`);
+        console.groupEnd();
+
+        console.groupEnd();
+    </script>
+
+</body>
+</html>

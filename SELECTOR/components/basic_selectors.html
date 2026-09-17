@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Basic Selectors</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin: 24px 0 12px; }
+
+        .demo-wrap { position: relative; width: min(560px, 100%); }
+        .demo-wrap::after {
+            content: "container: 560px (100% on mobile)";
+            display: block; margin-top: 6px;
+            font-size: 0.72rem; color: #64748b;
+            font-weight: 600; font-style: italic;
+        }
+
+        .demo {
+            width: 100%;
+            padding: 12px;
+            margin-top: 32px;
+            background-color: #1e293b;
+            border: 2px dashed rgba(255,255,255,0.25);
+            border-radius: 12px;
+            position: relative;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .demo::before {
+            content: attr(data-box);
+            position: absolute;
+            top: -26px; left: 0;
+            font-size: 0.85rem; font-weight: 800;
+            color: #0f172a; background-color: #fbbf24;
+            padding: 3px 12px; border-radius: 6px;
+        }
+        .demo::after {
+            content: attr(data-prop);
+            position: absolute;
+            top: -26px; right: 0;
+            font-size: 0.78rem; font-weight: 700;
+            color: #475569; max-width: 60%; text-align: right;
+        }
+
+        /* ==========================================================
+           SHARED CHILD STYLES
+           ========================================================== */
+        .demo > * {
+            padding: 10px 14px;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: #ffffff;
+            background-color: #475569;   /* default grey — not targeted */
+        }
+
+        /* Small "matches" / "not matched" badge */
+        .demo > *::after {
+            float: right;
+            font-size: 0.7rem;
+            font-weight: 700;
+            padding: 2px 8px;
+            border-radius: 999px;
+            background-color: rgba(255,255,255,0.15);
+            margin-left: 8px;
+        }
+
+        /* ==========================================================
+           1. ELEMENT SELECTOR
+           ========================================================== */
+        .s-element p {
+            background-color: #ef4444;
+        }
+        .s-element p::after   { content: "✓ matched"; background-color: rgba(255,255,255,0.25); }
+        .s-element div::after { content: "✗ not matched"; }
+
+        /* ==========================================================
+           2. CLASS SELECTOR
+           ========================================================== */
+        .s-class .highlight {
+            background-color: #10b981;
+        }
+        .s-class .highlight::after { content: "✓ matched"; background-color: rgba(255,255,255,0.25); }
+        .s-class .item::after      { content: "✗ not matched"; }
+
+        /* ==========================================================
+           3. ID SELECTOR
+           ========================================================== */
+        .s-id #hero-title {
+            background-color: #f59e0b;
+        }
+        .s-id #hero-title::after { content: "✓ matched"; background-color: rgba(255,255,255,0.25); }
+        .s-id .item::after       { content: "✗ not matched"; }
+
+        /* ==========================================================
+           4. UNIVERSAL SELECTOR
+           ========================================================== */
+        .s-universal * {
+            border: 2px dashed #ec4899;
+        }
+        .s-universal *::after { content: "✓ matched"; background-color: rgba(255,255,255,0.25); }
+
+        /* ==========================================================
+           5. GROUPING SELECTOR
+           ========================================================== */
+        .s-group h3,
+        .s-group p,
+        .s-group span {
+            background-color: #8b5cf6;
+        }
+        .s-group h3::after,
+        .s-group p::after,
+        .s-group span::after { content: "✓ matched"; background-color: rgba(255,255,255,0.25); }
+        .s-group div::after  { content: "✗ not matched"; }
+
+        /* ==========================================================
+           6. CHAINED SELECTOR
+           ========================================================== */
+        .s-chained p.primary {
+            background-color: #06b6d4;
+        }
+        .s-chained p.primary::after { content: "✓ matched"; background-color: rgba(255,255,255,0.25); }
+        .s-chained p:not(.primary)::after,
+        .s-chained span::after { content: "✗ not matched"; }
+
+        /* ==========================================================
+           7. MULTIPLE CLASSES SELECTOR
+           ========================================================== */
+        .s-multi-class .btn.primary {
+            background-color: #ec4899;
+        }
+        .s-multi-class .btn.primary::after { content: "✓ matched"; background-color: rgba(255,255,255,0.25); }
+        .s-multi-class .btn:not(.primary)::after,
+        .s-multi-class .primary:not(.btn)::after { content: "✗ not matched"; }
+
+        /* ==========================================================
+           8. UNIVERSAL + TAG (scoped universal)
+           ========================================================== */
+        .s-universal-tag .card {
+            background-color: rgba(168, 85, 247, 0.12);
+            padding: 10px;
+            border-radius: 8px;
+            border: 2px dashed #a855f7;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .s-universal-tag .card * {
+            border: 2px solid #a855f7;
+            padding: 8px 12px;
+            border-radius: 6px;
+            background-color: #475569;
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.82rem;
+        }
+        .s-universal-tag .card *::after { content: "✓ matched"; float: right; font-size: 0.7rem; background-color: rgba(255,255,255,0.25); padding: 2px 8px; border-radius: 999px; }
+        .s-universal-tag > p::after { content: "✗ not matched"; }
+
+        /* ==========================================================
+           CONSOLE-STYLE CODE BLOCK
+           ========================================================== */
+        .console-code {
+            width: min(560px, 100%);
+            margin: 12px 0 0;
+            padding: 12px 16px;
+            background-color: #1e1e1e; color: #d4d4d4;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem; line-height: 1.55;
+            border-radius: 8px;
+            border-left: 4px solid #fbbf24;
+            white-space: pre-wrap; word-break: break-word;
+        }
+        .console-code .header { color: #fbbf24; font-weight: 700; display: block; margin-bottom: 4px; }
+        .console-code .sel  { color: #f472b6; }
+        .console-code .prop { color: #7dd3fc; }
+        .console-code .val  { color: #fbbf24; }
+        .console-code .cmt  { color: #6b7280; font-style: italic; }
+        .console-code .match { color: #4ade80; }
+        .console-code .nomatch { color: #f87171; }
+
+        hr.divider {
+            border: none; border-top: 2px dashed #cbd5e1;
+            margin: 50px 0 24px; width: min(560px, 100%);
+        }
+
+        @media (max-width: 560px) {
+            .demo { padding: 10px; }
+            .demo > * { font-size: 0.78rem; padding: 8px 12px; }
+            .demo > *::after { font-size: 0.62rem; padding: 1px 6px; }
+            .demo::before, .demo::after { font-size: 0.7rem; padding: 2px 8px; top: -22px; }
+            .console-code { font-size: 0.72rem; padding: 10px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Element / Class / ID / Universal / Group / Chained / Multi-class / Scoped-*</h2>
+
+    <!-- ═════════ BOX-1 — ELEMENT SELECTOR ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-element" data-box="BOX-1" data-prop="element selector">
+            <p>This is a &lt;p&gt; element</p>
+            <p>This is another &lt;p&gt; element</p>
+            <div>This is a &lt;div&gt; element</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-1 → element selector</span><span class="sel">p</span> {
+    <span class="prop">background</span>: <span class="val">#ef4444</span>;
+}<span class="cmt">
+/* matches <span class="match">EVERY &lt;p&gt; tag</span> — regardless of class or id
+   does NOT match <span class="nomatch">&lt;div&gt;</span> or any other tag */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-2 — CLASS SELECTOR ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-class" data-box="BOX-2" data-prop="class selector">
+            <div class="highlight">This has class="highlight"</div>
+            <div class="item">This has class="item"</div>
+            <div class="highlight">This also has class="highlight"</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-2 → class selector</span><span class="sel">.highlight</span> {
+    <span class="prop">background</span>: <span class="val">#10b981</span>;
+}<span class="cmt">
+/* matches any tag with <span class="match">class="highlight"</span>
+   reusable — you can have many .highlight elements
+   does NOT match <span class="nomatch">class="item"</span> */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-3 — ID SELECTOR ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-id" data-box="BOX-3" data-prop="id selector">
+            <div id="hero-title">This has id="hero-title"</div>
+            <div class="item">This has class="item"</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-3 → id selector</span><span class="sel">#hero-title</span> {
+    <span class="prop">background</span>: <span class="val">#f59e0b</span>;
+}<span class="cmt">
+/* matches the one element with <span class="match">id="hero-title"</span>
+   IDs must be UNIQUE in a document — only 1 per page
+   does NOT match <span class="nomatch">class="item"</span> */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-4 — UNIVERSAL SELECTOR ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-universal" data-box="BOX-4" data-prop="universal selector (*)">
+            <div>I am a &lt;div&gt;</div>
+            <p>I am a &lt;p&gt;</p>
+            <span>I am a &lt;span&gt;</span>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-4 → universal selector</span><span class="sel">.s-universal *</span> {
+    <span class="prop">border</span>: <span class="val">2px dashed #ec4899</span>;
+}<span class="cmt">
+/* <span class="match">* matches EVERY element</span> inside the parent
+   &lt;div&gt;, &lt;p&gt;, &lt;span&gt; — all get the pink dashed border */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-5 — GROUPING SELECTOR ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-group" data-box="BOX-5" data-prop="grouping selector (, comma)">
+            <h3>I am an &lt;h3&gt;</h3>
+            <p>I am a &lt;p&gt;</p>
+            <span>I am a &lt;span&gt;</span>
+            <div>I am a &lt;div&gt;</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-5 → grouping selector</span><span class="sel">h3, p, span</span> {
+    <span class="prop">background</span>: <span class="val">#8b5cf6</span>;
+}<span class="cmt">
+/* comma = ONE rule applying to <span class="match">h3 OR p OR span</span>
+   — saves repeating yourself
+   does NOT match <span class="nomatch">&lt;div&gt;</span> */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-6 — CHAINED SELECTOR ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-chained" data-box="BOX-6" data-prop="chained selector (p.primary)">
+            <p class="primary">I am &lt;p class="primary"&gt;</p>
+            <p>I am a plain &lt;p&gt;</p>
+            <span class="primary">I am &lt;span class="primary"&gt;</span>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-6 → chained selector</span><span class="sel">p.primary</span> {
+    <span class="prop">background</span>: <span class="val">#06b6d4</span>;
+}<span class="cmt">
+/* no space = must be BOTH &lt;p&gt; AND .primary
+   matches: <span class="match">&lt;p class="primary"&gt;</span>
+   does NOT match: <span class="nomatch">plain &lt;p&gt;</span>, <span class="nomatch">&lt;span class="primary"&gt;</span> */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-7 — MULTIPLE CLASSES ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-multi-class" data-box="BOX-7" data-prop="multiple classes (.btn.primary)">
+            <div class="btn primary">class="btn primary"</div>
+            <div class="btn">class="btn"</div>
+            <div class="primary">class="primary"</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-7 → multiple classes</span><span class="sel">.btn.primary</span> {
+    <span class="prop">background</span>: <span class="val">#ec4899</span>;
+}<span class="cmt">
+/* no space = must have <span class="match">BOTH class="btn" AND class="primary"</span>
+   ✓ matches: class="btn primary"
+   ✗ does NOT match: class="btn" alone, class="primary" alone */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-8 — UNIVERSAL + TAG ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo s-universal-tag" data-box="BOX-8" data-prop="universal + tag (.card *)">
+            <div class="card">
+                <p>Inside .card → &lt;p&gt;</p>
+                <span>Inside .card → &lt;span&gt;</span>
+                <div>Inside .card → &lt;div&gt;</div>
+            </div>
+            <p>Outside .card → NOT matched</p>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-8 → universal + tag</span><span class="sel">.card *</span> {
+    <span class="prop">border</span>: <span class="val">2px solid #a855f7</span>;
+}<span class="cmt">
+/* scoped universal — matches <span class="match">EVERY element INSIDE .card</span>
+   ✓ matches: children of .card
+   ✗ does NOT match: elements outside .card */</span></div>
+
+    <script>
+        console.group("📐 Basic Selectors — CSS Used For Each Box");
+
+        console.group("🔵 BOX-1 → element selector  [ p ]");
+        console.log(`p {
+    background: #ef4444;
+}
+/* ✓ matches EVERY <p> tag · ✗ does NOT match <div> */`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-2 → class selector  [ .highlight ]");
+        console.log(`.highlight {
+    background: #10b981;
+}
+/* ✓ matches class="highlight" · ✗ does NOT match class="item" */`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-3 → id selector  [ #hero-title ]");
+        console.log(`#hero-title {
+    background: #f59e0b;
+}
+/* ✓ matches id="hero-title" · ✗ does NOT match class="item" */`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-4 → universal selector  [ * ]");
+        console.log(`.s-universal * {
+    border: 2px dashed #ec4899;
+}
+/* ✓ matches EVERY element inside the parent */`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-5 → grouping selector  [ h3, p, span ]");
+        console.log(`h3, p, span {
+    background: #8b5cf6;
+}
+/* ✓ matches h3 OR p OR span · ✗ does NOT match <div> */`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-6 → chained selector  [ p.primary ]");
+        console.log(`p.primary {
+    background: #06b6d4;
+}
+/* ✓ matches <p class="primary"> · ✗ does NOT match plain <p> or <span class="primary"> */`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-7 → multiple classes  [ .btn.primary ]");
+        console.log(`.btn.primary {
+    background: #ec4899;
+}
+/* ✓ matches class="btn primary"
+   ✗ does NOT match class="btn" alone or class="primary" alone */`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-8 → universal + tag  [ .card * ]");
+        console.log(`.card * {
+    border: 2px solid #a855f7;
+}
+/* ✓ matches EVERY element INSIDE .card
+   ✗ does NOT match elements outside .card */`);
+        console.groupEnd();
+
+        console.groupEnd();
+    </script>
+
+</body>
+</html>
