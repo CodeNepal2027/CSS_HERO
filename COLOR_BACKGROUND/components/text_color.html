@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Text &amp; Named Colors</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin-bottom: 12px; }
+        h3 { color: #475569; margin: 16px 0 8px; font-size: 1rem; }
+
+        .demo {
+            padding: 16px;
+            margin: 10px 0;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        /* ---------- Named Colors ---------- */
+        .c-red       { color: red; }
+        .c-blue      { color: blue; }
+        .c-green     { color: green; }
+        .c-orange    { color: orange; }
+        .c-purple    { color: purple; }
+        .c-tomato    { color: tomato; }
+        .c-teal      { color: teal; }
+        .c-crimson   { color: crimson; }
+
+        /* ---------- Hex ---------- */
+        .c-hex-1     { color: #2563eb; }
+        .c-hex-2     { color: #f59e0b; }
+        .c-hex-3     { color: #3f3; }
+        .c-hex-4     { color: #ff000080; }
+
+        /* ---------- RGB / RGBA / HSL / HSLA ---------- */
+        .c-rgb       { color: rgb(37, 99, 235); }
+        .c-rgba      { color: rgba(239, 68, 68, 0.7); }
+        .c-hsl       { color: hsl(160, 84%, 39%); }
+        .c-hsla      { color: hsla(280, 65%, 60%, 0.8); }
+
+        /* ---------- Modern ---------- */
+        .c-oklch     { color: oklch(0.62 0.22 25); }
+        .c-color-mix { color: color-mix(in srgb, red 60%, blue 40%); }
+
+        /* ---------- Gradient Text (background-clip: text) ---------- */
+        .c-grad-linear {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+            -webkit-background-clip: text;
+            background-clip: text;
+            font-size: 2rem;
+            font-weight: 900;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .c-grad-radial {
+            background: radial-gradient(circle, #f59e0b, #ef4444);
+            -webkit-background-clip: text;
+            background-clip: text;
+            font-size: 2rem;
+            font-weight: 900;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .c-grad-rainbow {
+            background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
+            -webkit-background-clip: text;
+            background-clip: text;
+            font-size: 2rem;
+            font-weight: 900;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+        }
+
+        .c-grad-animated {
+            background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
+            background-size: 300% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            font-size: 2rem;
+            font-weight: 900;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            animation: slide 3s linear infinite;
+        }
+        @keyframes slide {
+            0%   { background-position: 0% 50%; }
+            100% { background-position: 300% 50%; }
+        }
+
+        /* ---------- Image Background Text ---------- */
+        .c-img-text {
+            background-image: url('https://picsum.photos/id/1015/600/200');
+            background-size: cover;
+            background-position: center;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            font-size: 2.5rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .c-img-text-star {
+            background-image: url('https://picsum.photos/id/1043/600/200');
+            background-size: cover;
+            background-position: center;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
+            font-size: 2.5rem;
+            font-weight: 800;
+        }
+
+        /* ---------- Drop Cap (bonus: traditional gradient text) ---------- */
+        .c-outline {
+            -webkit-text-stroke: 2px #3b82f6;
+            color: transparent;
+            font-size: 2rem;
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>Named Colors</h2>
+    <div class="demo c-red">     BOX-1: color: red</div>
+    <div class="demo c-blue">    BOX-2: color: blue</div>
+    <div class="demo c-green">   BOX-3: color: green</div>
+    <div class="demo c-orange">  BOX-4: color: orange</div>
+    <div class="demo c-purple">  BOX-5: color: purple</div>
+    <div class="demo c-tomato">  BOX-6: color: tomato</div>
+    <div class="demo c-teal">    BOX-7: color: teal</div>
+    <div class="demo c-crimson"> BOX-8: color: crimson</div>
+
+    <hr>
+
+    <h2>Hex Colors</h2>
+    <div class="demo c-hex-1"> BOX-9:  color: #2563eb       (6-digit)</div>
+    <div class="demo c-hex-2"> BOX-10: color: #f59e0b       (6-digit)</div>
+    <div class="demo c-hex-3"> BOX-11: color: #3f3          (3-digit shorthand)</div>
+    <div class="demo c-hex-4"> BOX-12: color: #ff000080     (8-digit with alpha)</div>
+
+    <hr>
+
+    <h2>RGB / RGBA / HSL / HSLA</h2>
+    <div class="demo c-rgb">   BOX-13: color: rgb(37, 99, 235)</div>
+    <div class="demo c-rgba">  BOX-14: color: rgba(239, 68, 68, 0.7)</div>
+    <div class="demo c-hsl">   BOX-15: color: hsl(160, 84%, 39%)</div>
+    <div class="demo c-hsla">  BOX-16: color: hsla(280, 65%, 60%, 0.8)</div>
+
+    <hr>
+
+    <h2>Modern Color Functions</h2>
+    <div class="demo c-oklch">     BOX-17: color: oklch(0.62 0.22 25)</div>
+    <div class="demo c-color-mix"> BOX-18: color: color-mix(in srgb, red 60%, blue 40%)</div>
+
+    <hr>
+
+    <h2>Gradient Text (background-clip: text)</h2>
+    <div class="demo c-grad-linear">  BOX-19: linear-gradient text (blue → purple → pink)</div>
+    <div class="demo c-grad-radial">  BOX-20: radial-gradient text (amber → red)</div>
+    <div class="demo c-grad-rainbow"> BOX-21: rainbow gradient text</div>
+    <div class="demo c-grad-animated">BOX-22: animated gradient text</div>
+
+    <hr>
+
+    <h2>Image Background Text (background-clip: text)</h2>
+    <div class="demo c-img-text">       BOX-23: IMAGE TEXT</div>
+    <div class="demo c-img-text-star">  BOX-24: NATURE TEXT</div>
+
+    <hr>
+
+    <h2>Outline Text (bonus)</h2>
+    <div class="demo c-outline">BOX-25: -webkit-text-stroke: 2px blue</div>
+
+    <script>
+        console.group("🎨 Text & Named Colors — CSS Used For Each Box");
+
+        /* ---------- Named ---------- */
+        console.group("🔴 BOX-1 → .c-red");
+        console.log(`.c-red { color: red; }`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-2 → .c-blue");
+        console.log(`.c-blue { color: blue; }`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-3 → .c-green");
+        console.log(`.c-green { color: green; }`);
+        console.groupEnd();
+
+        console.group("🟠 BOX-4 → .c-orange");
+        console.log(`.c-orange { color: orange; }`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-5 → .c-purple");
+        console.log(`.c-purple { color: purple; }`);
+        console.groupEnd();
+
+        console.group("🍅 BOX-6 → .c-tomato");
+        console.log(`.c-tomato { color: tomato; }`);
+        console.groupEnd();
+
+        console.group("🩵 BOX-7 → .c-teal");
+        console.log(`.c-teal { color: teal; }`);
+        console.groupEnd();
+
+        console.group("❤️ BOX-8 → .c-crimson");
+        console.log(`.c-crimson { color: crimson; }`);
+        console.groupEnd();
+
+        /* ---------- Hex ---------- */
+        console.group("🔷 BOX-9 → .c-hex-1");
+        console.log(`.c-hex-1 { color: #2563eb; }       /* 6-digit */`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-10 → .c-hex-2");
+        console.log(`.c-hex-2 { color: #f59e0b; }       /* 6-digit */`);
+        console.groupEnd();
+
+        console.group("🟩 BOX-11 → .c-hex-3");
+        console.log(`.c-hex-3 { color: #3f3; }          /* 3-digit shorthand */`);
+        console.groupEnd();
+
+        console.group("🔴 BOX-12 → .c-hex-4");
+        console.log(`.c-hex-4 { color: #ff000080; }     /* 8-digit with alpha */`);
+        console.groupEnd();
+
+        /* ---------- RGB / HSL ---------- */
+        console.group("🔵 BOX-13 → .c-rgb");
+        console.log(`.c-rgb { color: rgb(37, 99, 235); }`);
+        console.groupEnd();
+
+        console.group("🔴 BOX-14 → .c-rgba");
+        console.log(`.c-rgba { color: rgba(239, 68, 68, 0.7); }`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-15 → .c-hsl");
+        console.log(`.c-hsl { color: hsl(160, 84%, 39%); }`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-16 → .c-hsla");
+        console.log(`.c-hsla { color: hsla(280, 65%, 60%, 0.8); }`);
+        console.groupEnd();
+
+        /* ---------- Modern ---------- */
+        console.group("🟠 BOX-17 → .c-oklch");
+        console.log(`.c-oklch { color: oklch(0.62 0.22 25); }`);
+        console.groupEnd();
+
+        console.group("🌈 BOX-18 → .c-color-mix");
+        console.log(`.c-color-mix { color: color-mix(in srgb, red 60%, blue 40%); }`);
+        console.groupEnd();
+
+        /* ---------- Gradient Text ---------- */
+        console.group("🌈 BOX-19 → .c-grad-linear");
+        console.log(`.c-grad-linear {
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899);
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-size: 2rem;
+    font-weight: 900;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}`);
+        console.groupEnd();
+
+        console.group("⭕ BOX-20 → .c-grad-radial");
+        console.log(`.c-grad-radial {
+    background: radial-gradient(circle, #f59e0b, #ef4444);
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-size: 2rem;
+    font-weight: 900;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}`);
+        console.groupEnd();
+
+        console.group("🌈 BOX-21 → .c-grad-rainbow");
+        console.log(`.c-grad-rainbow {
+    background: linear-gradient(90deg, red, orange, yellow, green, cyan, blue, violet);
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-size: 2rem;
+    font-weight: 900;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+}`);
+        console.groupEnd();
+
+        console.group("✨ BOX-22 → .c-grad-animated");
+        console.log(`.c-grad-animated {
+    background: linear-gradient(90deg, #3b82f6, #8b5cf6, #ec4899, #3b82f6);
+    background-size: 300% 100%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    font-size: 2rem;
+    font-weight: 900;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: slide 3s linear infinite;
+}
+@keyframes slide {
+    0%   { background-position: 0% 50%; }
+    100% { background-position: 300% 50%; }
+}`);
+        console.groupEnd();
+
+        /* ---------- Image Background Text ---------- */
+        console.group("🖼️ BOX-23 → .c-img-text");
+        console.log(`.c-img-text {
+    background-image: url('https://picsum.photos/id/1015/600/200');
+    background-size: cover;
+    background-position: center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-size: 2.5rem;
+    font-weight: 800;
+}`);
+        console.groupEnd();
+
+        console.group("🖼️ BOX-24 → .c-img-text-star");
+        console.log(`.c-img-text-star {
+    background-image: url('https://picsum.photos/id/1043/600/200');
+    background-size: cover;
+    background-position: center;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    font-size: 2.5rem;
+    font-weight: 800;
+}`);
+        console.groupEnd();
+
+        /* ---------- Outline Text ---------- */
+        console.group("✒️ BOX-25 → .c-outline");
+        console.log(`.c-outline {
+    -webkit-text-stroke: 2px #3b82f6;
+    color: transparent;
+    font-size: 2rem;
+    font-weight: 800;
+}`);
+        console.groupEnd();
+
+        console.groupEnd();
+    </script>
+
+</body>
+</html>

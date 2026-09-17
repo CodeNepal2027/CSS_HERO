@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Background Colors</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin-bottom: 12px; }
+        h3 { color: #475569; margin: 16px 0 8px; font-size: 1rem; }
+
+        .demo {
+            padding: 24px;
+            margin: 10px 0;
+            border-radius: 8px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: #0f172a;
+        }
+
+        /* ---------- Named ---------- */
+        .bg-lightblue    { background-color: lightblue; }
+        .bg-lightgreen   { background-color: lightgreen; }
+        .bg-lightcoral   { background-color: lightcoral; }
+        .bg-lightyellow  { background-color: lightyellow; }
+
+        /* ---------- Hex ---------- */
+        .bg-hex-blue     { background-color: #3b82f6; color: #ffffff; }
+        .bg-hex-green    { background-color: #10b981; color: #ffffff; }
+        .bg-hex-amber    { background-color: #f59e0b; color: #ffffff; }
+
+        /* ---------- RGB / RGBA ---------- */
+        .bg-rgb          { background-color: rgb(139, 92, 246); color: #ffffff; }
+        .bg-rgba         { background-color: rgba(239, 68, 68, 0.35); }
+
+        /* ---------- HSL ---------- */
+        .bg-hsl          { background-color: hsl(200, 95%, 60%); color: #ffffff; }
+
+        /* ---------- Opacity vs RGBA ---------- */
+        .bg-opacity      { background-color: #10b981; opacity: 0.4; }
+        .bg-alpha        { background-color: rgba(16, 185, 129, 0.4); }
+    </style>
+</head>
+<body>
+
+    <h2>Named Colors</h2>
+    <div class="demo bg-lightblue">   BOX-1: background-color: lightblue</div>
+    <div class="demo bg-lightgreen">  BOX-2: background-color: lightgreen</div>
+    <div class="demo bg-lightcoral">  BOX-3: background-color: lightcoral</div>
+    <div class="demo bg-lightyellow"> BOX-4: background-color: lightyellow</div>
+
+    <hr>
+
+    <h2>Hex Colors</h2>
+    <div class="demo bg-hex-blue">  BOX-5: background-color: #3b82f6</div>
+    <div class="demo bg-hex-green"> BOX-6: background-color: #10b981</div>
+    <div class="demo bg-hex-amber"> BOX-7: background-color: #f59e0b</div>
+
+    <hr>
+
+    <h2>RGB / RGBA / HSL</h2>
+    <div class="demo bg-rgb">  BOX-8:  background-color: rgb(139, 92, 246)</div>
+    <div class="demo bg-rgba"> BOX-9:  background-color: rgba(239, 68, 68, 0.35)</div>
+    <div class="demo bg-hsl">  BOX-10: background-color: hsl(200, 95%, 60%)</div>
+
+    <hr>
+
+    <h2>opacity vs rgba()</h2>
+    <div class="demo bg-opacity"> BOX-11: background-color: #10b981; opacity: 0.4;</div>
+    <div class="demo bg-alpha">   BOX-12: background-color: rgba(16, 185, 129, 0.4);</div>
+
+    <script>
+        console.group("🎨 Background Colors — CSS Used For Each Box");
+
+        console.group("🩵 BOX-1 → .bg-lightblue");
+        console.log(`.bg-lightblue { background-color: lightblue; }`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-2 → .bg-lightgreen");
+        console.log(`.bg-lightgreen { background-color: lightgreen; }`);
+        console.groupEnd();
+
+        console.group("🩷 BOX-3 → .bg-lightcoral");
+        console.log(`.bg-lightcoral { background-color: lightcoral; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-4 → .bg-lightyellow");
+        console.log(`.bg-lightyellow { background-color: lightyellow; }`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-5 → .bg-hex-blue");
+        console.log(`.bg-hex-blue { background-color: #3b82f6; color: #ffffff; }`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-6 → .bg-hex-green");
+        console.log(`.bg-hex-green { background-color: #10b981; color: #ffffff; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-7 → .bg-hex-amber");
+        console.log(`.bg-hex-amber { background-color: #f59e0b; color: #ffffff; }`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-8 → .bg-rgb");
+        console.log(`.bg-rgb { background-color: rgb(139, 92, 246); color: #ffffff; }`);
+        console.groupEnd();
+
+        console.group("🔴 BOX-9 → .bg-rgba");
+        console.log(`.bg-rgba { background-color: rgba(239, 68, 68, 0.35); }`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-10 → .bg-hsl");
+        console.log(`.bg-hsl { background-color: hsl(200, 95%, 60%); color: #ffffff; }`);
+        console.groupEnd();
+
+        console.group("⚠️ BOX-11 → .bg-opacity");
+        console.log(`.bg-opacity { background-color: #10b981; opacity: 0.4; }
+/* opacity affects the ENTIRE element — text + background */`);
+        console.groupEnd();
+
+        console.group("✅ BOX-12 → .bg-alpha");
+        console.log(`.bg-alpha { background-color: rgba(16, 185, 129, 0.4); }
+/* rgba affects ONLY the background — text stays opaque */`);
+        console.groupEnd();
+
+        console.groupEnd();
+    </script>
+
+</body>
+</html>
