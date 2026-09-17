@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Order / Align-Self / Gap</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin: 24px 0 12px; }
+        h3 { color: #475569; margin: 16px 0 8px; font-size: 1rem; }
+
+        /* ==========================================================
+           RESPONSIVE WRAPPER
+           ========================================================== */
+        .demo-wrap {
+            position: relative;
+            width: min(500px, 100%);
+        }
+
+        .demo-wrap::after {
+            content: "container: 500px × 220px (100% on mobile)";
+            display: block;
+            margin-top: 6px;
+            font-size: 0.72rem;
+            color: #64748b;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        /* ==========================================================
+           PARENT CONTAINER — TALL so align-self is visible
+           ========================================================== */
+        .demo {
+            display: flex;
+            width: 100%;
+            height: 220px;                     /* ← TALL parent */
+            padding: 12px;
+            margin-top: 32px;
+            background-color: #1e293b;
+            border: 2px dashed rgba(255,255,255,0.25);
+            border-radius: 12px;
+            position: relative;
+            /* gap set per demo below */
+        }
+
+        .demo::before {
+            content: attr(data-box);
+            position: absolute;
+            top: -26px;
+            left: 0;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #0f172a;
+            background-color: #fbbf24;
+            padding: 3px 12px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .demo::after {
+            content: attr(data-prop);
+            position: absolute;
+            top: -26px;
+            right: 0;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #475569;
+            max-width: 60%;
+            text-align: right;
+        }
+
+        /* ==========================================================
+           CHILD ITEMS
+           ========================================================== */
+        .item {
+            background-color: #f59e0b;
+            color: #ffffff;
+            padding: 16px 20px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            min-width: 60px;
+            min-height: 50px;
+        }
+
+        /* ==========================================================
+           ORDER
+           ========================================================== */
+        .order-neg { order: -1; background-color: #ef4444; }
+        .order-0   { order: 0; }
+        .order-1   { order: 1; background-color: #10b981; }
+        .order-2   { order: 2; background-color: #3b82f6; }
+
+        /* ==========================================================
+           ALIGN-SELF
+           ========================================================== */
+        .as-start   { align-self: flex-start; }
+        .as-center  { align-self: center; }
+        .as-end     { align-self: flex-end; }
+        .as-stretch { align-self: stretch; }
+        .as-baseline{ align-self: baseline; }
+
+        /* Different font-sizes for baseline demo */
+        .fs-sm { font-size: 0.75rem; }
+        .fs-md { font-size: 1rem;    }
+        .fs-lg { font-size: 1.5rem;  }
+
+        /* ==========================================================
+           GAP
+           ========================================================== */
+        .gap-none { gap: 0; }
+        .gap-sm   { gap: 8px; }
+        .gap-md   { gap: 16px; }
+        .gap-lg   { gap: 32px; }
+        .gap-xy   { gap: 24px 8px; flex-wrap: wrap; height: auto; }
+
+        /* ==========================================================
+           CONSOLE-STYLE CODE BLOCK
+           ========================================================== */
+        .console-code {
+            width: min(500px, 100%);
+            margin: 12px 0 0;
+            padding: 12px 16px;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 0.82rem;
+            line-height: 1.55;
+            border-radius: 8px;
+            border-left: 4px solid #fbbf24;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            word-break: break-word;
+        }
+
+        .console-code .header {
+            color: #fbbf24;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .console-code .sel  { color: #f472b6; }
+        .console-code .prop { color: #7dd3fc; }
+        .console-code .val  { color: #fbbf24; }
+        .console-code .cmt  { color: #6b7280; font-style: italic; }
+
+        /* ==========================================================
+           HR SEPARATOR
+           ========================================================== */
+        hr.divider {
+            border: none;
+            border-top: 2px dashed #cbd5e1;
+            margin: 50px 0 24px;
+            width: min(500px, 100%);
+        }
+
+        /* ==========================================================
+           MOBILE TWEAKS
+           ========================================================== */
+        @media (max-width: 560px) {
+            .demo { padding: 10px; height: 180px; }
+            .gap-xy { height: auto; }
+
+            .item {
+                padding: 12px 12px;
+                font-size: 0.85rem;
+                border-radius: 6px;
+                min-width: 40px;
+            }
+
+            .demo::before,
+            .demo::after {
+                font-size: 0.7rem;
+                padding: 2px 8px;
+                top: -22px;
+            }
+
+            .console-code { font-size: 0.72rem; padding: 10px 12px; }
+        }
+
+        @media (max-width: 360px) {
+            .demo { height: 160px; }
+            .item { padding: 10px 8px; font-size: 0.78rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>order — rearranges items without changing HTML</h2>
+
+    <!-- ═════════ BOX-1 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo" data-box="BOX-1" data-prop="order: -1 · 0 · 1 · 2" style="gap: 8px; align-items: center;">
+            <div class="item order-0">A</div>
+            <div class="item order-1">B</div>
+            <div class="item order-neg">C</div>
+            <div class="item order-2">D</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟠 BOX-1 → order values</span><span class="sel">.order-neg</span> { <span class="prop">order</span>: <span class="val">-1</span>; }
+<span class="sel">.order-0</span>   { <span class="prop">order</span>: <span class="val">0</span>; }   <span class="cmt">/* default */</span>
+<span class="sel">.order-1</span>   { <span class="prop">order</span>: <span class="val">1</span>; }
+<span class="sel">.order-2</span>   { <span class="prop">order</span>: <span class="val">2</span>; }<span class="cmt">
+/* C (-1) jumps to the front → C A B D */</span></div>
+
+    <hr class="divider">
+
+    <h2>align-self — overrides align-items for one item</h2>
+
+    <!-- ═════════ BOX-2 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo" data-box="BOX-2" data-prop="align-self: start · center · end · stretch" style="gap: 8px;">
+            <div class="item as-start">A</div>
+            <div class="item as-center">B</div>
+            <div class="item as-end">C</div>
+            <div class="item as-stretch">D</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟠 BOX-2 → align-self values</span><span class="sel">.as-start</span>   { <span class="prop">align-self</span>: <span class="val">flex-start</span>; }
+<span class="sel">.as-center</span>  { <span class="prop">align-self</span>: <span class="val">center</span>; }
+<span class="sel">.as-end</span>     { <span class="prop">align-self</span>: <span class="val">flex-end</span>; }
+<span class="sel">.as-stretch</span> { <span class="prop">align-self</span>: <span class="val">stretch</span>; }<span class="cmt">
+/* parent: display: flex; height: 220px (no align-items set) */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-3 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo" data-box="BOX-3" data-prop="align-self: baseline" style="gap: 8px; align-items: flex-start;">
+            <div class="item as-baseline fs-lg">A</div>
+            <div class="item as-baseline fs-sm">B</div>
+            <div class="item as-baseline fs-lg">C</div>
+            <div class="item as-baseline fs-md">D</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟠 BOX-3 → align-self: baseline</span><span class="sel">.as-baseline</span> { <span class="prop">align-self</span>: <span class="val">baseline</span>; }
+<span class="sel">.fs-lg</span> { <span class="prop">font-size</span>: <span class="val">1.5rem</span>; }
+<span class="sel">.fs-md</span> { <span class="prop">font-size</span>: <span class="val">1rem</span>; }
+<span class="sel">.fs-sm</span> { <span class="prop">font-size</span>: <span class="val">0.75rem</span>; }<span class="cmt">
+/* items align on their text baseline, not their box edge */</span></div>
+
+    <hr class="divider">
+
+    <h2>gap — spacing between flex items</h2>
+
+    <!-- ═════════ BOX-4 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo gap-none" data-box="BOX-4" data-prop="gap: 0" style="align-items: center;">
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟡 BOX-4 → .gap-none</span><span class="sel">.gap-none</span> { <span class="prop">gap</span>: <span class="val">0</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-5 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo gap-sm" data-box="BOX-5" data-prop="gap: 8px" style="align-items: center;">
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟡 BOX-5 → .gap-sm</span><span class="sel">.gap-sm</span> { <span class="prop">gap</span>: <span class="val">8px</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-6 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo gap-md" data-box="BOX-6" data-prop="gap: 16px" style="align-items: center;">
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟡 BOX-6 → .gap-md</span><span class="sel">.gap-md</span> { <span class="prop">gap</span>: <span class="val">16px</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-7 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo gap-lg" data-box="BOX-7" data-prop="gap: 32px" style="align-items: center;">
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟡 BOX-7 → .gap-lg</span><span class="sel">.gap-lg</span> { <span class="prop">gap</span>: <span class="val">32px</span>; }</div>
+
+    <hr class="divider">
+
+    <h3>gap: 24px 8px (row-gap column-gap) with wrap</h3>
+
+    <!-- ═════════ BOX-8 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo gap-xy" data-box="BOX-8" data-prop="gap: 24px 8px (row column)">
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+            <div class="item">D</div>
+            <div class="item">E</div>
+            <div class="item">F</div>
+            <div class="item">G</div>
+            <div class="item">H</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟡 BOX-8 → .gap-xy</span><span class="sel">.gap-xy</span> {
+    <span class="prop">flex-wrap</span>: <span class="val">wrap</span>;
+    <span class="prop">gap</span>: <span class="val">24px 8px</span>;   <span class="cmt">/* row-gap column-gap */</span>
+}</div>
+
+    <script>
+        console.group("📐 Order / Align-Self / Gap — CSS Used For Each Box");
+
+        console.group("🟠 BOX-1 → order values");
+        console.log(`.order-neg { order: -1; }
+.order-0   { order: 0; }   /* default */
+.order-1   { order: 1; }
+.order-2   { order: 2; }`);
+        console.groupEnd();
+
+        console.group("🟠 BOX-2 → align-self values");
+        console.log(`.as-start   { align-self: flex-start; }
+.as-center  { align-self: center; }
+.as-end     { align-self: flex-end; }
+.as-stretch { align-self: stretch; }`);
+        console.groupEnd();
+
+        console.group("🟠 BOX-3 → align-self: baseline");
+        console.log(`.as-baseline { align-self: baseline; }
+.fs-lg { font-size: 1.5rem; }
+.fs-md { font-size: 1rem; }
+.fs-sm { font-size: 0.75rem; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-4 → .gap-none");
+        console.log(`.gap-none { gap: 0; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-5 → .gap-sm");
+        console.log(`.gap-sm { gap: 8px; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-6 → .gap-md");
+        console.log(`.gap-md { gap: 16px; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-7 → .gap-lg");
+        console.log(`.gap-lg { gap: 32px; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-8 → .gap-xy");
+        console.log(`.gap-xy {
+    flex-wrap: wrap;
+    gap: 24px 8px;   /* row-gap column-gap */
+}`);
+        console.groupEnd();
+
+        console.groupEnd();
+    </script>
+
+</body>
+</html>

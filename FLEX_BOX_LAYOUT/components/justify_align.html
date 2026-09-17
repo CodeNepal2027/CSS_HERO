@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Justify &amp; Align</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin: 24px 0 12px; }
+        h3 { color: #475569; margin: 16px 0 8px; font-size: 1rem; }
+
+        /* ==========================================================
+           PARENT CONTAINER
+           ========================================================== */
+        .demo {
+            display: flex;
+            width: 100%;
+            max-width: 640px;
+            height: 220px;
+            padding: 12px;
+            margin-top: 32px;
+            background-color: #8b5cf6;
+            border: 2px dashed rgba(255,255,255,0.35);
+            border-radius: 12px;
+            gap: 8px;
+            position: relative;
+        }
+
+        /* BOX-N label on the parent container */
+        .demo::before {
+            content: attr(data-box);
+            position: absolute;
+            top: -26px;
+            left: 0;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #0f172a;
+            background-color: #fbbf24;
+            padding: 3px 12px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Property label at the top-right */
+        .demo::after {
+            content: attr(data-prop);
+            position: absolute;
+            top: -26px;
+            right: 0;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #475569;
+        }
+
+        /* ==========================================================
+           CHILD ITEMS
+           ========================================================== */
+        .item {
+            background-color: #f59e0b;
+            color: #ffffff;
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-align: center;
+            min-width: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .h-sm { height: 60px;  }
+        .h-md { height: 100px; }
+        .h-lg { height: 150px; }
+        .h-xl { height: 180px; }
+
+        /* ==========================================================
+           justify-content
+           ========================================================== */
+        .jc-start        { justify-content: flex-start; }
+        .jc-center       { justify-content: center; }
+        .jc-end          { justify-content: flex-end; }
+        .jc-between      { justify-content: space-between; }
+        .jc-around       { justify-content: space-around; }
+        .jc-evenly       { justify-content: space-evenly; }
+
+        /* ==========================================================
+           align-items
+           ========================================================== */
+        .ai-start        { align-items: flex-start; }
+        .ai-center       { align-items: center; }
+        .ai-end          { align-items: flex-end; }
+        .ai-stretch      { align-items: stretch; }
+        .ai-baseline     { align-items: baseline; }
+
+        .fs-sm { font-size: 0.75rem; }
+        .fs-md { font-size: 1rem;    }
+        .fs-lg { font-size: 1.5rem;  }
+
+        /* ==========================================================
+           align-content (multi-line)
+           ========================================================== */
+        .ac-start   { flex-wrap: wrap; align-content: flex-start;    }
+        .ac-center  { flex-wrap: wrap; align-content: center;        }
+        .ac-between { flex-wrap: wrap; align-content: space-between; }
+        .ac-around  { flex-wrap: wrap; align-content: space-around;  }
+
+        /* ==========================================================
+           CONSOLE-STYLE CODE BLOCK
+           ========================================================== */
+        .console-code {
+            max-width: 640px;
+            margin: 12px 0 0;
+            padding: 12px 16px;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 0.82rem;
+            line-height: 1.55;
+            border-radius: 8px;
+            border-left: 4px solid #fbbf24;
+            white-space: pre-wrap;
+            overflow-x: auto;
+        }
+
+        .console-code .header {
+            color: #fbbf24;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .console-code .sel  { color: #f472b6; }
+        .console-code .prop { color: #7dd3fc; }
+        .console-code .val  { color: #fbbf24; }
+        .console-code .cmt  { color: #6b7280; font-style: italic; }
+
+        /* ==========================================================
+           HR SEPARATOR
+           ========================================================== */
+        hr.divider {
+            border: none;
+            border-top: 2px dashed #cbd5e1;
+            margin: 40px 0 24px;
+            max-width: 640px;
+        }
+    </style>
+</head>
+<body>
+
+    <h2>justify-content (main axis — horizontal)</h2>
+
+    <!-- ═════════ BOX-1 ═════════ -->
+    <div class="demo jc-start" data-box="BOX-1" data-prop="justify-content: flex-start">
+        <div class="item h-md">A</div>
+        <div class="item h-lg">B</div>
+        <div class="item h-sm">C</div>
+        <div class="item h-md">D</div>
+    </div>
+    <div class="console-code"><span class="header">🟢 BOX-1 → .jc-start</span><span class="sel">.jc-start</span> { <span class="prop">justify-content</span>: <span class="val">flex-start</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-2 ═════════ -->
+    <div class="demo jc-center" data-box="BOX-2" data-prop="justify-content: center">
+        <div class="item h-md">A</div>
+        <div class="item h-lg">B</div>
+        <div class="item h-sm">C</div>
+        <div class="item h-md">D</div>
+    </div>
+    <div class="console-code"><span class="header">🟢 BOX-2 → .jc-center</span><span class="sel">.jc-center</span> { <span class="prop">justify-content</span>: <span class="val">center</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-3 ═════════ -->
+    <div class="demo jc-end" data-box="BOX-3" data-prop="justify-content: flex-end">
+        <div class="item h-md">A</div>
+        <div class="item h-lg">B</div>
+        <div class="item h-sm">C</div>
+        <div class="item h-md">D</div>
+    </div>
+    <div class="console-code"><span class="header">🟢 BOX-3 → .jc-end</span><span class="sel">.jc-end</span> { <span class="prop">justify-content</span>: <span class="val">flex-end</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-4 ═════════ -->
+    <div class="demo jc-between" data-box="BOX-4" data-prop="justify-content: space-between">
+        <div class="item h-md">A</div>
+        <div class="item h-lg">B</div>
+        <div class="item h-sm">C</div>
+        <div class="item h-md">D</div>
+    </div>
+    <div class="console-code"><span class="header">🟢 BOX-4 → .jc-between</span><span class="sel">.jc-between</span> { <span class="prop">justify-content</span>: <span class="val">space-between</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-5 ═════════ -->
+    <div class="demo jc-around" data-box="BOX-5" data-prop="justify-content: space-around">
+        <div class="item h-md">A</div>
+        <div class="item h-lg">B</div>
+        <div class="item h-sm">C</div>
+        <div class="item h-md">D</div>
+    </div>
+    <div class="console-code"><span class="header">🟢 BOX-5 → .jc-around</span><span class="sel">.jc-around</span> { <span class="prop">justify-content</span>: <span class="val">space-around</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-6 ═════════ -->
+    <div class="demo jc-evenly" data-box="BOX-6" data-prop="justify-content: space-evenly">
+        <div class="item h-md">A</div>
+        <div class="item h-lg">B</div>
+        <div class="item h-sm">C</div>
+        <div class="item h-md">D</div>
+    </div>
+    <div class="console-code"><span class="header">🟢 BOX-6 → .jc-evenly</span><span class="sel">.jc-evenly</span> { <span class="prop">justify-content</span>: <span class="val">space-evenly</span>; }</div>
+
+    <hr class="divider">
+
+    <h2>align-items (cross axis — vertical)</h2>
+
+    <!-- ═════════ BOX-7 ═════════ -->
+    <div class="demo ai-start" data-box="BOX-7" data-prop="align-items: flex-start">
+        <div class="item h-lg">A</div>
+        <div class="item h-md">B</div>
+        <div class="item h-sm">C</div>
+        <div class="item h-xl">D</div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-7 → .ai-start</span><span class="sel">.ai-start</span> { <span class="prop">align-items</span>: <span class="val">flex-start</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-8 ═════════ -->
+    <div class="demo ai-center" data-box="BOX-8" data-prop="align-items: center">
+        <div class="item h-lg">A</div>
+        <div class="item h-md">B</div>
+        <div class="item h-sm">C</div>
+        <div class="item h-xl">D</div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-8 → .ai-center</span><span class="sel">.ai-center</span> { <span class="prop">align-items</span>: <span class="val">center</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-9 ═════════ -->
+    <div class="demo ai-end" data-box="BOX-9" data-prop="align-items: flex-end">
+        <div class="item h-lg">A</div>
+        <div class="item h-md">B</div>
+        <div class="item h-sm">C</div>
+        <div class="item h-xl">D</div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-9 → .ai-end</span><span class="sel">.ai-end</span> { <span class="prop">align-items</span>: <span class="val">flex-end</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-10 ═════════ -->
+    <div class="demo ai-stretch" data-box="BOX-10" data-prop="align-items: stretch">
+        <div class="item">A</div>
+        <div class="item">B</div>
+        <div class="item">C</div>
+        <div class="item">D</div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-10 → .ai-stretch</span><span class="sel">.ai-stretch</span> { <span class="prop">align-items</span>: <span class="val">stretch</span>; }<span class="cmt">
+/* children have no height → they stretch to fill the container */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-11 ═════════ -->
+    <div class="demo ai-baseline" data-box="BOX-11" data-prop="align-items: baseline">
+        <div class="item fs-lg">A</div>
+        <div class="item fs-sm">B</div>
+        <div class="item fs-lg">C</div>
+        <div class="item fs-md">D</div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-11 → .ai-baseline</span><span class="sel">.ai-baseline</span> { <span class="prop">align-items</span>: <span class="val">baseline</span>; }<span class="cmt">
+/* items align on their text baseline */</span></div>
+
+    <hr class="divider">
+
+    <h2>align-content (multi-line, requires flex-wrap)</h2>
+
+    <!-- ═════════ BOX-12 ═════════ -->
+    <div class="demo ac-start" data-box="BOX-12" data-prop="align-content: flex-start">
+        <div class="item h-sm">A</div>
+        <div class="item h-sm">B</div>
+        <div class="item h-sm">C</div>
+        <div class="item h-sm">D</div>
+        <div class="item h-sm">E</div>
+        <div class="item h-sm">F</div>
+        <div class="item h-sm">G</div>
+        <div class="item h-sm">H</div>
+    </div>
+    <div class="console-code"><span class="header">🟣 BOX-12 → .ac-start</span><span class="sel">.ac-start</span> {
+    <span class="prop">flex-wrap</span>: <span class="val">wrap</span>;
+    <span class="prop">align-content</span>: <span class="val">flex-start</span>;
+}</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-13 ═════════ -->
+    <div class="demo ac-center" data-box="BOX-13" data-prop="align-content: center">
+        <div class="item h-sm">A</div>
+        <div class="item h-sm">B</div>
+        <div class="item h-sm">C</div>
+        <div class="item h-sm">D</div>
+        <div class="item h-sm">E</div>
+        <div class="item h-sm">F</div>
+        <div class="item h-sm">G</div>
+        <div class="item h-sm">H</div>
+    </div>
+    <div class="console-code"><span class="header">🟣 BOX-13 → .ac-center</span><span class="sel">.ac-center</span> {
+    <span class="prop">flex-wrap</span>: <span class="val">wrap</span>;
+    <span class="prop">align-content</span>: <span class="val">center</span>;
+}</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-14 ═════════ -->
+    <div class="demo ac-between" data-box="BOX-14" data-prop="align-content: space-between">
+        <div class="item h-sm">A</div>
+        <div class="item h-sm">B</div>
+        <div class="item h-sm">C</div>
+        <div class="item h-sm">D</div>
+        <div class="item h-sm">E</div>
+        <div class="item h-sm">F</div>
+        <div class="item h-sm">G</div>
+        <div class="item h-sm">H</div>
+    </div>
+    <div class="console-code"><span class="header">🟣 BOX-14 → .ac-between</span><span class="sel">.ac-between</span> {
+    <span class="prop">flex-wrap</span>: <span class="val">wrap</span>;
+    <span class="prop">align-content</span>: <span class="val">space-between</span>;
+}</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-15 ═════════ -->
+    <div class="demo ac-around" data-box="BOX-15" data-prop="align-content: space-around">
+        <div class="item h-sm">A</div>
+        <div class="item h-sm">B</div>
+        <div class="item h-sm">C</div>
+        <div class="item h-sm">D</div>
+        <div class="item h-sm">E</div>
+        <div class="item h-sm">F</div>
+        <div class="item h-sm">G</div>
+        <div class="item h-sm">H</div>
+    </div>
+    <div class="console-code"><span class="header">🟣 BOX-15 → .ac-around</span><span class="sel">.ac-around</span> {
+    <span class="prop">flex-wrap</span>: <span class="val">wrap</span>;
+    <span class="prop">align-content</span>: <span class="val">space-around</span>;
+}</div>
+
+    <script>
+        console.group("📐 Justify & Align — CSS Used For Each Box");
+
+        console.group("🟢 BOX-1 → .jc-start");
+        console.log(`.jc-start { justify-content: flex-start; }`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-2 → .jc-center");
+        console.log(`.jc-center { justify-content: center; }`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-3 → .jc-end");
+        console.log(`.jc-end { justify-content: flex-end; }`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-4 → .jc-between");
+        console.log(`.jc-between { justify-content: space-between; }`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-5 → .jc-around");
+        console.log(`.jc-around { justify-content: space-around; }`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-6 → .jc-evenly");
+        console.log(`.jc-evenly { justify-content: space-evenly; }`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-7 → .ai-start");
+        console.log(`.ai-start { align-items: flex-start; }`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-8 → .ai-center");
+        console.log(`.ai-center { align-items: center; }`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-9 → .ai-end");
+        console.log(`.ai-end { align-items: flex-end; }`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-10 → .ai-stretch");
+        console.log(`.ai-stretch { align-items: stretch; }
+/* children have no height → stretch to fill */`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-11 → .ai-baseline");
+        console.log(`.ai-baseline { align-items: baseline; }
+/* items align on their text baseline */`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-12 → .ac-start");
+        console.log(`.ac-start {
+    flex-wrap: wrap;
+    align-content: flex-start;
+}`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-13 → .ac-center");
+        console.log(`.ac-center {
+    flex-wrap: wrap;
+    align-content: center;
+}`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-14 → .ac-between");
+        console.log(`.ac-between {
+    flex-wrap: wrap;
+    align-content: space-between;
+}`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-15 → .ac-around");
+        console.log(`.ac-around {
+    flex-wrap: wrap;
+    align-content: space-around;
+}`);
+        console.groupEnd();
+
+        console.groupEnd();
+    </script>
+
+</body>
+</html>
