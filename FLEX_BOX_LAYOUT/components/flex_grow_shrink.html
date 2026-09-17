@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Grow / Shrink / Basis</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin: 24px 0 12px; }
+        h3 { color: #475569; margin: 16px 0 8px; font-size: 1rem; }
+
+        /* ==========================================================
+           RESPONSIVE WRAPPER
+           ========================================================== */
+        .demo-wrap {
+            position: relative;
+            width: min(500px, 100%);
+        }
+
+        .demo-wrap::after {
+            content: "container: 500px (100% on mobile)";
+            display: block;
+            margin-top: 6px;
+            font-size: 0.72rem;
+            color: #64748b;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        /* ==========================================================
+           PARENT CONTAINER
+           ========================================================== */
+        .demo {
+            display: flex;
+            width: 100%;
+            padding: 12px;
+            margin-top: 32px;
+            background-color: #1e293b;
+            border: 2px dashed rgba(255,255,255,0.25);
+            border-radius: 12px;
+            gap: 8px;
+            position: relative;
+            min-height: 90px;
+        }
+
+        .demo::before {
+            content: attr(data-box);
+            position: absolute;
+            top: -26px;
+            left: 0;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #0f172a;
+            background-color: #fbbf24;
+            padding: 3px 12px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        .demo::after {
+            content: attr(data-prop);
+            position: absolute;
+            top: -26px;
+            right: 0;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #475569;
+            max-width: 60%;
+            text-align: right;
+        }
+
+        /* ==========================================================
+           CHILD ITEMS
+           ========================================================== */
+        .item {
+            background-color: #8b5cf6;
+            color: #ffffff;
+            padding: 16px 20px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1rem;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            min-width: 40px;
+        }
+
+        /* ---------- flex-grow ---------- */
+        .grow-0 { flex-grow: 0; }
+        .grow-1 { flex-grow: 1; }
+        .grow-2 { flex-grow: 2; }
+        .grow-3 { flex-grow: 3; }
+
+        /* ---------- flex-shrink ---------- */
+        .shrink-0 { flex-shrink: 0; width: 200px; }
+        .shrink-1 { flex-shrink: 1; width: 200px; }
+        .shrink-2 { flex-shrink: 2; width: 200px; }
+
+        /* ---------- flex-basis ---------- */
+        .basis-auto { flex-basis: auto; }
+        .basis-100  { flex-basis: 100px; }
+        .basis-200  { flex-basis: 200px; }
+        .basis-30   { flex-basis: 30%; }
+
+        /* ---------- flex shorthand ---------- */
+        .flex-1      { flex: 1; }              /* = 1 1 0% */
+        .flex-auto   { flex: auto; }           /* = 1 1 auto */
+        .flex-none   { flex: none; }           /* = 0 0 auto */
+        .flex-custom { flex: 2 1 150px; }      /* grow shrink basis */
+
+        /* ==========================================================
+           CONSOLE-STYLE CODE BLOCK
+           ========================================================== */
+        .console-code {
+            width: min(500px, 100%);
+            margin: 12px 0 0;
+            padding: 12px 16px;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 0.82rem;
+            line-height: 1.55;
+            border-radius: 8px;
+            border-left: 4px solid #fbbf24;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            word-break: break-word;
+        }
+
+        .console-code .header {
+            color: #fbbf24;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .console-code .sel  { color: #f472b6; }
+        .console-code .prop { color: #7dd3fc; }
+        .console-code .val  { color: #fbbf24; }
+        .console-code .cmt  { color: #6b7280; font-style: italic; }
+
+        /* ==========================================================
+           HR SEPARATOR
+           ========================================================== */
+        hr.divider {
+            border: none;
+            border-top: 2px dashed #cbd5e1;
+            margin: 50px 0 24px;
+            width: min(500px, 100%);
+        }
+
+        /* ==========================================================
+           MOBILE TWEAKS
+           ========================================================== */
+        @media (max-width: 560px) {
+            html, body { padding: 12px; }
+
+            .demo { padding: 10px; gap: 6px; min-height: 70px; }
+
+            .item {
+                padding: 12px 10px;
+                font-size: 0.85rem;
+                border-radius: 6px;
+            }
+
+            /* Shrink demos still need 200px children on desktop —
+               scale them down so 3 × 200px doesn't blow the viewport */
+            .shrink-0, .shrink-1, .shrink-2 { width: 120px; }
+
+            .demo::before,
+            .demo::after {
+                font-size: 0.7rem;
+                padding: 2px 8px;
+                top: -22px;
+            }
+
+            .console-code { font-size: 0.72rem; padding: 10px 12px; }
+        }
+
+        @media (max-width: 360px) {
+            .item { padding: 10px 8px; font-size: 0.78rem; }
+            .shrink-0, .shrink-1, .shrink-2 { width: 90px; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>flex-grow — how much of the extra space each item takes</h2>
+
+    <!-- ═════════ BOX-1 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo" data-box="BOX-1" data-prop="flex-grow: 0 1 1">
+            <div class="item grow-0">A</div>
+            <div class="item grow-1">B</div>
+            <div class="item grow-1">C</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟣 BOX-1 → .grow-0 / .grow-1 / .grow-1</span><span class="sel">.grow-0</span> { <span class="prop">flex-grow</span>: <span class="val">0</span>; }<span class="cmt">
+</span><span class="sel">.grow-1</span> { <span class="prop">flex-grow</span>: <span class="val">1</span>; }
+<span class="cmt">/* A stays its size · B and C share the extra space equally */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-2 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo" data-box="BOX-2" data-prop="flex-grow: 1 · 2 · 3">
+            <div class="item grow-1">A</div>
+            <div class="item grow-2">B</div>
+            <div class="item grow-3">C</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟣 BOX-2 → .grow-1 / .grow-2 / .grow-3</span><span class="sel">.grow-1</span> { <span class="prop">flex-grow</span>: <span class="val">1</span>; }
+<span class="sel">.grow-2</span> { <span class="prop">flex-grow</span>: <span class="val">2</span>; }
+<span class="sel">.grow-3</span> { <span class="prop">flex-grow</span>: <span class="val">3</span>; }<span class="cmt">
+/* extra space shared in ratio 1 : 2 : 3 */</span></div>
+
+    <hr class="divider">
+
+    <h2>flex-shrink — how much each item shrinks when space runs out</h2>
+
+    <!-- ═════════ BOX-3 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo" data-box="BOX-3" data-prop="flex-shrink: 0 · 1 · 2">
+            <div class="item shrink-0">A</div>
+            <div class="item shrink-1">B</div>
+            <div class="item shrink-2">C</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔴 BOX-3 → .shrink-0 / .shrink-1 / .shrink-2</span><span class="sel">.shrink-0</span> { <span class="prop">flex-shrink</span>: <span class="val">0</span>; <span class="prop">width</span>: <span class="val">200px</span>; }
+<span class="sel">.shrink-1</span> { <span class="prop">flex-shrink</span>: <span class="val">1</span>; <span class="prop">width</span>: <span class="val">200px</span>; }
+<span class="sel">.shrink-2</span> { <span class="prop">flex-shrink</span>: <span class="val">2</span>; <span class="prop">width</span>: <span class="val">200px</span>; }<span class="cmt">
+/* A refuses to shrink · B shrinks 1× · C shrinks 2× */</span></div>
+
+    <hr class="divider">
+
+    <h2>flex-basis — initial size before grow/shrink</h2>
+
+    <!-- ═════════ BOX-4 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo" data-box="BOX-4" data-prop="flex-basis: auto">
+            <div class="item basis-auto">A</div>
+            <div class="item basis-auto">B</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟠 BOX-4 → .basis-auto</span><span class="sel">.basis-auto</span> { <span class="prop">flex-basis</span>: <span class="val">auto</span>; }<span class="cmt">
+/* size = content width */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-5 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo" data-box="BOX-5" data-prop="flex-basis: 100px · 200px">
+            <div class="item basis-100">A</div>
+            <div class="item basis-200">B</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟠 BOX-5 → .basis-100 / .basis-200</span><span class="sel">.basis-100</span> { <span class="prop">flex-basis</span>: <span class="val">100px</span>; }
+<span class="sel">.basis-200</span> { <span class="prop">flex-basis</span>: <span class="val">200px</span>; }<span class="cmt">
+/* B starts twice as wide as A */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-6 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo" data-box="BOX-6" data-prop="flex-basis: 30% × 3">
+            <div class="item basis-30">A</div>
+            <div class="item basis-30">B</div>
+            <div class="item basis-30">C</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟠 BOX-6 → .basis-30</span><span class="sel">.basis-30</span> { <span class="prop">flex-basis</span>: <span class="val">30%</span>; }<span class="cmt">
+/* each takes 30% of container width — 3 × 30% = 90% + gaps */</span></div>
+
+    <hr class="divider">
+
+    <h2>flex shorthand (grow shrink basis)</h2>
+
+    <!-- ═════════ BOX-7 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo" data-box="BOX-7" data-prop="flex: 1 (1 1 0%)">
+            <div class="item flex-1">A</div>
+            <div class="item flex-1">B</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-7 → .flex-1</span><span class="sel">.flex-1</span> { <span class="prop">flex</span>: <span class="val">1</span>; }<span class="cmt">
+/* = 1 1 0% → equal-width, both grow to fill */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-8 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo" data-box="BOX-8" data-prop="flex: auto (1 1 auto)">
+            <div class="item flex-auto">A</div>
+            <div class="item flex-auto">B</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-8 → .flex-auto</span><span class="sel">.flex-auto</span> { <span class="prop">flex</span>: <span class="val">auto</span>; }<span class="cmt">
+/* = 1 1 auto → size based on content, then grow */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-9 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo" data-box="BOX-9" data-prop="flex: none (0 0 auto)">
+            <div class="item flex-none">A</div>
+            <div class="item flex-none">B</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-9 → .flex-none</span><span class="sel">.flex-none</span> { <span class="prop">flex</span>: <span class="val">none</span>; }<span class="cmt">
+/* = 0 0 auto → fixed size, never grows or shrinks */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-10 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo" data-box="BOX-10" data-prop="flex: 2 1 150px">
+            <div class="item flex-custom">A</div>
+            <div class="item flex-custom">B</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-10 → .flex-custom</span><span class="sel">.flex-custom</span> { <span class="prop">flex</span>: <span class="val">2 1 150px</span>; }<span class="cmt">
+/* grow 2 · shrink 1 · basis 150px */</span></div>
+
+    <script>
+        console.group("📐 Grow / Shrink / Basis — CSS Used For Each Box");
+
+        console.group("🟣 BOX-1 → grow 0 / 1 / 1");
+        console.log(`.grow-0 { flex-grow: 0; }
+.grow-1 { flex-grow: 1; }`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-2 → grow 1 / 2 / 3");
+        console.log(`.grow-1 { flex-grow: 1; }
+.grow-2 { flex-grow: 2; }
+.grow-3 { flex-grow: 3; }`);
+        console.groupEnd();
+
+        console.group("🔴 BOX-3 → shrink 0 / 1 / 2");
+        console.log(`.shrink-0 { flex-shrink: 0; width: 200px; }
+.shrink-1 { flex-shrink: 1; width: 200px; }
+.shrink-2 { flex-shrink: 2; width: 200px; }`);
+        console.groupEnd();
+
+        console.group("🟠 BOX-4 → .basis-auto");
+        console.log(`.basis-auto { flex-basis: auto; }`);
+        console.groupEnd();
+
+        console.group("🟠 BOX-5 → basis 100px / 200px");
+        console.log(`.basis-100 { flex-basis: 100px; }
+.basis-200 { flex-basis: 200px; }`);
+        console.groupEnd();
+
+        console.group("🟠 BOX-6 → .basis-30");
+        console.log(`.basis-30 { flex-basis: 30%; }`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-7 → .flex-1");
+        console.log(`.flex-1 { flex: 1; }   /* = 1 1 0% */`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-8 → .flex-auto");
+        console.log(`.flex-auto { flex: auto; }   /* = 1 1 auto */`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-9 → .flex-none");
+        console.log(`.flex-none { flex: none; }   /* = 0 0 auto */`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-10 → .flex-custom");
+        console.log(`.flex-custom { flex: 2 1 150px; }   /* grow 2, shrink 1, basis 150px */`);
+        console.groupEnd();
+
+        console.groupEnd();
+    </script>
+
+</body>
+</html>

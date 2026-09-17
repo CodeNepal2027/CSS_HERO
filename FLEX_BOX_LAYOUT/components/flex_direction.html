@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Direction &amp; Wrap</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin: 24px 0 12px; }
+        h3 { color: #475569; margin: 16px 0 8px; font-size: 1rem; }
+
+        /* ==========================================================
+           RESPONSIVE WRAPPER
+           — same width as the container, shrinks on mobile
+           ========================================================== */
+        .demo-wrap {
+            position: relative;
+            width: min(500px, 100%);         /* responsive cap */
+        }
+
+        /* width label under each container */
+        .demo-wrap::after {
+            content: "width: 500px (or 100% on small screens)";
+            display: block;
+            margin-top: 6px;
+            font-size: 0.72rem;
+            color: #64748b;
+            font-weight: 600;
+            font-style: italic;
+        }
+
+        /* ==========================================================
+           PARENT CONTAINER
+           ========================================================== */
+        .demo {
+            display: flex;
+            width: 100%;                     /* fills demo-wrap */
+            padding: 16px;
+            margin-top: 32px;
+            background-color: #8b5cf6;
+            border: 2px dashed rgba(255,255,255,0.35);
+            border-radius: 12px;
+            gap: 8px;
+            position: relative;
+            min-height: 120px;
+        }
+
+        /* BOX-N badge */
+        .demo::before {
+            content: attr(data-box);
+            position: absolute;
+            top: -26px;
+            left: 0;
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #0f172a;
+            background-color: #fbbf24;
+            padding: 3px 12px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
+        }
+
+        /* property label top-right */
+        .demo::after {
+            content: attr(data-prop);
+            position: absolute;
+            top: -26px;
+            right: 0;
+            font-size: 0.78rem;
+            font-weight: 700;
+            color: #475569;
+            max-width: 60%;
+            text-align: right;
+        }
+
+        /* ==========================================================
+           CHILD ITEMS
+           — fixed 100px on desktop, flexible on mobile
+           ========================================================== */
+        .item {
+            background-color: #f59e0b;
+            color: #ffffff;
+            padding: 16px 20px;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1.1rem;
+            text-align: center;
+            width: 100px;                    /* fixed → forces wrap */
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            flex-shrink: 0;                  /* honest wrap: don't auto-shrink */
+        }
+
+        /* Direction demos — auto width so A B C sit naturally */
+        .dir-demo .item {
+            width: auto;
+            min-width: 60px;
+        }
+
+        /* ==========================================================
+           FLEX-DIRECTION
+           ========================================================== */
+        .fd-row            { flex-direction: row; }
+        .fd-row-reverse    { flex-direction: row-reverse; }
+        .fd-column         { flex-direction: column; }
+        .fd-column-reverse { flex-direction: column-reverse; }
+
+        /* ==========================================================
+           FLEX-WRAP
+           ========================================================== */
+        .fw-nowrap  { flex-wrap: nowrap; }
+        .fw-wrap    { flex-wrap: wrap; }
+        .fw-reverse { flex-wrap: wrap-reverse; }
+
+        /* ==========================================================
+           FLEX-FLOW
+           ========================================================== */
+        .ff-column-wrap { flex-flow: column wrap; max-height: 300px; }
+
+        /* ==========================================================
+           CONSOLE-STYLE CODE BLOCK
+           ========================================================== */
+        .console-code {
+            width: min(500px, 100%);
+            margin: 12px 0 0;
+            padding: 12px 16px;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            font-family: 'JetBrains Mono', 'Courier New', monospace;
+            font-size: 0.82rem;
+            line-height: 1.55;
+            border-radius: 8px;
+            border-left: 4px solid #fbbf24;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            word-break: break-word;
+        }
+
+        .console-code .header {
+            color: #fbbf24;
+            font-weight: 700;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .console-code .sel  { color: #f472b6; }
+        .console-code .prop { color: #7dd3fc; }
+        .console-code .val  { color: #fbbf24; }
+        .console-code .cmt  { color: #6b7280; font-style: italic; }
+
+        /* ==========================================================
+           HR SEPARATOR
+           ========================================================== */
+        hr.divider {
+            border: none;
+            border-top: 2px dashed #cbd5e1;
+            margin: 50px 0 24px;
+            width: min(500px, 100%);
+        }
+
+        /* ==========================================================
+           MOBILE TWEAKS
+           ========================================================== */
+        @media (max-width: 560px) {
+            html, body { padding: 12px; }
+
+            .demo { padding: 10px; gap: 6px; }
+
+            .item {
+                width: 70px;                 /* smaller but still forces wrap */
+                height: 50px;
+                font-size: 0.95rem;
+                padding: 10px 12px;
+            }
+
+            .demo::before,
+            .demo::after {
+                font-size: 0.7rem;
+                padding: 2px 8px;
+            }
+
+            .demo::before { top: -22px; }
+            .demo::after  { top: -22px; }
+
+            .console-code { font-size: 0.72rem; padding: 10px 12px; }
+        }
+
+        @media (max-width: 360px) {
+            .item {
+                width: 55px;
+                height: 44px;
+                font-size: 0.85rem;
+                padding: 8px 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>flex-direction</h2>
+
+    <!-- ═════════ BOX-1 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo fd-row dir-demo" data-box="BOX-1" data-prop="flex-direction: row">
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-1 → .fd-row</span><span class="sel">.fd-row</span> { <span class="prop">flex-direction</span>: <span class="val">row</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-2 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo fd-row-reverse dir-demo" data-box="BOX-2" data-prop="flex-direction: row-reverse">
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-2 → .fd-row-reverse</span><span class="sel">.fd-row-reverse</span> { <span class="prop">flex-direction</span>: <span class="val">row-reverse</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-3 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo fd-column dir-demo" data-box="BOX-3" data-prop="flex-direction: column">
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-3 → .fd-column</span><span class="sel">.fd-column</span> { <span class="prop">flex-direction</span>: <span class="val">column</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-4 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo fd-column-reverse dir-demo" data-box="BOX-4" data-prop="flex-direction: column-reverse">
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-4 → .fd-column-reverse</span><span class="sel">.fd-column-reverse</span> { <span class="prop">flex-direction</span>: <span class="val">column-reverse</span>; }</div>
+
+    <hr class="divider">
+
+    <h2>flex-wrap — items are 100px wide · 8 items need 800px</h2>
+
+    <!-- ═════════ BOX-5 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo fw-nowrap" data-box="BOX-5" data-prop="flex-wrap: nowrap">
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+            <div class="item">D</div>
+            <div class="item">E</div>
+            <div class="item">F</div>
+            <div class="item">G</div>
+            <div class="item">H</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟢 BOX-5 → .fw-nowrap</span><span class="sel">.fw-nowrap</span> { <span class="prop">flex-wrap</span>: <span class="val">nowrap</span>; }<span class="cmt">
+/* all 8 items stay on one row → horizontal scroll */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-6 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo fw-wrap" data-box="BOX-6" data-prop="flex-wrap: wrap">
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+            <div class="item">D</div>
+            <div class="item">E</div>
+            <div class="item">F</div>
+            <div class="item">G</div>
+            <div class="item">H</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟢 BOX-6 → .fw-wrap</span><span class="sel">.fw-wrap</span> { <span class="prop">flex-wrap</span>: <span class="val">wrap</span>; }<span class="cmt">
+/* items break onto new rows going DOWN */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-7 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo fw-reverse" data-box="BOX-7" data-prop="flex-wrap: wrap-reverse">
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+            <div class="item">D</div>
+            <div class="item">E</div>
+            <div class="item">F</div>
+            <div class="item">G</div>
+            <div class="item">H</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟢 BOX-7 → .fw-reverse</span><span class="sel">.fw-reverse</span> { <span class="prop">flex-wrap</span>: <span class="val">wrap-reverse</span>; }<span class="cmt">
+/* items break onto new rows going UP */</span></div>
+
+    <hr class="divider">
+
+    <h2>flex-flow (shorthand for direction + wrap)</h2>
+
+    <!-- ═════════ BOX-8 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo ff-column-wrap" data-box="BOX-8" data-prop="flex-flow: column wrap">
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+            <div class="item">D</div>
+            <div class="item">E</div>
+            <div class="item">F</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟣 BOX-8 → .ff-column-wrap</span><span class="sel">.ff-column-wrap</span> {
+    <span class="prop">flex-flow</span>: <span class="val">column wrap</span>;
+    <span class="prop">max-height</span>: <span class="val">220px</span>;
+}</div>
+
+    <script>
+        console.group("📐 Flex Direction & Wrap — CSS Used For Each Box");
+
+        console.group("🔵 BOX-1 → .fd-row");
+        console.log(`.fd-row { flex-direction: row; }`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-2 → .fd-row-reverse");
+        console.log(`.fd-row-reverse { flex-direction: row-reverse; }`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-3 → .fd-column");
+        console.log(`.fd-column { flex-direction: column; }`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-4 → .fd-column-reverse");
+        console.log(`.fd-column-reverse { flex-direction: column-reverse; }`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-5 → .fw-nowrap");
+        console.log(`.fw-nowrap { flex-wrap: nowrap; }
+/* container: 500px · items: 8 × 100px = 800px
+   → all on one row, scrolls horizontally */`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-6 → .fw-wrap");
+        console.log(`.fw-wrap { flex-wrap: wrap; }
+/* items break onto new rows going DOWN */`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-7 → .fw-reverse");
+        console.log(`.fw-reverse { flex-wrap: wrap-reverse; }
+/* items break onto new rows going UP */`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-8 → .ff-column-wrap");
+        console.log(`.ff-column-wrap {
+    flex-flow: column wrap;
+    max-height: 300px;
+}`);
+        console.groupEnd();
+
+        console.groupEnd();
+    </script>
+
+</body>
+</html>
