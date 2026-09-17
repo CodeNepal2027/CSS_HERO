@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Grid Template Columns &amp; Rows</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin: 24px 0 12px; }
+
+        .demo-wrap { position: relative; width: min(500px, 100%); }
+        .demo-wrap::after {
+            content: "container: 500px × 220px (100% on mobile)";
+            display: block; margin-top: 6px;
+            font-size: 0.72rem; color: #64748b;
+            font-weight: 600; font-style: italic;
+        }
+
+        .demo {
+            display: grid;
+            width: 100%;
+            height: 220px;
+            padding: 12px;
+            margin-top: 32px;
+            background-color: #1e293b;
+            border: 2px dashed rgba(255,255,255,0.25);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .demo::before {
+            content: attr(data-box);
+            position: absolute;
+            top: -26px; left: 0;
+            font-size: 0.85rem; font-weight: 800;
+            color: #0f172a; background-color: #fbbf24;
+            padding: 3px 12px; border-radius: 6px;
+        }
+        .demo::after {
+            content: attr(data-prop);
+            position: absolute;
+            top: -26px; right: 0;
+            font-size: 0.78rem; font-weight: 700;
+            color: #475569; max-width: 60%; text-align: right;
+        }
+
+        .item {
+            background-color: #3b82f6;
+            color: #ffffff;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            min-height: 40px;
+        }
+
+        /* ---------- grid-template-columns demos ---------- */
+        .gt-3-equal   { grid-template-columns: 1fr 1fr 1fr; }
+        .gt-2-1       { grid-template-columns: 2fr 1fr; }
+        .gt-px-fr     { grid-template-columns: 100px 1fr; }
+        .gt-repeat    { grid-template-columns: repeat(3, 100px); }
+        .gt-auto-fill { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }
+        .gt-fit       { grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); }
+
+        /* ---------- grid-template-rows demos ---------- */
+        .gr-3         { grid-template-columns: repeat(3, 1fr); grid-template-rows: 60px 60px 60px; }
+        .gr-mixed     { grid-template-columns: repeat(3, 1fr); grid-template-rows: 40px auto 80px; }
+
+        .console-code {
+            width: min(500px, 100%);
+            margin: 12px 0 0;
+            padding: 12px 16px;
+            background-color: #1e1e1e;
+            color: #d4d4d4;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem;
+            line-height: 1.55;
+            border-radius: 8px;
+            border-left: 4px solid #fbbf24;
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+        .console-code .header { color: #fbbf24; font-weight: 700; display: block; margin-bottom: 4px; }
+        .console-code .sel  { color: #f472b6; }
+        .console-code .prop { color: #7dd3fc; }
+        .console-code .val  { color: #fbbf24; }
+        .console-code .cmt  { color: #6b7280; font-style: italic; }
+
+        hr.divider {
+            border: none;
+            border-top: 2px dashed #cbd5e1;
+            margin: 50px 0 24px;
+            width: min(500px, 100%);
+        }
+
+        @media (max-width: 560px) {
+            .demo { padding: 10px; height: 180px; }
+            .item { font-size: 0.85rem; }
+            .demo::before, .demo::after { font-size: 0.7rem; padding: 2px 8px; top: -22px; }
+            .console-code { font-size: 0.72rem; padding: 10px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>grid-template-columns — define columns</h2>
+
+    <!-- ═════════ BOX-1 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo gt-3-equal" data-box="BOX-1" data-prop="3 equal columns (1fr 1fr 1fr)" style="gap: 8px;">
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-1 → .gt-3-equal</span><span class="sel">.gt-3-equal</span> { <span class="prop">grid-template-columns</span>: <span class="val">1fr 1fr 1fr</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-2 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo gt-2-1" data-box="BOX-2" data-prop="2fr 1fr" style="gap: 8px;">
+            <div class="item">A</div>
+            <div class="item">B</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-2 → .gt-2-1</span><span class="sel">.gt-2-1</span> { <span class="prop">grid-template-columns</span>: <span class="val">2fr 1fr</span>; }<span class="cmt">
+/* A takes 2/3 of width · B takes 1/3 */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-3 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo gt-px-fr" data-box="BOX-3" data-prop="100px 1fr" style="gap: 8px;">
+            <div class="item">A</div>
+            <div class="item">B</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-3 → .gt-px-fr</span><span class="sel">.gt-px-fr</span> { <span class="prop">grid-template-columns</span>: <span class="val">100px 1fr</span>; }<span class="cmt">
+/* A fixed 100px · B fills remaining space */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-4 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo gt-repeat" data-box="BOX-4" data-prop="repeat(3, 100px)" style="gap: 8px; justify-content: start;">
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-4 → .gt-repeat</span><span class="sel">.gt-repeat</span> { <span class="prop">grid-template-columns</span>: <span class="val">repeat(3, 100px)</span>; }<span class="cmt">
+/* 3 columns of exactly 100px each */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-5 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo gt-auto-fill" data-box="BOX-5" data-prop="repeat(auto-fill, minmax(80px, 1fr))" style="gap: 8px;">
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+            <div class="item">D</div>
+            <div class="item">E</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-5 → .gt-auto-fill</span><span class="sel">.gt-auto-fill</span> {
+    <span class="prop">grid-template-columns</span>: <span class="val">repeat(auto-fill, minmax(80px, 1fr))</span>;
+}<span class="cmt">
+/* creates as many ≥80px columns as fit — even empty ones */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-6 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo gt-fit" data-box="BOX-6" data-prop="repeat(auto-fit, minmax(80px, 1fr))" style="gap: 8px;">
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+            <div class="item">D</div>
+            <div class="item">E</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-6 → .gt-fit</span><span class="sel">.gt-fit</span> {
+    <span class="prop">grid-template-columns</span>: <span class="val">repeat(auto-fit, minmax(80px, 1fr))</span>;
+}<span class="cmt">
+/* like auto-fill but collapses empty columns → items stretch */</span></div>
+
+    <hr class="divider">
+
+    <h2>grid-template-rows — define rows</h2>
+
+    <!-- ═════════ BOX-7 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo gr-3" data-box="BOX-7" data-prop="3 rows of 60px" style="gap: 8px;">
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+            <div class="item">D</div>
+            <div class="item">E</div>
+            <div class="item">F</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-7 → .gr-3</span><span class="sel">.gr-3</span> {
+    <span class="prop">grid-template-columns</span>: <span class="val">repeat(3, 1fr)</span>;
+    <span class="prop">grid-template-rows</span>: <span class="val">60px 60px 60px</span>;
+}</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-8 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo gr-mixed" data-box="BOX-8" data-prop="rows: 40px auto 80px" style="gap: 8px;">
+            <div class="item">A</div>
+            <div class="item">B</div>
+            <div class="item">C</div>
+            <div class="item">D</div>
+            <div class="item">E</div>
+            <div class="item">F</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🔵 BOX-8 → .gr-mixed</span><span class="sel">.gr-mixed</span> {
+    <span class="prop">grid-template-columns</span>: <span class="val">repeat(3, 1fr)</span>;
+    <span class="prop">grid-template-rows</span>: <span class="val">40px auto 80px</span>;
+}<span class="cmt">
+/* row heights: 40px · auto (fills) · 80px */</span></div>
+
+    <script>
+        console.group("📐 Grid Template Columns & Rows — CSS Used For Each Box");
+        console.group("🔵 BOX-1 → .gt-3-equal");
+        console.log(`.gt-3-equal { grid-template-columns: 1fr 1fr 1fr; }`);
+        console.groupEnd();
+        console.group("🔵 BOX-2 → .gt-2-1");
+        console.log(`.gt-2-1 { grid-template-columns: 2fr 1fr; }`);
+        console.groupEnd();
+        console.group("🔵 BOX-3 → .gt-px-fr");
+        console.log(`.gt-px-fr { grid-template-columns: 100px 1fr; }`);
+        console.groupEnd();
+        console.group("🔵 BOX-4 → .gt-repeat");
+        console.log(`.gt-repeat { grid-template-columns: repeat(3, 100px); }`);
+        console.groupEnd();
+        console.group("🔵 BOX-5 → .gt-auto-fill");
+        console.log(`.gt-auto-fill { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)); }`);
+        console.groupEnd();
+        console.group("🔵 BOX-6 → .gt-fit");
+        console.log(`.gt-fit { grid-template-columns: repeat(auto-fit, minmax(80px, 1fr)); }`);
+        console.groupEnd();
+        console.group("🔵 BOX-7 → .gr-3");
+        console.log(`.gr-3 {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 60px 60px 60px;
+}`);
+        console.groupEnd();
+        console.group("🔵 BOX-8 → .gr-mixed");
+        console.log(`.gr-mixed {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 40px auto 80px;
+}`);
+        console.groupEnd();
+        console.groupEnd();
+    </script>
+
+</body>
+</html>

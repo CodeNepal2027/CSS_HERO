@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Grid Gap &amp; Repeat &amp; fr</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin: 24px 0 12px; }
+
+        .demo-wrap { position: relative; width: min(500px, 100%); }
+        .demo-wrap::after {
+            content: "container: 500px × 220px (100% on mobile)";
+            display: block; margin-top: 6px;
+            font-size: 0.72rem; color: #64748b;
+            font-weight: 600; font-style: italic;
+        }
+
+        .demo {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            width: 100%;
+            height: 220px;
+            padding: 12px;
+            margin-top: 32px;
+            background-color: #1e293b;
+            border: 2px dashed rgba(255,255,255,0.25);
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .demo::before {
+            content: attr(data-box);
+            position: absolute;
+            top: -26px; left: 0;
+            font-size: 0.85rem; font-weight: 800;
+            color: #0f172a; background-color: #fbbf24;
+            padding: 3px 12px; border-radius: 6px;
+        }
+        .demo::after {
+            content: attr(data-prop);
+            position: absolute;
+            top: -26px; right: 0;
+            font-size: 0.78rem; font-weight: 700;
+            color: #475569; max-width: 60%; text-align: right;
+        }
+
+        .item {
+            background-color: #10b981;
+            color: #ffffff;
+            border-radius: 8px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .gap-0  { gap: 0; }
+        .gap-sm { gap: 8px; }
+        .gap-md { gap: 16px; }
+        .gap-lg { gap: 32px; }
+        .gap-xy { gap: 24px 8px; }
+
+        .console-code {
+            width: min(500px, 100%);
+            margin: 12px 0 0;
+            padding: 12px 16px;
+            background-color: #1e1e1e; color: #d4d4d4;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem; line-height: 1.55;
+            border-radius: 8px;
+            border-left: 4px solid #fbbf24;
+            white-space: pre-wrap; word-break: break-word;
+        }
+        .console-code .header { color: #fbbf24; font-weight: 700; display: block; margin-bottom: 4px; }
+        .console-code .sel  { color: #f472b6; }
+        .console-code .prop { color: #7dd3fc; }
+        .console-code .val  { color: #fbbf24; }
+        .console-code .cmt  { color: #6b7280; font-style: italic; }
+
+        hr.divider {
+            border: none; border-top: 2px dashed #cbd5e1;
+            margin: 50px 0 24px; width: min(500px, 100%);
+        }
+
+        @media (max-width: 560px) {
+            .demo { padding: 10px; height: 180px; }
+            .demo::before, .demo::after { font-size: 0.7rem; padding: 2px 8px; top: -22px; }
+            .console-code { font-size: 0.72rem; padding: 10px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>gap — spacing between grid cells</h2>
+
+    <!-- ═════════ BOX-1 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo gap-0" data-box="BOX-1" data-prop="gap: 0">
+            <div class="item">A</div><div class="item">B</div><div class="item">C</div>
+            <div class="item">D</div><div class="item">E</div><div class="item">F</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟢 BOX-1 → .gap-0</span><span class="sel">.gap-0</span> { <span class="prop">gap</span>: <span class="val">0</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-2 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo gap-sm" data-box="BOX-2" data-prop="gap: 8px">
+            <div class="item">A</div><div class="item">B</div><div class="item">C</div>
+            <div class="item">D</div><div class="item">E</div><div class="item">F</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟢 BOX-2 → .gap-sm</span><span class="sel">.gap-sm</span> { <span class="prop">gap</span>: <span class="val">8px</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-3 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo gap-md" data-box="BOX-3" data-prop="gap: 16px">
+            <div class="item">A</div><div class="item">B</div><div class="item">C</div>
+            <div class="item">D</div><div class="item">E</div><div class="item">F</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟢 BOX-3 → .gap-md</span><span class="sel">.gap-md</span> { <span class="prop">gap</span>: <span class="val">16px</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-4 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo gap-lg" data-box="BOX-4" data-prop="gap: 32px">
+            <div class="item">A</div><div class="item">B</div><div class="item">C</div>
+            <div class="item">D</div><div class="item">E</div><div class="item">F</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟢 BOX-4 → .gap-lg</span><span class="sel">.gap-lg</span> { <span class="prop">gap</span>: <span class="val">32px</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-5 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo gap-xy" data-box="BOX-5" data-prop="gap: 24px 8px (row column)">
+            <div class="item">A</div><div class="item">B</div><div class="item">C</div>
+            <div class="item">D</div><div class="item">E</div><div class="item">F</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟢 BOX-5 → .gap-xy</span><span class="sel">.gap-xy</span> { <span class="prop">gap</span>: <span class="val">24px 8px</span>; }<span class="cmt">
+/* 24px row gap · 8px column gap */</span></div>
+
+    <hr class="divider">
+
+    <h2>repeat() + fr units at a glance</h2>
+
+    <!-- ═════════ BOX-6 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo" style="grid-template-columns: repeat(2, 1fr); gap: 8px;" data-box="BOX-6" data-prop="repeat(2, 1fr)">
+            <div class="item">A</div><div class="item">B</div>
+            <div class="item">C</div><div class="item">D</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟢 BOX-6 → repeat(2, 1fr)</span><span class="sel">.demo</span> { <span class="prop">grid-template-columns</span>: <span class="val">repeat(2, 1fr)</span>; }</div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-7 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo" style="grid-template-columns: 1fr 2fr 1fr; gap: 8px;" data-box="BOX-7" data-prop="1fr 2fr 1fr">
+            <div class="item">A</div><div class="item">B</div><div class="item">C</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟢 BOX-7 → 1fr 2fr 1fr</span><span class="sel">.demo</span> { <span class="prop">grid-template-columns</span>: <span class="val">1fr 2fr 1fr</span>; }<span class="cmt">
+/* B column is twice as wide as A and C */</span></div>
+
+    <hr class="divider">
+
+    <!-- ═════════ BOX-8 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo" style="grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px;" data-box="BOX-8" data-prop="repeat(4, minmax(0, 1fr))">
+            <div class="item">A</div><div class="item">B</div><div class="item">C</div><div class="item">D</div>
+            <div class="item">E</div><div class="item">F</div><div class="item">G</div><div class="item">H</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟢 BOX-8 → minmax(0, 1fr)</span><span class="sel">.demo</span> {
+    <span class="prop">grid-template-columns</span>: <span class="val">repeat(4, minmax(0, 1fr))</span>;
+}<span class="cmt">
+/* minmax(0, 1fr) prevents cells from overflowing long content */</span></div>
+
+    <script>
+        console.group("📐 Grid Gap & Repeat & fr — CSS Used For Each Box");
+        console.group("🟢 BOX-1 → .gap-0");
+        console.log(`.gap-0 { gap: 0; }`);
+        console.groupEnd();
+        console.group("🟢 BOX-2 → .gap-sm");
+        console.log(`.gap-sm { gap: 8px; }`);
+        console.groupEnd();
+        console.group("🟢 BOX-3 → .gap-md");
+        console.log(`.gap-md { gap: 16px; }`);
+        console.groupEnd();
+        console.group("🟢 BOX-4 → .gap-lg");
+        console.log(`.gap-lg { gap: 32px; }`);
+        console.groupEnd();
+        console.group("🟢 BOX-5 → .gap-xy");
+        console.log(`.gap-xy { gap: 24px 8px; }`);
+        console.groupEnd();
+        console.group("🟢 BOX-6 → repeat(2, 1fr)");
+        console.log(`grid-template-columns: repeat(2, 1fr);`);
+        console.groupEnd();
+        console.group("🟢 BOX-7 → 1fr 2fr 1fr");
+        console.log(`grid-template-columns: 1fr 2fr 1fr;`);
+        console.groupEnd();
+        console.group("🟢 BOX-8 → minmax(0, 1fr)");
+        console.log(`grid-template-columns: repeat(4, minmax(0, 1fr));`);
+        console.groupEnd();
+        console.groupEnd();
+    </script>
+
+</body>
+</html>

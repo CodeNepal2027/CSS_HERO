@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Grid Practice Hub</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        h1 { color: #0f172a; margin-bottom: 25px; font-size: 1.8rem; text-align: center; }
+        .button-container { display: flex; flex-direction: column; gap: 15px; width: 100%; max-width: 320px; }
+        .btn {
+            display: block;
+            text-decoration: none;
+            text-align: center;
+            padding: 14px 24px;
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgba(0,0,0,0.1);
+            transition: all 0.2s ease-in-out;
+        }
+        .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 15px -3px rgba(0,0,0,0.15); filter: brightness(1.08); }
+        .btn:active { transform: translateY(0); }
+
+        .btn-template { background-color: #3b82f6; }
+        .btn-gap      { background-color: #10b981; }
+        .btn-place    { background-color: #8b5cf6; }
+        .btn-areas    { background-color: #f59e0b; }
+    </style>
+</head>
+<body>
+
+    <h1>CSS Grid Practice Modules</h1>
+
+    <div class="button-container">
+        <a href="./components/grid_template.html"      rel="noopener noreferrer" class="btn btn-template">Template Columns &amp; Rows</a>
+        <a href="./components/grid_gap.html"           rel="noopener noreferrer" class="btn btn-gap">Gap &amp; Repeat &amp; fr</a>
+        <a href="./components/grid_placement.html"     rel="noopener noreferrer" class="btn btn-place">Column / Row / Span</a>
+        <a href="./components/grid_named_areas.html"   rel="noopener noreferrer" class="btn btn-areas">Named Areas &amp; Lines</a>
+    </div>
+
+</body>
+</html>
