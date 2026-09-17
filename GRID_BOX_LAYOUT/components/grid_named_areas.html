@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Grid Named Areas &amp; Lines</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin: 24px 0 12px; }
+        h3 { color: #475569; margin: 16px 0 8px; font-size: 1rem; }
+
+        .demo-wrap { position: relative; width: min(500px, 100%); }
+        .demo-wrap::after {
+            content: "container: 500px × 260px (100% on mobile)";
+            display: block; margin-top: 6px;
+            font-size: 0.72rem; color: #64748b;
+            font-weight: 600; font-style: italic;
+        }
+
+        .demo {
+            display: grid;
+            width: 100%;
+            height: 260px;
+            padding: 12px;
+            margin-top: 32px;
+            background-color: #1e293b;
+            border: 2px dashed rgba(255,255,255,0.25);
+            border-radius: 12px;
+            position: relative;
+            gap: 8px;
+        }
+
+        .demo::before {
+            content: attr(data-box);
+            position: absolute;
+            top: -26px; left: 0;
+            font-size: 0.85rem; font-weight: 800;
+            color: #0f172a; background-color: #fbbf24;
+            padding: 3px 12px; border-radius: 6px;
+        }
+        .demo::after {
+            content: attr(data-prop);
+            position: absolute;
+            top: -26px; right: 0;
+            font-size: 0.78rem; font-weight: 700;
+            color: #475569; max-width: 60%; text-align: right;
+        }
+
+        .item {
+            color: #ffffff;
+            border-radius: 8px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            font-size: 0.85rem;
+            padding: 8px;
+            text-align: center;
+        }
+
+        /* ==========================================================
+           BOX-1 — Holy Grail (areas)
+           ========================================================== */
+        .grail {
+            grid-template-columns: 1fr 3fr 1fr;
+            grid-template-rows: 60px 1fr 60px;
+            grid-template-areas:
+                "header header header"
+                "nav    main   aside"
+                "footer footer footer";
+        }
+        .grail .header { grid-area: header; background-color: #3b82f6; }
+        .grail .nav    { grid-area: nav;    background-color: #10b981; }
+        .grail .main   { grid-area: main;   background-color: #f59e0b; }
+        .grail .aside  { grid-area: aside;  background-color: #8b5cf6; }
+        .grail .footer { grid-area: footer; background-color: #ef4444; }
+
+        /* ==========================================================
+           BOX-2 — Dashboard (areas)
+           ========================================================== */
+        .dashboard {
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            grid-template-areas:
+                "stats stats stats stats"
+                "chart chart side  side"
+                "chart chart side  side";
+        }
+        .dashboard .stats { grid-area: stats; background-color: #06b6d4; }
+        .dashboard .chart { grid-area: chart; background-color: #8b5cf6; }
+        .dashboard .side  { grid-area: side;  background-color: #f59e0b; }
+
+        /* ==========================================================
+           BOX-3 — Named lines
+           ========================================================== */
+        .named-lines {
+            grid-template-columns: [start] 1fr [mid] 1fr [end];
+            grid-template-rows: [top] 1fr [middle] 1fr [bottom];
+        }
+        .named-lines .a { grid-column: start / mid; grid-row: top / middle;    background-color: #ef4444; }
+        .named-lines .b { grid-column: mid / end;   grid-row: top / bottom;    background-color: #10b981; }
+        .named-lines .c { grid-column: start / mid; grid-row: middle / bottom; background-color: #3b82f6; }
+
+        /* ==========================================================
+           BOX-4 — Numeric placement (grid-row: 1/1 etc.)
+           ========================================================== */
+        .numeric-place {
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+        }
+        .numeric-place .p1 { grid-column: 1 / 3; grid-row: 1 / 2; background-color: #3b82f6; }
+        .numeric-place .p2 { grid-column: 3 / 5; grid-row: 1 / 2; background-color: #10b981; }
+        .numeric-place .p3 { grid-column: 1 / 2; grid-row: 2 / 4; background-color: #f59e0b; }
+        .numeric-place .p4 { grid-column: 2 / 4; grid-row: 2 / 3; background-color: #8b5cf6; }
+        .numeric-place .p5 { grid-column: 2 / 4; grid-row: 3 / 4; background-color: #ec4899; }
+        .numeric-place .p6 { grid-column: 4 / 5; grid-row: 2 / 4; background-color: #06b6d4; }
+
+        /* ==========================================================
+           BOX-5 — Magazine / article layout (12-col feel with 4 cols)
+           ========================================================== */
+        .magazine {
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+        }
+        .magazine .hero    { grid-column: 1 / 5; grid-row: 1 / 2; background-color: #ef4444; }
+        .magazine .feature { grid-column: 1 / 3; grid-row: 2 / 4; background-color: #8b5cf6; }
+        .magazine .story-a { grid-column: 3 / 4; grid-row: 2 / 3; background-color: #10b981; }
+        .magazine .story-b { grid-column: 4 / 5; grid-row: 2 / 3; background-color: #f59e0b; }
+        .magazine .story-c { grid-column: 3 / 5; grid-row: 3 / 4; background-color: #06b6d4; }
+
+        /* ==========================================================
+           BOX-6 — Overlapping cards with z-index
+           ========================================================== */
+        .overlap {
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+        }
+        .overlap .layer-back  { grid-column: 1 / 3; grid-row: 1 / 3; background-color: #3b82f6; z-index: 1; }
+        .overlap .layer-mid   { grid-column: 2 / 4; grid-row: 2 / 4; background-color: #10b981; z-index: 2; }
+        .overlap .layer-front { grid-column: 2 / 3; grid-row: 2 / 3; background-color: #f59e0b; z-index: 3; }
+
+        /* ==========================================================
+           BOX-7 — Bento grid (mixed spans)
+           ========================================================== */
+        .bento {
+            grid-template-columns: repeat(4, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+        }
+        .bento .b1 { grid-column: 1 / 3; grid-row: 1 / 2; background-color: #ef4444; }
+        .bento .b2 { grid-column: 3 / 5; grid-row: 1 / 2; background-color: #10b981; }
+        .bento .b3 { grid-column: 1 / 2; grid-row: 2 / 3; background-color: #3b82f6; }
+        .bento .b4 { grid-column: 1 / 2; grid-row: 3 / 4; background-color: #8b5cf6; }
+        .bento .b5 { grid-column: 2 / 5; grid-row: 2 / 4; background-color: #f59e0b; }
+
+        /* ==========================================================
+           CONSOLE-STYLE CODE BLOCK
+           ========================================================== */
+        .console-code {
+            width: min(500px, 100%);
+            margin: 12px 0 0;
+            padding: 12px 16px;
+            background-color: #1e1e1e; color: #d4d4d4;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.82rem; line-height: 1.55;
+            border-radius: 8px;
+            border-left: 4px solid #fbbf24;
+            white-space: pre-wrap; word-break: break-word;
+        }
+        .console-code .header { color: #fbbf24; font-weight: 700; display: block; margin-bottom: 4px; }
+        .console-code .sel  { color: #f472b6; }
+        .console-code .prop { color: #7dd3fc; }
+        .console-code .val  { color: #fbbf24; }
+        .console-code .cmt  { color: #6b7280; font-style: italic; }
+
+        hr.divider {
+            border: none; border-top: 2px dashed #cbd5e1;
+            margin: 50px 0 24px; width: min(500px, 100%);
+        }
+
+        @media (max-width: 560px) {
+            .demo { padding: 10px; height: 220px; }
+            .item { font-size: 0.7rem; }
+            .demo::before, .demo::after { font-size: 0.7rem; padding: 2px 8px; top: -22px; }
+            .console-code { font-size: 0.72rem; padding: 10px 12px; }
+        }
+    </style>
+</head>
+<body>
+
+    <h2>grid-template-areas — Holy Grail layout</h2>
+
+    <!-- ═════════ BOX-1 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo grail" data-box="BOX-1" data-prop="Holy Grail (header / nav / main / aside / footer)">
+            <div class="item header">header</div>
+            <div class="item nav">nav</div>
+            <div class="item main">main</div>
+            <div class="item aside">aside</div>
+            <div class="item footer">footer</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟡 BOX-1 → .grail</span><span class="sel">.grail</span> {
+    <span class="prop">grid-template-columns</span>: <span class="val">1fr 3fr 1fr</span>;
+    <span class="prop">grid-template-rows</span>: <span class="val">60px 1fr 60px</span>;
+    <span class="prop">grid-template-areas</span>:
+        <span class="val">"header header header"</span>
+        <span class="val">"nav    main   aside"</span>
+        <span class="val">"footer footer footer"</span>;
+}
+<span class="sel">.header</span> { <span class="prop">grid-area</span>: <span class="val">header</span>; }
+<span class="sel">.nav</span>    { <span class="prop">grid-area</span>: <span class="val">nav</span>; }
+<span class="sel">.main</span>   { <span class="prop">grid-area</span>: <span class="val">main</span>; }
+<span class="sel">.aside</span>  { <span class="prop">grid-area</span>: <span class="val">aside</span>; }
+<span class="sel">.footer</span> { <span class="prop">grid-area</span>: <span class="val">footer</span>; }</div>
+
+    <hr class="divider">
+
+    <h2>grid-template-areas — Dashboard layout</h2>
+
+    <!-- ═════════ BOX-2 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo dashboard" data-box="BOX-2" data-prop="Dashboard (stats / chart / side)">
+            <div class="item stats">stats</div>
+            <div class="item chart">chart</div>
+            <div class="item side">side</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟡 BOX-2 → .dashboard</span><span class="sel">.dashboard</span> {
+    <span class="prop">grid-template-columns</span>: <span class="val">repeat(4, 1fr)</span>;
+    <span class="prop">grid-template-rows</span>: <span class="val">repeat(3, 1fr)</span>;
+    <span class="prop">grid-template-areas</span>:
+        <span class="val">"stats stats stats stats"</span>
+        <span class="val">"chart chart side  side"</span>
+        <span class="val">"chart chart side  side"</span>;
+}
+<span class="sel">.stats</span> { <span class="prop">grid-area</span>: <span class="val">stats</span>; }
+<span class="sel">.chart</span> { <span class="prop">grid-area</span>: <span class="val">chart</span>; }
+<span class="sel">.side</span>  { <span class="prop">grid-area</span>: <span class="val">side</span>; }</div>
+
+    <hr class="divider">
+
+    <h2>Named grid lines — [start] / [mid] / [end]</h2>
+
+    <!-- ═════════ BOX-3 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo named-lines" data-box="BOX-3" data-prop="named lines: start / mid / end">
+            <div class="item a">A</div>
+            <div class="item b">B</div>
+            <div class="item c">C</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟡 BOX-3 → .named-lines</span><span class="sel">.named-lines</span> {
+    <span class="prop">grid-template-columns</span>: <span class="val">[start] 1fr [mid] 1fr [end]</span>;
+    <span class="prop">grid-template-rows</span>: <span class="val">[top] 1fr [middle] 1fr [bottom]</span>;
+}
+<span class="sel">.a</span> { <span class="prop">grid-column</span>: <span class="val">start / mid</span>;    <span class="prop">grid-row</span>: <span class="val">top / middle</span>; }
+<span class="sel">.b</span> { <span class="prop">grid-column</span>: <span class="val">mid / end</span>;      <span class="prop">grid-row</span>: <span class="val">top / bottom</span>; }
+<span class="sel">.c</span> { <span class="prop">grid-column</span>: <span class="val">start / mid</span>;    <span class="prop">grid-row</span>: <span class="val">middle / bottom</span>; }</div>
+
+    <hr class="divider">
+
+    <h2>Numeric placement — grid-column / grid-row with line numbers</h2>
+
+    <!-- ═════════ BOX-4 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo numeric-place" data-box="BOX-4" data-prop="4 cols × 3 rows · placed by line numbers">
+            <div class="item p1">1/3 · 1/2</div>
+            <div class="item p2">3/5 · 1/2</div>
+            <div class="item p3">1/2 · 2/4</div>
+            <div class="item p4">2/4 · 2/3</div>
+            <div class="item p5">2/4 · 3/4</div>
+            <div class="item p6">4/5 · 2/4</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟡 BOX-4 → .numeric-place</span><span class="sel">.numeric-place</span> {
+    <span class="prop">grid-template-columns</span>: <span class="val">repeat(4, 1fr)</span>;
+    <span class="prop">grid-template-rows</span>: <span class="val">repeat(3, 1fr)</span>;
+}
+<span class="sel">.p1</span> { <span class="prop">grid-column</span>: <span class="val">1 / 3</span>; <span class="prop">grid-row</span>: <span class="val">1 / 2</span>; }   <span class="cmt">/* cols 1-2 · row 1 */</span>
+<span class="sel">.p2</span> { <span class="prop">grid-column</span>: <span class="val">3 / 5</span>; <span class="prop">grid-row</span>: <span class="val">1 / 2</span>; }   <span class="cmt">/* cols 3-4 · row 1 */</span>
+<span class="sel">.p3</span> { <span class="prop">grid-column</span>: <span class="val">1 / 2</span>; <span class="prop">grid-row</span>: <span class="val">2 / 4</span>; }   <span class="cmt">/* col 1 · rows 2-3 */</span>
+<span class="sel">.p4</span> { <span class="prop">grid-column</span>: <span class="val">2 / 4</span>; <span class="prop">grid-row</span>: <span class="val">2 / 3</span>; }   <span class="cmt">/* cols 2-3 · row 2 */</span>
+<span class="sel">.p5</span> { <span class="prop">grid-column</span>: <span class="val">2 / 4</span>; <span class="prop">grid-row</span>: <span class="val">3 / 4</span>; }   <span class="cmt">/* cols 2-3 · row 3 */</span>
+<span class="sel">.p6</span> { <span class="prop">grid-column</span>: <span class="val">4 / 5</span>; <span class="prop">grid-row</span>: <span class="val">2 / 4</span>; }   <span class="cmt">/* col 4 · rows 2-3 */</span></div>
+
+    <hr class="divider">
+
+    <h2>Magazine / article layout — hero + feature + stories</h2>
+
+    <!-- ═════════ BOX-5 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo magazine" data-box="BOX-5" data-prop="Magazine (hero / feature / stories)">
+            <div class="item hero">hero · 1/5 · 1/2</div>
+            <div class="item feature">feature · 1/3 · 2/4</div>
+            <div class="item story-a">story-a</div>
+            <div class="item story-b">story-b</div>
+            <div class="item story-c">story-c · 3/5 · 3/4</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟡 BOX-5 → .magazine</span><span class="sel">.magazine</span> {
+    <span class="prop">grid-template-columns</span>: <span class="val">repeat(4, 1fr)</span>;
+    <span class="prop">grid-template-rows</span>: <span class="val">repeat(3, 1fr)</span>;
+}
+<span class="sel">.hero</span>    { <span class="prop">grid-column</span>: <span class="val">1 / 5</span>; <span class="prop">grid-row</span>: <span class="val">1 / 2</span>; }  <span class="cmt">/* full-width banner */</span>
+<span class="sel">.feature</span> { <span class="prop">grid-column</span>: <span class="val">1 / 3</span>; <span class="prop">grid-row</span>: <span class="val">2 / 4</span>; }  <span class="cmt">/* tall left block */</span>
+<span class="sel">.story-a</span> { <span class="prop">grid-column</span>: <span class="val">3 / 4</span>; <span class="prop">grid-row</span>: <span class="val">2 / 3</span>; }
+<span class="sel">.story-b</span> { <span class="prop">grid-column</span>: <span class="val">4 / 5</span>; <span class="prop">grid-row</span>: <span class="val">2 / 3</span>; }
+<span class="sel">.story-c</span> { <span class="prop">grid-column</span>: <span class="val">3 / 5</span>; <span class="prop">grid-row</span>: <span class="val">3 / 4</span>; }</div>
+
+    <hr class="divider">
+
+    <h2>Overlapping layers — grid + z-index</h2>
+
+    <!-- ═════════ BOX-6 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo overlap" data-box="BOX-6" data-prop="overlapping (z-index 1 / 2 / 3)">
+            <div class="item layer-back">back · z-1</div>
+            <div class="item layer-mid">mid · z-2</div>
+            <div class="item layer-front">front · z-3</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟡 BOX-6 → .overlap</span><span class="sel">.overlap</span> {
+    <span class="prop">grid-template-columns</span>: <span class="val">repeat(3, 1fr)</span>;
+    <span class="prop">grid-template-rows</span>: <span class="val">repeat(3, 1fr)</span>;
+}
+<span class="sel">.layer-back</span>  { <span class="prop">grid-column</span>: <span class="val">1 / 3</span>; <span class="prop">grid-row</span>: <span class="val">1 / 3</span>; <span class="prop">z-index</span>: <span class="val">1</span>; }
+<span class="sel">.layer-mid</span>   { <span class="prop">grid-column</span>: <span class="val">2 / 4</span>; <span class="prop">grid-row</span>: <span class="val">2 / 4</span>; <span class="prop">z-index</span>: <span class="val">2</span>; }
+<span class="sel">.layer-front</span> { <span class="prop">grid-column</span>: <span class="val">2 / 3</span>; <span class="prop">grid-row</span>: <span class="val">2 / 3</span>; <span class="prop">z-index</span>: <span class="val">3</span>; }<span class="cmt">
+/* items overlap — z-index decides which sits on top */</span></div>
+
+    <hr class="divider">
+
+    <h2>Bento grid — mixed spans</h2>
+
+    <!-- ═════════ BOX-7 ═════════ -->
+    <div class="demo-wrap">
+        <div class="demo bento" data-box="BOX-7" data-prop="Bento (mixed 2×1 / 1×1 / 3×2 spans)">
+            <div class="item b1">B1 · 1/3 · 1/2</div>
+            <div class="item b2">B2 · 3/5 · 1/2</div>
+            <div class="item b3">B3</div>
+            <div class="item b4">B4</div>
+            <div class="item b5">B5 · 2/5 · 2/4</div>
+        </div>
+    </div>
+    <div class="console-code"><span class="header">🟡 BOX-7 → .bento</span><span class="sel">.bento</span> {
+    <span class="prop">grid-template-columns</span>: <span class="val">repeat(4, 1fr)</span>;
+    <span class="prop">grid-template-rows</span>: <span class="val">repeat(3, 1fr)</span>;
+}
+<span class="sel">.b1</span> { <span class="prop">grid-column</span>: <span class="val">1 / 3</span>; <span class="prop">grid-row</span>: <span class="val">1 / 2</span>; }  <span class="cmt">/* 2 × 1 */</span>
+<span class="sel">.b2</span> { <span class="prop">grid-column</span>: <span class="val">3 / 5</span>; <span class="prop">grid-row</span>: <span class="val">1 / 2</span>; }  <span class="cmt">/* 2 × 1 */</span>
+<span class="sel">.b3</span> { <span class="prop">grid-column</span>: <span class="val">1 / 2</span>; <span class="prop">grid-row</span>: <span class="val">2 / 3</span>; }  <span class="cmt">/* 1 × 1 */</span>
+<span class="sel">.b4</span> { <span class="prop">grid-column</span>: <span class="val">1 / 2</span>; <span class="prop">grid-row</span>: <span class="val">3 / 4</span>; }  <span class="cmt">/* 1 × 1 */</span>
+<span class="sel">.b5</span> { <span class="prop">grid-column</span>: <span class="val">2 / 5</span>; <span class="prop">grid-row</span>: <span class="val">2 / 4</span>; }  <span class="cmt">/* 3 × 2 */</span></div>
+
+    <script>
+        console.group("📐 Grid Named Areas & Lines — CSS Used For Each Box");
+
+        console.group("🟡 BOX-1 → .grail");
+        console.log(`.grail {
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 60px 1fr 60px;
+    grid-template-areas:
+        "header header header"
+        "nav    main   aside"
+        "footer footer footer";
+}
+.header { grid-area: header; }
+.nav    { grid-area: nav; }
+.main   { grid-area: main; }
+.aside  { grid-area: aside; }
+.footer { grid-area: footer; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-2 → .dashboard");
+        console.log(`.dashboard {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    grid-template-areas:
+        "stats stats stats stats"
+        "chart chart side  side"
+        "chart chart side  side";
+}
+.stats { grid-area: stats; }
+.chart { grid-area: chart; }
+.side  { grid-area: side; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-3 → .named-lines");
+        console.log(`.named-lines {
+    grid-template-columns: [start] 1fr [mid] 1fr [end];
+    grid-template-rows: [top] 1fr [middle] 1fr [bottom];
+}
+.a { grid-column: start / mid; grid-row: top / middle; }
+.b { grid-column: mid / end;   grid-row: top / bottom; }
+.c { grid-column: start / mid; grid-row: middle / bottom; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-4 → .numeric-place");
+        console.log(`.numeric-place {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+.p1 { grid-column: 1 / 3; grid-row: 1 / 2; }
+.p2 { grid-column: 3 / 5; grid-row: 1 / 2; }
+.p3 { grid-column: 1 / 2; grid-row: 2 / 4; }
+.p4 { grid-column: 2 / 4; grid-row: 2 / 3; }
+.p5 { grid-column: 2 / 4; grid-row: 3 / 4; }
+.p6 { grid-column: 4 / 5; grid-row: 2 / 4; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-5 → .magazine");
+        console.log(`.magazine {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+.hero    { grid-column: 1 / 5; grid-row: 1 / 2; }
+.feature { grid-column: 1 / 3; grid-row: 2 / 4; }
+.story-a { grid-column: 3 / 4; grid-row: 2 / 3; }
+.story-b { grid-column: 4 / 5; grid-row: 2 / 3; }
+.story-c { grid-column: 3 / 5; grid-row: 3 / 4; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-6 → .overlap");
+        console.log(`.overlap {
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+.layer-back  { grid-column: 1 / 3; grid-row: 1 / 3; z-index: 1; }
+.layer-mid   { grid-column: 2 / 4; grid-row: 2 / 4; z-index: 2; }
+.layer-front { grid-column: 2 / 3; grid-row: 2 / 3; z-index: 3; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-7 → .bento");
+        console.log(`.bento {
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+}
+.b1 { grid-column: 1 / 3; grid-row: 1 / 2; }
+.b2 { grid-column: 3 / 5; grid-row: 1 / 2; }
+.b3 { grid-column: 1 / 2; grid-row: 2 / 3; }
+.b4 { grid-column: 1 / 2; grid-row: 3 / 4; }
+.b5 { grid-column: 2 / 5; grid-row: 2 / 4; }`);
+        console.groupEnd();
+
+        console.groupEnd();
+    </script>
+
+</body>
+</html>
