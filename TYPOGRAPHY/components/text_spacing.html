@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Spacing / Height / Shadow</title>
+    <style>
+        html, body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin-bottom: 12px; }
+        h3 { color: #475569; margin: 16px 0 8px; font-size: 1rem; }
+
+        .demo {
+            padding: 16px;
+            margin: 10px 0;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        .ls-tight   { letter-spacing: -1px; }
+        .ls-normal  { letter-spacing: 0; }
+        .ls-wide    { letter-spacing: 3px; }
+
+        .lh-tight   { line-height: 1.1; }
+        .lh-normal  { line-height: 1.5; }
+        .lh-loose   { line-height: 2; }
+
+        .ws-normal  { word-spacing: normal; }
+        .ws-wide    { word-spacing: 12px; }
+
+        .ts-none    { text-shadow: none; }
+        .ts-soft    { text-shadow: 1px 1px 2px rgba(0,0,0,0.25); }
+        .ts-glow    { text-shadow: 0 0 8px #3b82f6; }
+        .ts-multi   { text-shadow: 2px 2px 0 #ef4444, 4px 4px 0 #f59e0b; }
+    </style>
+</head>
+<body>
+
+    <h2>Letter Spacing</h2>
+    <div class="demo ls-tight">  BOX-1: letter-spacing: -1px</div>
+    <div class="demo ls-normal"> BOX-2: letter-spacing: 0</div>
+    <div class="demo ls-wide">   BOX-3: letter-spacing: 3px</div>
+
+    <hr>
+
+    <h2>Line Height</h2>
+    <div class="demo lh-tight">  BOX-4: line-height: 1.1 — Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</div>
+    <div class="demo lh-normal"> BOX-5: line-height: 1.5 — Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</div>
+    <div class="demo lh-loose">  BOX-6: line-height: 2 — Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore.</div>
+
+    <hr>
+
+    <h2>Word Spacing</h2>
+    <div class="demo ws-normal"> BOX-7: word-spacing: normal — the quick brown fox</div>
+    <div class="demo ws-wide">   BOX-8: word-spacing: 12px — the quick brown fox</div>
+
+    <hr>
+
+    <h2>Text Shadow</h2>
+    <div class="demo ts-none">  BOX-9: text-shadow: none</div>
+    <div class="demo ts-soft">  BOX-10: text-shadow: 1px 1px 2px rgba(0,0,0,0.25)</div>
+    <div class="demo ts-glow">  BOX-11: text-shadow: 0 0 8px #3b82f6</div>
+    <div class="demo ts-multi"> BOX-12: text-shadow: 2px 2px 0 #ef4444, 4px 4px 0 #f59e0b</div>
+
+    <script>
+        console.group("📏 Spacing / Height / Shadow — CSS Used For Each Box");
+
+        console.group("🔵 BOX-1 → .ls-tight");
+        console.log(`.ls-tight { letter-spacing: -1px; }`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-2 → .ls-normal");
+        console.log(`.ls-normal { letter-spacing: 0; }`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-3 → .ls-wide");
+        console.log(`.ls-wide { letter-spacing: 3px; }`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-4 → .lh-tight");
+        console.log(`.lh-tight { line-height: 1.1; }`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-5 → .lh-normal");
+        console.log(`.lh-normal { line-height: 1.5; }`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-6 → .lh-loose");
+        console.log(`.lh-loose { line-height: 2; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-7 → .ws-normal");
+        console.log(`.ws-normal { word-spacing: normal; }`);
+        console.groupEnd();
+
+        console.group("🟡 BOX-8 → .ws-wide");
+        console.log(`.ws-wide { word-spacing: 12px; }`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-9 → .ts-none");
+        console.log(`.ts-none { text-shadow: none; }`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-10 → .ts-soft");
+        console.log(`.ts-soft { text-shadow: 1px 1px 2px rgba(0,0,0,0.25); }`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-11 → .ts-glow");
+        console.log(`.ts-glow { text-shadow: 0 0 8px #3b82f6; }`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-12 → .ts-multi");
+        console.log(`.ts-multi { text-shadow: 2px 2px 0 #ef4444, 4px 4px 0 #f59e0b; }`);
+        console.groupEnd();
+
+        console.groupEnd();
+    </script>
+
+</body>
+</html>

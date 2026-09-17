@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="../../favicon.svg">
+    <title>CSS HERO || Font Family &amp; Size</title>
+
+    <!-- Google Fonts: Inter, Roboto, Poppins, Lora, JetBrains Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Roboto:wght@400;700&family=Poppins:wght@400;600&family=Lora:wght@400;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        html, body { font-family: 'Segoe UI', sans-serif; overflow: scroll; }
+        h2 { color: #0f172a; margin-bottom: 12px; }
+        h3 { color: #475569; margin: 16px 0 8px; font-size: 1rem; }
+
+        .demo {
+            padding: 16px;
+            margin: 10px 0;
+            background-color: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1.125rem;
+        }
+
+        /* ==========================================================
+           GENERIC FAMILIES (built-in, no download)
+           ========================================================== */
+        .ff-serif      { font-family: Georgia, 'Times New Roman', serif; }
+        .ff-sans       { font-family: Arial, Helvetica, sans-serif; }
+        .ff-mono       { font-family: 'Courier New', Courier, monospace; }
+        .ff-cursive    { font-family: 'Brush Script MT', cursive; }
+        .ff-fantasy    { font-family: Impact, fantasy; }
+        .ff-system     { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; }
+
+        /* ==========================================================
+           GOOGLE FONTS (loaded above)
+           ========================================================== */
+        .ff-inter      { font-family: 'Inter', sans-serif; }
+        .ff-roboto     { font-family: 'Roboto', sans-serif; }
+        .ff-poppins    { font-family: 'Poppins', sans-serif; }
+        .ff-lora       { font-family: 'Lora', serif; }
+        .ff-jetbrains  { font-family: 'JetBrains Mono', monospace; }
+
+        /* ==========================================================
+           REAL-WORLD FONT STACKS (used by popular projects)
+           ========================================================== */
+        .ff-github     { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Noto Sans', Helvetica, Arial, sans-serif; }
+        .ff-tailwind   { font-family: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+        .ff-bootstrap  { font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; }
+        .ff-mono-stack { font-family: ui-monospace, SFMono-Regular, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace; }
+
+        /* ---------- Font Size (rem) ---------- */
+        .fs-xs  { font-size: 0.75rem; }   /* 12px */
+        .fs-sm  { font-size: 0.875rem; }  /* 14px */
+        .fs-md  { font-size: 1.125rem; }  /* 18px */
+        .fs-lg  { font-size: 1.5rem; }    /* 24px */
+        .fs-xl  { font-size: 2rem; }      /* 32px */
+        .fs-2xl { font-size: 3rem; }      /* 48px */
+    </style>
+</head>
+<body>
+
+    <h2>Generic Font Families</h2>
+    <div class="demo ff-serif">   BOX-1: serif — Georgia, Times New Roman, serif</div>
+    <div class="demo ff-sans">    BOX-2: sans-serif — Arial, Helvetica, sans-serif</div>
+    <div class="demo ff-mono">    BOX-3: monospace — Courier New, monospace</div>
+    <div class="demo ff-cursive"> BOX-4: cursive — Brush Script MT, cursive</div>
+    <div class="demo ff-fantasy"> BOX-5: fantasy — Impact, fantasy</div>
+    <div class="demo ff-system">  BOX-6: system-ui — -apple-system, Segoe UI, sans-serif</div>
+
+    <hr>
+
+    <h2>Google Fonts (widely used)</h2>
+    <div class="demo ff-inter">     BOX-7: Inter — modern UI font (used by GitHub, Linear)</div>
+    <div class="demo ff-roboto">    BOX-8: Roboto — Google's default Android font</div>
+    <div class="demo ff-poppins">   BOX-9: Poppins — geometric sans, popular for headings</div>
+    <div class="demo ff-lora">      BOX-10: Lora — elegant serif, great for body text</div>
+    <div class="demo ff-jetbrains"> BOX-11: JetBrains Mono — coding font with ligatures</div>
+
+    <hr>
+
+    <h2>Real-World Font Stacks</h2>
+    <div class="demo ff-github">    BOX-12: GitHub stack — system-ui first, no downloads</div>
+    <div class="demo ff-tailwind">  BOX-13: Tailwind stack — ui-sans-serif, system-ui</div>
+    <div class="demo ff-bootstrap"> BOX-14: Bootstrap 5 stack — system-ui, -apple-system</div>
+    <div class="demo ff-mono-stack">BOX-15: Mono stack — ui-monospace, SF Mono, Menlo</div>
+
+    <hr>
+
+    <h2>Font Size (rem)</h2>
+    <div class="demo fs-xs">  BOX-16: font-size: 0.75rem  (12px)</div>
+    <div class="demo fs-sm">  BOX-17: font-size: 0.875rem (14px)</div>
+    <div class="demo fs-md">  BOX-18: font-size: 1.125rem (18px)</div>
+    <div class="demo fs-lg">  BOX-19: font-size: 1.5rem  (24px)</div>
+    <div class="demo fs-xl">  BOX-20: font-size: 2rem    (32px)</div>
+    <div class="demo fs-2xl"> BOX-21: font-size: 3rem    (48px)</div>
+
+    <script>
+        console.group("🔤 Font Family & Size — CSS Used For Each Box");
+
+        /* ---------- Generic Families ---------- */
+        console.group("🔵 BOX-1 → .ff-serif");
+        console.log(`.ff-serif { font-family: Georgia, 'Times New Roman', serif; }`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-2 → .ff-sans");
+        console.log(`.ff-sans { font-family: Arial, Helvetica, sans-serif; }`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-3 → .ff-mono");
+        console.log(`.ff-mono { font-family: 'Courier New', Courier, monospace; }`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-4 → .ff-cursive");
+        console.log(`.ff-cursive { font-family: 'Brush Script MT', cursive; }`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-5 → .ff-fantasy");
+        console.log(`.ff-fantasy { font-family: Impact, fantasy; }`);
+        console.groupEnd();
+
+        console.group("🔵 BOX-6 → .ff-system");
+        console.log(`.ff-system { font-family: system-ui, -apple-system, 'Segoe UI', sans-serif; }`);
+        console.groupEnd();
+
+        /* ---------- Google Fonts ---------- */
+        console.group("🟣 BOX-7 → .ff-inter");
+        console.log(`.ff-inter { font-family: 'Inter', sans-serif; }`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-8 → .ff-roboto");
+        console.log(`.ff-roboto { font-family: 'Roboto', sans-serif; }`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-9 → .ff-poppins");
+        console.log(`.ff-poppins { font-family: 'Poppins', sans-serif; }`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-10 → .ff-lora");
+        console.log(`.ff-lora { font-family: 'Lora', serif; }`);
+        console.groupEnd();
+
+        console.group("🟣 BOX-11 → .ff-jetbrains");
+        console.log(`.ff-jetbrains { font-family: 'JetBrains Mono', monospace; }`);
+        console.groupEnd();
+
+        /* ---------- Real-World Stacks ---------- */
+        console.group("🟠 BOX-12 → .ff-github");
+        console.log(`.ff-github {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI',
+                 'Noto Sans', Helvetica, Arial, sans-serif;
+}`);
+        console.groupEnd();
+
+        console.group("🟠 BOX-13 → .ff-tailwind");
+        console.log(`.ff-tailwind {
+    font-family: ui-sans-serif, system-ui, -apple-system,
+                 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+}`);
+        console.groupEnd();
+
+        console.group("🟠 BOX-14 → .ff-bootstrap");
+        console.log(`.ff-bootstrap {
+    font-family: system-ui, -apple-system, 'Segoe UI',
+                 Roboto, 'Helvetica Neue', Arial, sans-serif;
+}`);
+        console.groupEnd();
+
+        console.group("🟠 BOX-15 → .ff-mono-stack");
+        console.log(`.ff-mono-stack {
+    font-family: ui-monospace, SFMono-Regular, 'SF Mono',
+                 Menlo, Consolas, 'Liberation Mono', monospace;
+}`);
+        console.groupEnd();
+
+        /* ---------- Font Size (rem) ---------- */
+        console.group("🟢 BOX-16 → .fs-xs");
+        console.log(`.fs-xs { font-size: 0.75rem; }   /* 12px */`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-17 → .fs-sm");
+        console.log(`.fs-sm { font-size: 0.875rem; }  /* 14px */`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-18 → .fs-md");
+        console.log(`.fs-md { font-size: 1.125rem; }  /* 18px */`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-19 → .fs-lg");
+        console.log(`.fs-lg { font-size: 1.5rem; }    /* 24px */`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-20 → .fs-xl");
+        console.log(`.fs-xl { font-size: 2rem; }      /* 32px */`);
+        console.groupEnd();
+
+        console.group("🟢 BOX-21 → .fs-2xl");
+        console.log(`.fs-2xl { font-size: 3rem; }     /* 48px */`);
+        console.groupEnd();
+
+        console.groupEnd();
+    </script>
+
+</body>
+</html>
